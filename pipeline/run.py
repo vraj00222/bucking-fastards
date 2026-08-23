@@ -16,6 +16,7 @@ import requests
 
 sys.path.insert(0, str(Path(__file__).parent))
 import greptile_client
+import local_intel
 import lyricist
 
 ROOT = Path(__file__).parent.parent
@@ -65,17 +66,29 @@ def main():
     timing = {}
 
     # 1. intel (cached)
+    print("STAGE:intel", flush=True)
     facts_path = out / "facts.json"
     t0 = time.time()
     if facts_path.exists():
         facts = json.loads(facts_path.read_text())
         print(f"facts: cached ({facts_path})")
     else:
-        facts = greptile_client.mine(repo, genius=args.genius, skip_index=args.skip_index)
+        try:
+            facts = greptile_client.mine(repo, genius=args.genius, skip_index=args.skip_index)
+            if all(v.startswith("(query failed") for v in facts["answers"].values()):
+                raise RuntimeError("all greptile queries failed")
+        except Exception as e:
+            print(f"greptile unavailable ({e}); falling back to local intel")
+            facts = local_intel.mine(repo)
         facts_path.write_text(json.dumps(facts, indent=2))
     timing["intel_s"] = round(time.time() - t0, 1)
 
+    # teaser for the generation theater
+    fact = (facts["answers"].get("comments") or facts["answers"].get("funny_names") or "")[:200]
+    print(f"FACT:{fact}", flush=True)
+
     # 2. lyrics
+    print("STAGE:lyrics", flush=True)
     t0 = time.time()
     prev = previous_track(repo)
     if prev:
@@ -85,7 +98,10 @@ def main():
     (out / "lyrics.json").write_text(json.dumps(song, indent=2))
     print(f'\n"{song["song_title"]}" by {song["artist_name"]}\ncaption: {song["caption"]}\n')
 
+    print(f'TITLE:{song["song_title"]} — {song["artist_name"]}', flush=True)
+
     # 3. audio: N takes in parallel
+    print("STAGE:audio", flush=True)
     t0 = time.time()
     print(f"generating {args.takes} takes on Modal ({args.duration}s each) ...")
     with ThreadPoolExecutor(max_workers=args.takes) as ex:
@@ -140,6 +156,7 @@ def main():
     db = json.loads(db_path.read_text())
     db["tracks"] = [t for t in db["tracks"] if t.get("slug") != slug] + [meta]
     db_path.write_text(json.dumps(db, indent=2))
+    print(f"STAGE:done SLUG:{slug}", flush=True)
     print(f"\ndone: {out}/track.mp3  |  meta: {out}/meta.json  |  published to tracks.json")
 
 

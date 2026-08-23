@@ -40,7 +40,6 @@ def write_song(facts, style, previous=None):
     resp = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=2000,
-        temperature=1.0,
         system=SYSTEM,
         messages=[{"role": "user", "content": user}],
     )
