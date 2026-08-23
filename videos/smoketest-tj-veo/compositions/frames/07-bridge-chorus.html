@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<div id="root" data-composition-id="07-bridge-chorus" data-width="1080" data-height="1920" data-duration="5.991">
+<style>
+#root {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background-color: #0D1117;
+  font-family: Menlo, Consolas, Monaco, 'Courier New', monospace;
+  color: #C9D1D9;
+}
+
+@font-face {
+  font-family: 'Menlo';
+  src: local('Menlo');
+}
+
+@font-face {
+  font-family: 'Consolas';
+  src: local('Consolas');
+}
+
+@font-face {
+  font-family: 'Monaco';
+  src: local('Monaco');
+}
+
+@font-face {
+  font-family: 'Courier New';
+  src: local('Courier New');
+}
+
+.section-tag {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 18px;
+  color: #8B949E;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 10;
+}
+
+.ghost-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  text-align: center;
+  font-size: 40px;
+  line-height: 1.5;
+  color: #8B949E;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.lyric-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  text-align: center;
+  font-size: 48px;
+  line-height: 1.6;
+  color: #C9D1D9;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
+  z-index: 5;
+}
+
+.hero {
+  color: #58A6FF;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: #58A6FF;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+</style>
+
+<div id="section-tag" class="clip section-tag" data-start="0" data-duration="5.991" data-track-index="10">[bridge]</div>
+
+<div id="ghost" class="clip ghost-line" data-start="0" data-duration="2.05" data-track-index="1">waiting for the compile</div>
+
+<div id="lyric" class="clip lyric-line" data-start="0" data-duration="5.991" data-track-index="2">
+  three <span id="todos-word" class="hero">TODOs</span> in the <span id="git-word" class="hero">git</span> hook — nobody edits that file<span id="cursor" class="cursor"></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+(function() {
+  window.__timelines = window.__timelines || {};
+  
+  var root = document.getElementById('root');
+  var sectionTag = document.getElementById('section-tag');
+  var ghost = document.getElementById('ghost');
+  var lyric = document.getElementById('lyric');
+  var todosWord = document.getElementById('todos-word');
+  var gitWord = document.getElementById('git-word');
+  var cursor = document.getElementById('cursor');
+  
+  gsap.set(sectionTag, { autoAlpha: 0 });
+  gsap.set(ghost, { autoAlpha: 0, xPercent: -50, yPercent: -50 });
+  gsap.set(lyric, { autoAlpha: 0, xPercent: -50, yPercent: -50 });
+  gsap.set(cursor, { autoAlpha: 0 });
+  
+  var tl = gsap.timeline({ paused: true });
+  
+  tl.to(sectionTag, { autoAlpha: 0.5, duration: 0.3 }, 0.05);
+  
+  tl.to(ghost, { autoAlpha: 0.3, duration: 0.3 }, 0.05);
+  tl.to(ghost, { autoAlpha: 0, duration: 0.3 }, 1.95);
+  
+  tl.to(lyric, { autoAlpha: 1, duration: 0.5 }, 2.0);
+  tl.to(cursor, { autoAlpha: 1, duration: 0.1 }, 2.0);
+  tl.to(cursor, { autoAlpha: 0, duration: 0.3 }, 3.5);
+  
+  tl.to(todosWord, { 
+    opacity: 0.2, 
+    duration: 0.15, 
+    repeat: 5, 
+    yoyo: true 
+  }, 2.8);
+  
+  tl.to(lyric, {
+    x: '+=8',
+    yoyo: true,
+    repeat: 7,
+    duration: 0.04,
+    ease: 'none'
+  }, 4.3);
+  
+  tl.to(lyric, { autoAlpha: 0, duration: 0.3 }, 5.691);
+  tl.to(sectionTag, { autoAlpha: 0, duration: 0.3 }, 5.691);
+  
+  tl.set(lyric, { opacity: 0 }, 5.991);
+  tl.set(sectionTag, { opacity: 0 }, 5.991);
+  tl.set(ghost, { opacity: 0 }, 5.991);
+  
+  tl.seek(0);
+  window.__timelines["07-bridge-chorus"] = tl;
+})();
+</script>
+
+</div>
+</template>
+</body>
+</html>

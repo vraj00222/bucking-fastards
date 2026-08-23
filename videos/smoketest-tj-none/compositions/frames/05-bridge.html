@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<div id="root" data-composition-id="05-bridge" data-width="1080" data-height="1920" data-duration="12.005">
+<style>
+#root {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background-color: #0D1117;
+  font-family: Consolas, 'Courier New', monospace;
+}
+
+@font-face {
+  font-family: 'Consolas';
+  src: local('Consolas');
+}
+
+@font-face {
+  font-family: 'Courier New';
+  src: local('Courier New');
+}
+
+.section-tag {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 18px;
+  color: #484F58;
+  letter-spacing: 2px;
+  z-index: 10;
+}
+
+.lyric-container {
+  position: absolute;
+  left: 60px;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  text-align: center;
+  pointer-events: none;
+}
+
+.lyric-line {
+  font-size: 52px;
+  line-height: 1.4;
+  color: #C9D1D9;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+  font-weight: normal;
+}
+
+.hero {
+  color: #58A6FF;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.todo-repeat {
+  position: absolute;
+  left: 50%;
+  font-size: 96px;
+  color: #58A6FF;
+  font-weight: bold;
+  letter-spacing: 8px;
+  text-shadow: 0 0 20px rgba(88, 166, 255, 0.6);
+  white-space: nowrap;
+}
+
+.vague-glitch {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  font-size: 120px;
+  color: #58A6FF;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-shadow: 0 0 30px rgba(88, 166, 255, 0.8);
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.dimmed-text {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  font-size: 64px;
+  color: #484F58;
+  letter-spacing: 2px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 4;
+}
+</style>
+
+<div class="section-tag">[bridge]</div>
+
+<div class="lyric-container clip" id="lyric-main" data-start="0" data-duration="12.005" data-track-index="1">
+  <div class="lyric-line">
+    THREE <span class="hero">TODO</span>S IN THE GIT HOOK,<br>
+    EACH ONE MORE <span class="hero">VAGUE</span> —<br>
+    NOBODY EDITS THAT FILE
+  </div>
+</div>
+
+<div class="todo-repeat clip" id="todo-1" data-start="0.432" data-duration="8" data-track-index="2">TODO</div>
+<div class="todo-repeat clip" id="todo-2" data-start="1.2" data-duration="7.5" data-track-index="2">TODO</div>
+<div class="todo-repeat clip" id="todo-3" data-start="2" data-duration="7" data-track-index="2">TODO</div>
+
+<div class="vague-glitch clip" id="vague-glitch" data-start="5" data-duration="5" data-track-index="3">VAGUE</div>
+
+<div class="dimmed-text clip" id="nobody-edits" data-start="7" data-duration="5.005" data-track-index="4">NOBODY EDITS</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+(function () {
+  window.__timelines = window.__timelines || {};
+  
+  var lyricMain = document.getElementById('lyric-main');
+  var todo1 = document.getElementById('todo-1');
+  var todo2 = document.getElementById('todo-2');
+  var todo3 = document.getElementById('todo-3');
+  var vagueGlitch = document.getElementById('vague-glitch');
+  var nobodyEdits = document.getElementById('nobody-edits');
+  
+  gsap.set(lyricMain, { autoAlpha: 0 });
+  gsap.set(todo1, { autoAlpha: 0, xPercent: -50, y: 600 });
+  gsap.set(todo2, { autoAlpha: 0, xPercent: -50, y: 750 });
+  gsap.set(todo3, { autoAlpha: 0, xPercent: -50, y: 900 });
+  gsap.set(vagueGlitch, { autoAlpha: 0, xPercent: -50, yPercent: -50 });
+  gsap.set(nobodyEdits, { autoAlpha: 0, xPercent: -50, yPercent: -50 });
+  
+  var tl = gsap.timeline({ paused: true });
+  
+  tl.to(lyricMain, { autoAlpha: 1, duration: 0.4 }, 0.05);
+  
+  tl.to(todo1, { autoAlpha: 0.7, duration: 0.6 }, 0.432);
+  tl.to(todo1, { y: '+=15', duration: 3, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 0.432);
+  
+  tl.to(todo2, { autoAlpha: 0.6, duration: 0.6 }, 1.2);
+  tl.to(todo2, { y: '+=20', duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 1.2);
+  
+  tl.to(todo3, { autoAlpha: 0.5, duration: 0.6 }, 2);
+  tl.to(todo3, { y: '+=12', duration: 2.5, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 2);
+  
+  tl.to(vagueGlitch, { autoAlpha: 1, duration: 0.15 }, 5);
+  tl.to(vagueGlitch, { x: -8, duration: 0.05 }, 5.05);
+  tl.to(vagueGlitch, { x: 12, duration: 0.05 }, 5.1);
+  tl.to(vagueGlitch, { x: -6, duration: 0.05 }, 5.15);
+  tl.to(vagueGlitch, { x: 0, duration: 0.05 }, 5.2);
+  tl.to(vagueGlitch, { scaleX: 1.15, scaleY: 0.95, duration: 0.1 }, 5.05);
+  tl.to(vagueGlitch, { scaleX: 1, scaleY: 1, duration: 0.15 }, 5.15);
+  tl.to(vagueGlitch, { autoAlpha: 0.8, duration: 1.5 }, 5.3);
+  
+  tl.to([todo1, todo2, todo3], { autoAlpha: 0, duration: 0.8 }, 6.5);
+  
+  tl.to(nobodyEdits, { autoAlpha: 0.4, duration: 1.2 }, 7);
+  
+  tl.to([lyricMain, vagueGlitch, nobodyEdits], { autoAlpha: 0, duration: 0.3 }, 11.705);
+  tl.set([lyricMain, todo1, todo2, todo3, vagueGlitch, nobodyEdits], { autoAlpha: 0 }, 12.005);
+  
+  tl.seek(0);
+  window.__timelines["05-bridge"] = tl;
+})();
+</script>
+</div>
+</template>
+</body>
+</html>

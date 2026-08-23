@@ -1,0 +1,94 @@
+{
+  "brand": {
+    "font_stack": "Bebas Neue, Impact, Arial Black, sans-serif",
+    "palette": {
+      "bg": "#0A0E1A",
+      "ink": "#E8F0FF",
+      "accent": "#00D9FF",
+      "muted": "#4A5568"
+    },
+    "notes": [
+      "kinetic energy",
+      "stark contrast",
+      "center-weighted type",
+      "electronic pulse"
+    ]
+  },
+  "frames": [
+    {
+      "id": "01-intro",
+      "span_sec": [
+        0.0,
+        15.604
+      ],
+      "pacing": "beat_cut",
+      "mood": [
+        "dark",
+        "tense"
+      ],
+      "feel": "sparse intro, snare roll at 4.7s, SURGE at 10s-12s, warm low-mid energy builds",
+      "copy": "ZEPHYR",
+      "visual": "Title slams in at 1.579s on phrase start. Cyan accent flickers on snare roll (4.7-5.6s). Type scales 120% on SURGE at 10s, then glitches on DROP at 11s. Background pulses warm gradient on bass onsets."
+    },
+    {
+      "id": "02-rise",
+      "span_sec": [
+        15.604,
+        36.362
+      ],
+      "pacing": "beat_cut",
+      "mood": [
+        "hype",
+        "aggressive"
+      ],
+      "feel": "heavy bass drops, dense onsets, SURGE at 26s and 36s, sustained kick rolls 32-35s",
+      "copy": "BREAKBEAT STORM",
+      "visual": "Each phrase edge (15.6s, 22.5s, 29.5s) triggers hard cut. 'BREAKBEAT' strobes cyan on kick. 'STORM' red flash on SURGE 26s. Accel-roll 32-35s creates strobing border vignette. Final frame scales type 150% at 36s SURGE."
+    },
+    {
+      "id": "03-peak",
+      "span_sec": [
+        36.362,
+        57.168
+      ],
+      "pacing": "beat_cut",
+      "mood": [
+        "hype",
+        "glitch"
+      ],
+      "feel": "heavy bass/sub dominance, multiple hard DROPs (51s, 53s, 56s), sustained hihat fill 38-40s, highest energy at 52s",
+      "copy": "DIGITAL CHAOS",
+      "visual": "Split-screen glitch on DROP 51s: left half inverts colors. DROP 53s freezes frame for 0.2s. Hihat fill 38-40s adds cyan scan-lines. SURGE 52s explodes type into particles, reassembles at 53s. DROP 56s hard cut to solid accent bg."
+    },
+    {
+      "id": "04-breakdown",
+      "span_sec": [
+        57.168,
+        71.03
+      ],
+      "pacing": "phrase_flow",
+      "mood": [
+        "warm",
+        "cinematic"
+      ],
+      "feel": "sparse return, warm low-mid, slower onset density, snare rolls 60s and 68s, rebuilds energy toward 71s",
+      "copy": "REBUILD",
+      "visual": "Slow crossfade in. Type animates letter-by-letter over 2 bars. Warm orange gradient bleeds from corners on bass hits. Snare roll 68s triggers subtle RGB offset. No hard cuts\u2014smooth camera push-in toward phrase end at 71s."
+    },
+    {
+      "id": "05-finale",
+      "span_sec": [
+        71.03,
+        80.0
+      ],
+      "pacing": "beat_cut",
+      "mood": [
+        "hype",
+        "cinematic"
+      ],
+      "feel": "final high energy push, DROP at 74s, cuts to void at 76s",
+      "copy": "vraj00222",
+      "visual": "Artist tag slams top-right at 71.03s. Type scales on each downbeat. DROP 74s freezes frame white-flash. At 76s hard cut to black, artist tag fades cyan glow for 4 seconds of silence."
+    }
+  ]
+}

@@ -1,0 +1,473 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <div
+        id="root"
+        data-composition-id="04-chorus-hook"
+        data-width="1080"
+        data-height="1920"
+        data-duration="12.005"
+      >
+        <style>
+          /* Impact is an OS-bundled system font — declare with local() so the
+             linter's font-face requirement is satisfied without a downloadable
+             file. */
+          @font-face {
+            font-family: "Impact";
+            src: local("Impact"), local("Impact Regular");
+            font-weight: 400 900;
+            font-style: normal;
+          }
+          /* ── Chorus Hook · POSTER MOSAIC ────────────────────────────────
+             bg #1C1410 · ink #F5F2EF · accent #D8000F
+             Portrait 1080x1920.
+             G1: poster-tile-mosaic (8 tiles, 2col × 4row).
+             G2: typewriter-phrase-keyword-shuffle w/ red flash exit. */
+          #root {
+            position: absolute;
+            inset: 0;
+            width: 1080px;
+            height: 1920px;
+            overflow: hidden;
+            background: #1c1410;
+            color: #f5f2ef;
+            font-family: Impact, "Arial Black", sans-serif;
+          }
+          #root * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+
+          /* Scan-line texture */
+          .scan {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: repeating-linear-gradient(
+              to bottom,
+              rgba(245, 242, 239, 0.035) 0px,
+              rgba(245, 242, 239, 0.035) 1px,
+              transparent 1px,
+              transparent 4px
+            );
+            mix-blend-mode: screen;
+            opacity: 0.55;
+            z-index: 4;
+          }
+
+          /* Veo bg bed under G1 — bg_under_text treatment (montage.md). */
+          #g1_bed {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+            will-change: opacity;
+          }
+
+          /* Corner chrome tag (top-left) */
+          .tag {
+            position: absolute;
+            font-family: "Courier New", monospace;
+            font-size: 40px;
+            letter-spacing: 0.22em;
+            color: rgba(245, 242, 239, 0.62);
+            z-index: 6;
+            top: 60px;
+            left: 60px;
+          }
+          .tag .dot {
+            color: #d8000f;
+            margin-right: 12px;
+          }
+
+          /* Group container — full-bleed, absolute-positioned stack */
+          .group {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+          }
+          /* Group 2 starts hidden — group 1 is visible at frame 0. */
+          #g2 {
+            visibility: hidden;
+            opacity: 0;
+          }
+
+          /* ═══════════════════════════════════════════════════════════
+             GROUP 1 — poster-tile-mosaic (2 columns × 4 rows)
+             Canvas 1080x1920, gap 12px.
+             Grid inset: 60px top/bottom, 60px left/right (so text tag
+             at 60/60 has room). Available:
+                W = 1080 - 120 = 960
+                H = 1920 - 120 = 1800
+                col_w = (960 - 12) / 2 = 474
+                row_h = (1800 - 3*12) / 4 = 441
+             ─────────────────────────────────────────────────────────── */
+          #g1_grid {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            width: 960px;
+            height: 1800px;
+          }
+          .tile {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            will-change: opacity, transform;
+            transform-origin: center center;
+          }
+          .tile-label {
+            font-family: Impact, "Arial Black", sans-serif;
+            font-weight: 900;
+            font-size: 96px;
+            line-height: 0.88;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 0 16px;
+            white-space: nowrap;
+          }
+          /* Long labels shrink to fit inside a tile */
+          .tile-label.long {
+            font-size: 74px;
+          }
+          /* Band A · red */
+          .band-a {
+            background: #d8000f;
+            color: #f5f2ef;
+          }
+          /* Band B · off-white */
+          .band-b {
+            background: #f5f2ef;
+            color: #1c1410;
+          }
+          /* Band C · dark */
+          .band-c {
+            background: #1c1410;
+            color: #f5f2ef;
+            outline: 2px solid rgba(245, 242, 239, 0.24);
+            outline-offset: -2px;
+          }
+
+          /* ═══════════════════════════════════════════════════════════
+             GROUP 2 — typewriter-phrase-keyword-shuffle
+             ─────────────────────────────────────────────────────────── */
+          #g2 .stack {
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 18px;
+          }
+          #g2 .lead {
+            font-family: Impact, "Arial Black", sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: #f5f2ef;
+            white-space: nowrap;
+            font-size: 128px;
+            opacity: 0;
+            visibility: hidden;
+            will-change: opacity, transform;
+          }
+          #g2 .keyword {
+            font-weight: 900;
+            letter-spacing: -0.045em;
+            line-height: 0.88;
+            text-transform: uppercase;
+            color: #d8000f;
+            white-space: nowrap;
+            font-size: 260px;
+            margin-top: 40px;
+            opacity: 0;
+            visibility: hidden;
+            will-change: opacity, transform, font-family, font-weight, font-style;
+            font-family: Impact, "Arial Black", sans-serif;
+            font-style: normal;
+          }
+          /* Full-frame red flash for the 41.0s TRACK exit hard-stop */
+          #g2_flash {
+            position: absolute;
+            inset: 0;
+            background: #d8000f;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 8;
+            pointer-events: none;
+          }
+        </style>
+
+        <div class="scan"></div>
+
+        <!-- Veo bed under G1 (bg_under_text, 0 → 6.01s) -->
+        <video
+          id="g1_bed"
+          class="clip"
+          src="assets/04g1-cowbell-macro.mp4"
+          muted
+          playsinline
+          preload="auto"
+          data-start="0"
+          data-duration="6.010"
+          data-track-index="0"
+          data-layout-allow-overlap
+        ></video>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             GROUP 1 · 0.0 → 6.010s · poster-tile-mosaic
+             "NPM INSTALL COMMANDER — ONE FILE RULES THE PARSER"
+             Bands cycle red / off-white / dark across 8 tiles.
+             8 tiles in the labels array: NPM, INSTALL, COMMANDER,
+             NPM, INSTALL, COMMANDER, ONE FILE, PARSER — but only 7
+             onsets (last tile lands with the "PARSER" punch).
+             ═══════════════════════════════════════════════════════════ -->
+        <div id="g1" class="group">
+          <div class="tag" id="g1_tag"><span class="dot">◆</span>CHORUS</div>
+
+          <div id="g1_grid">
+            <!-- Row 0 -->
+            <div class="tile band-a" id="g1_tile1" style="top:0px;    left:0px;   width:474px; height:441px;">
+              <div class="tile-label">NPM</div>
+            </div>
+            <div class="tile band-b" id="g1_tile2" style="top:0px;    left:486px; width:474px; height:441px;">
+              <div class="tile-label">INSTALL</div>
+            </div>
+            <!-- Row 1 -->
+            <div class="tile band-c" id="g1_tile3" style="top:453px;  left:0px;   width:474px; height:441px;">
+              <div class="tile-label long">COMMANDER</div>
+            </div>
+            <div class="tile band-a" id="g1_tile4" style="top:453px;  left:486px; width:474px; height:441px;">
+              <div class="tile-label">NPM</div>
+            </div>
+            <!-- Row 2 -->
+            <div class="tile band-b" id="g1_tile5" style="top:906px;  left:0px;   width:474px; height:441px;">
+              <div class="tile-label">INSTALL</div>
+            </div>
+            <div class="tile band-c" id="g1_tile6" style="top:906px;  left:486px; width:474px; height:441px;">
+              <div class="tile-label long">COMMANDER</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="tile band-a" id="g1_tile7" style="top:1359px; left:0px;   width:474px; height:441px;">
+              <div class="tile-label">ONE FILE</div>
+            </div>
+            <div class="tile band-b" id="g1_tile8" style="top:1359px; left:486px; width:474px; height:441px;">
+              <div class="tile-label">PARSER</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             GROUP 2 · 6.010 → 12.005s · typewriter-keyword-shuffle
+             "ONE FILE RULES THE PARSER — NPM INSTALL COMMANDER"
+             ═══════════════════════════════════════════════════════════ -->
+        <div id="g2" class="group">
+          <div class="tag" id="g2_tag"><span class="dot">◆</span>CHORUS</div>
+          <div class="stack">
+            <div class="lead" id="g2_w1">ONE FILE</div>
+            <div class="lead" id="g2_w2">RULES THE</div>
+            <div class="lead" id="g2_w3">NPM INSTALL</div>
+            <div class="keyword" id="g2_kw">COMMANDER</div>
+          </div>
+          <div id="g2_flash"></div>
+        </div>
+
+        <script>
+          (function () {
+            window.__timelines = window.__timelines || {};
+
+            // Font preset library — the keyword cycles these on the shuffle beat.
+            var FONTS = [
+              { family: 'Impact, "Arial Black", sans-serif', weight: 900, style: "normal" },
+              { family: 'Georgia, "Times New Roman", Times, serif', weight: 800, style: "normal" },
+              { family: '"Courier New", Courier, monospace', weight: 700, style: "normal" },
+              { family: 'Georgia, "Times New Roman", serif', weight: 700, style: "italic" },
+              { family: '"Arial Narrow", "Helvetica Neue", sans-serif', weight: 800, style: "normal" },
+              { family: '"Helvetica Neue", Arial, sans-serif', weight: 300, style: "italic" },
+            ];
+            function fontProps(i) {
+              var f = FONTS[((i % FONTS.length) + FONTS.length) % FONTS.length];
+              return { fontFamily: f.family, fontWeight: f.weight, fontStyle: f.style };
+            }
+
+            // ── Refs ───────────────────────────────────────────────────
+            var g1 = document.getElementById("g1");
+            var g2 = document.getElementById("g2");
+
+            var g1_tiles = [
+              document.getElementById("g1_tile1"),
+              document.getElementById("g1_tile2"),
+              document.getElementById("g1_tile3"),
+              document.getElementById("g1_tile4"),
+              document.getElementById("g1_tile5"),
+              document.getElementById("g1_tile6"),
+              document.getElementById("g1_tile7"),
+              document.getElementById("g1_tile8"),
+            ];
+
+            var g2_w1 = document.getElementById("g2_w1");
+            var g2_w2 = document.getElementById("g2_w2");
+            var g2_w3 = document.getElementById("g2_w3");
+            var g2_kw = document.getElementById("g2_kw");
+            var g2_flash = document.getElementById("g2_flash");
+
+            var tl = gsap.timeline({ paused: true });
+
+            // ── Initial hidden state ───────────────────────────────────
+            gsap.set(g1_tiles, { autoAlpha: 0, scale: 0.9 });
+            gsap.set([g2_w1, g2_w2, g2_w3, g2_kw], { autoAlpha: 0 });
+            gsap.set(g2_flash, { autoAlpha: 0 });
+            gsap.set(g1, { autoAlpha: 1 });
+            gsap.set(g2, { autoAlpha: 0 });
+            gsap.set(g2_kw, fontProps(0));
+
+            // Mirror into timeline at t=0
+            tl.set(g1_tiles, { autoAlpha: 0, scale: 0.9 }, 0);
+            tl.set([g2_w1, g2_w2, g2_w3, g2_kw], { autoAlpha: 0 }, 0);
+            tl.set(g2_flash, { autoAlpha: 0 }, 0);
+            tl.set(g1, { autoAlpha: 1 }, 0);
+            tl.set(g2, { autoAlpha: 0 }, 0);
+            tl.set(g2_kw, fontProps(0), 0);
+
+            // ── Veo bed (bg_under_text) — fade in 0→0.35, exit hard-kill at 6.010 ──
+            var g1_bed = document.getElementById("g1_bed");
+            gsap.set(g1_bed, { opacity: 0 });
+            tl.set(g1_bed, { opacity: 0 }, 0);
+            tl.to(g1_bed, { opacity: 0.35, duration: 0.4, ease: "power1.out" }, 0.05);
+            tl.to(g1_bed, { opacity: 0, duration: 0.3, ease: "power1.in" }, 5.71);
+            tl.set(g1_bed, { opacity: 0 }, 6.010);
+
+            // ═══════════════════════════════════════════════════════════
+            //  GROUP 1 — poster-tile-mosaic
+            //  onsets LOCAL: [0.073, 1.073, 2.073, 3.073, 4.073, 5.073, 5.573]
+            //  7 onsets for 8 tiles — the 7th onset (5.573) lands the
+            //  final "PARSER" tile AND does its 300ms punch.
+            //  Tiles 1-6 land on their own onset. Tile 7 (ONE FILE) lands
+            //  alongside tile 6's arrival (COMMANDER at 5.073) to keep the
+            //  hook visually filled. Tile 8 (PARSER) is the 5.573 climax.
+            // ═══════════════════════════════════════════════════════════
+
+            // Enter mapping: tile index → onset time
+            // Tiles 0..5 → onsets 0..5, Tile 6 → onset 5 (paired), Tile 7 → onset 6 (5.573 punch)
+            var TILE_ONSETS = [0.073, 1.073, 2.073, 3.073, 4.073, 5.073, 5.073, 5.573];
+
+            for (var i = 0; i < 8; i++) {
+              var t = TILE_ONSETS[i];
+              var el = g1_tiles[i];
+              // Snap-in autoAlpha + scale 0.9 → 1.0 over 120ms
+              tl.set(el, { autoAlpha: 1 }, t);
+              tl.to(
+                el,
+                {
+                  scale: 1,
+                  duration: 0.12,
+                  ease: "back.out(2)",
+                  overwrite: "auto",
+                },
+                t
+              );
+            }
+
+            // 5.573s — "PARSER" tile punch: 1.0 → 1.08 → 1.0 over 300ms
+            // (Tile 8 is #g1_tile8, the PARSER tile.)
+            tl.to(
+              g1_tiles[7],
+              {
+                scale: 1.08,
+                duration: 0.15,
+                ease: "power2.out",
+              },
+              5.573
+            );
+            tl.to(
+              g1_tiles[7],
+              {
+                scale: 1.0,
+                duration: 0.15,
+                ease: "power2.in",
+              },
+              5.723
+            );
+
+            // ── Group swap at 6.010s ───────────────────────────────────
+            tl.set(g1, { autoAlpha: 0 }, 6.010);
+            tl.set(g2, { autoAlpha: 1 }, 6.010);
+
+            // ═══════════════════════════════════════════════════════════
+            //  GROUP 2 — typewriter-phrase-keyword-shuffle
+            //  onsets LOCAL: [6.073, 7.073, 8.073, 9.073, 10.073, 10.573]
+            //  Map: w1@6.073 (ONE FILE), w2@7.073 (RULES THE),
+            //       w3@8.073 (NPM INSTALL), kw@9.073 (COMMANDER, red).
+            //  10.073 = pulse. 10.573 = shuffle + hard-cut red flash exit.
+            // ═══════════════════════════════════════════════════════════
+
+            var POP_IN = { autoAlpha: 0, scale: 0.94, y: 8 };
+            var POP_OUT = {
+              autoAlpha: 1,
+              scale: 1,
+              y: 0,
+              duration: 0.1,
+              ease: "back.out(2)",
+              overwrite: "auto",
+            };
+
+            tl.fromTo(g2_w1, POP_IN, POP_OUT, 6.073);
+            tl.fromTo(g2_w2, POP_IN, POP_OUT, 7.073);
+            tl.fromTo(g2_w3, POP_IN, POP_OUT, 8.073);
+            tl.fromTo(g2_kw, POP_IN, POP_OUT, 9.073);
+
+            // 10.073 punch pulse on keyword base face
+            tl.to(
+              g2_kw,
+              { scale: 1.05, duration: 0.08, yoyo: true, repeat: 1, ease: "power2.out" },
+              10.073
+            );
+
+            // ── Keyword font shuffle at 10.573 ─────────────────────────
+            //   4-5 face swaps every 60-80ms for ~500ms, ending on Impact.
+            var G2_SHUF = 10.573;
+            tl.set(g2_kw, fontProps(1), G2_SHUF + 0.0);
+            tl.set(g2_kw, fontProps(2), G2_SHUF + 0.07);
+            tl.set(g2_kw, fontProps(3), G2_SHUF + 0.15);
+            tl.set(g2_kw, fontProps(4), G2_SHUF + 0.23);
+            tl.set(g2_kw, fontProps(5), G2_SHUF + 0.31);
+            tl.set(g2_kw, fontProps(2), G2_SHUF + 0.39);
+            // Land back on Impact black at end of shuffle window (~500ms)
+            tl.set(g2_kw, fontProps(0), G2_SHUF + 0.5);
+
+            // ── 41.0s TRACK = LOCAL 10.573 — hard-cut red flash exit ───
+            // Full-frame red for 100ms then back to black.
+            tl.set(g2_flash, { autoAlpha: 1 }, 10.573);
+            tl.set(g2_flash, { autoAlpha: 0 }, 10.673);
+
+            // Hold to end of frame
+            tl.to({}, { duration: 12.005 }, 0);
+
+            tl.seek(0);
+            window.__timelines["04-chorus-hook"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

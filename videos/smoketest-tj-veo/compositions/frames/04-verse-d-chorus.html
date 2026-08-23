@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<div id="root" data-composition-id="04-verse-d-chorus" data-width="1080" data-height="1920" data-duration="5.991">
+<style>
+#root {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: #0D1117;
+  font-family: Menlo, Consolas, Monaco, 'Courier New', monospace;
+}
+
+@font-face {
+  font-family: 'Menlo';
+  src: local('Menlo');
+}
+
+@font-face {
+  font-family: 'Consolas';
+  src: local('Consolas');
+}
+
+@font-face {
+  font-family: 'Monaco';
+  src: local('Monaco');
+}
+
+@font-face {
+  font-family: 'Courier New';
+  src: local('Courier New');
+}
+
+.section-tag {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 18px;
+  color: #8B949E;
+  letter-spacing: 1px;
+  z-index: 10;
+  opacity: 0;
+}
+
+.lyric-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+  z-index: 5;
+  opacity: 0;
+}
+
+.lyric-line {
+  font-size: 56px;
+  line-height: 1.4;
+  color: #C9D1D9;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.word {
+  display: inline-block;
+  margin: 0 8px;
+}
+
+.hero {
+  color: #58A6FF;
+  position: relative;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 60px;
+  background: #58A6FF;
+  margin-left: 4px;
+  vertical-align: middle;
+  opacity: 0;
+}
+
+.law-word {
+  display: inline-block;
+  font-size: 56px;
+  color: #58A6FF;
+  font-weight: 900;
+  text-shadow: 0 0 30px rgba(88, 166, 255, 0.8);
+}
+
+.energy-burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 600px;
+  height: 600px;
+  border: 3px solid #58A6FF;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.code-line {
+  position: absolute;
+  left: 80px;
+  font-size: 24px;
+  color: #8B949E;
+  opacity: 0;
+  font-family: Menlo, Consolas, Monaco, monospace;
+  z-index: 2;
+}
+
+.code-1 { top: 300px; }
+.code-2 { top: 380px; }
+.code-3 { top: 1400px; }
+.code-4 { top: 1480px; }
+</style>
+
+<div class="section-tag clip" id="section-tag" data-start="0" data-duration="5.991" data-track-index="5">[verse→chorus]</div>
+
+<div class="energy-burst clip" id="burst-1" data-start="0" data-duration="5.991" data-track-index="1"></div>
+<div class="energy-burst clip" id="burst-2" data-start="0" data-duration="5.991" data-track-index="1"></div>
+
+<div class="code-line code-1 clip" id="code-1" data-start="0" data-duration="5.991" data-track-index="2">$ node examples/pizza.js</div>
+<div class="code-line code-2 clip" id="code-2" data-start="0" data-duration="5.991" data-track-index="2">&gt; Order received: Large Pepperoni</div>
+<div class="code-line code-3 clip" id="code-3" data-start="0" data-duration="5.991" data-track-index="2">$ npm run order --type=cli</div>
+<div class="code-line code-4 clip" id="code-4" data-start="0" data-duration="5.991" data-track-index="2">&gt; CLI mode activated ✓</div>
+
+<div class="lyric-container clip" id="lyric-main" data-start="0" data-duration="5.991" data-track-index="3">
+  <div class="lyric-line">
+    <span class="word">examples/</span><span class="word hero" id="pizza-word">pizza</span><span class="word">ordering</span><span class="word hero" id="cli-word">CLI</span><span class="cursor" id="cursor"></span><span class="word">, that's</span><span class="word">the</span><span class="word law-word" id="law-word">law</span>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+(function () {
+  window.__timelines = window.__timelines || {};
+  
+  var sectionTag = document.getElementById('section-tag');
+  var burst1 = document.getElementById('burst-1');
+  var burst2 = document.getElementById('burst-2');
+  var code1 = document.getElementById('code-1');
+  var code2 = document.getElementById('code-2');
+  var code3 = document.getElementById('code-3');
+  var code4 = document.getElementById('code-4');
+  var lyricMain = document.getElementById('lyric-main');
+  var pizzaWord = document.getElementById('pizza-word');
+  var cliWord = document.getElementById('cli-word');
+  var cursor = document.getElementById('cursor');
+  var lawWord = document.getElementById('law-word');
+  
+  gsap.set(sectionTag, {autoAlpha: 0});
+  gsap.set(burst1, {autoAlpha: 0, scale: 0.5});
+  gsap.set(burst2, {autoAlpha: 0, scale: 0.3});
+  gsap.set([code1, code2, code3, code4], {autoAlpha: 0, x: -30});
+  gsap.set(lyricMain, {autoAlpha: 0});
+  gsap.set(cursor, {autoAlpha: 0});
+  gsap.set(lawWord, {scale: 1});
+  
+  var tl = gsap.timeline({ paused: true });
+  
+  tl.to(sectionTag, {autoAlpha: 0.6, duration: 0.3}, 0.05);
+  tl.to(lyricMain, {autoAlpha: 1, duration: 0.4}, 0.05);
+  
+  tl.to(code1, {autoAlpha: 0.5, x: 0, duration: 0.3}, 0.2);
+  tl.to(code2, {autoAlpha: 0.5, x: 0, duration: 0.3}, 0.4);
+  
+  tl.to(pizzaWord, {
+    textShadow: '0 0 20px rgba(88, 166, 255, 0.8)',
+    duration: 0.2,
+    repeat: 1,
+    yoyo: true
+  }, 0.8);
+  
+  tl.to(cliWord, {
+    textShadow: '0 0 20px rgba(88, 166, 255, 0.8)',
+    duration: 0.15
+  }, 1.5);
+  
+  tl.to(cursor, {autoAlpha: 1, duration: 0.1}, 1.5);
+  tl.to(cursor, {autoAlpha: 0, duration: 0.1}, 1.7);
+  tl.to(cursor, {autoAlpha: 1, duration: 0.1}, 1.9);
+  tl.to(cursor, {autoAlpha: 0, duration: 0.1}, 2.1);
+  tl.to(cursor, {autoAlpha: 1, duration: 0.1}, 2.3);
+  tl.to(cursor, {autoAlpha: 0, duration: 0.1}, 2.5);
+  
+  tl.to(code3, {autoAlpha: 0.5, x: 0, duration: 0.3}, 2.0);
+  tl.to(code4, {autoAlpha: 0.5, x: 0, duration: 0.3}, 2.3);
+  
+  tl.to(burst1, {autoAlpha: 0.3, scale: 1.5, duration: 0.6}, 3.5);
+  tl.to(burst1, {scale: 2.5, autoAlpha: 0, duration: 0.8}, 4.1);
+  
+  tl.to(lawWord, {
+    scale: 1.8,
+    fontWeight: 900,
+    textShadow: '0 0 40px rgba(88, 166, 255, 1), 0 0 80px rgba(88, 166, 255, 0.6)',
+    duration: 0.5,
+    ease: 'back.out(2)'
+  }, 3.6);
+  
+  tl.to(burst2, {autoAlpha: 0.4, scale: 1.2, duration: 0.5}, 3.6);
+  tl.to(burst2, {scale: 3, autoAlpha: 0, duration: 1}, 4.2);
+  
+  tl.to([sectionTag, lyricMain, code1, code2, code3, code4], {
+    autoAlpha: 0,
+    duration: 0.3
+  }, 5.691);
+  
+  tl.set([sectionTag, lyricMain, code1, code2, code3, code4, burst1, burst2], {
+    opacity: 0
+  }, 5.991);
+  
+  tl.seek(0);
+  window.__timelines["04-verse-d-chorus"] = tl;
+})();
+</script>
+
+</div>
+</template>
+</body>
+</html>

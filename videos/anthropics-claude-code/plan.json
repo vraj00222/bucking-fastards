@@ -1,0 +1,109 @@
+{
+  "brand": {
+    "font_stack": "Courier New, Consolas, Monaco, monospace",
+    "palette": {
+      "bg": "#0A0E12",
+      "ink": "#E8F0FF",
+      "accent": "#00A8E8",
+      "muted": "#4A5568"
+    },
+    "notes": [
+      "code editor aesthetic",
+      "clean monospace",
+      "terminal blue accent",
+      "middle-third safe zone"
+    ]
+  },
+  "frames": [
+    {
+      "id": "01-intro",
+      "span_sec": [
+        0.0,
+        12.0
+      ],
+      "pacing": "phrase_flow",
+      "mood": [
+        "dark",
+        "tense"
+      ],
+      "feel": "sparse intro, intermittent bass pulses, void drops at 12s",
+      "copy": "CLAUDE CODE",
+      "visual": "Title types in character-by-character on first bass hit at 1s, each word on separate line. Cursor blinks. Slow blue glow pulses with bass hits. Frame goes black on DROP at 12s."
+    },
+    {
+      "id": "02-build",
+      "span_sec": [
+        12.0,
+        28.212
+      ],
+      "pacing": "beat_cut",
+      "mood": [
+        "hype",
+        "aggressive"
+      ],
+      "feel": "heavy bass surge at 13s, sustained high energy, rhythmic section",
+      "copy": "ANTHROPIC",
+      "visual": "SURGE at 13s: word slams in full-screen, each letter a separate div that scales/rotates on beat hits. Blue accent (#00A8E8) strobes on snare. Letters jitter horizontally on hi-hat hits."
+    },
+    {
+      "id": "03-break",
+      "span_sec": [
+        28.212,
+        50.132
+      ],
+      "pacing": "phrase_flow",
+      "mood": [
+        "elegant",
+        "cinematic"
+      ],
+      "feel": "warm mid-range, building tension, hard drop at 49s into void",
+      "copy": "WRITE CODE THINK FASTER",
+      "visual": "Four words stack vertically, center-aligned. Each word fades in on phrase boundary (28s, 33s, 39s, 44s). Subtle scale pulse on bass hits. DROP at 49s: all text drops off bottom edge with easing."
+    },
+    {
+      "id": "04-surge",
+      "span_sec": [
+        50.132,
+        66.595
+      ],
+      "pacing": "beat_cut",
+      "mood": [
+        "hype",
+        "glitch"
+      ],
+      "feel": "major surge at 50s and 55s, dense energy, hi-hat roll at 62-63s",
+      "copy": "AI PAIR PROGRAMMING",
+      "visual": "SURGE 50s: 'AI' appears top-left in huge type. SURGE 55s: 'PAIR' slams center. SURGE 61s: 'PROGRAMMING' types in bottom-right. Blue pixel noise flickers on each word during hi-hat roll 62-63s."
+    },
+    {
+      "id": "05-outro",
+      "span_sec": [
+        66.595,
+        76.0
+      ],
+      "pacing": "phrase_flow",
+      "mood": [
+        "warm",
+        "dreamy"
+      ],
+      "feel": "warm descent, hard drop at 73s, void at 74-75s, final drop 76s",
+      "copy": "SHIP FASTER",
+      "visual": "Two-word lockup center-screen, appears at 66s with soft glow. Words breathe with bass. DROP 73s: glow intensifies then cuts. Void 74-75s: faint outline only. DROP 76s: fade to black."
+    },
+    {
+      "id": "06-end",
+      "span_sec": [
+        76.0,
+        80.0
+      ],
+      "pacing": "phrase_flow",
+      "mood": [
+        "dark",
+        "elegant"
+      ],
+      "feel": "silence, credits",
+      "copy": "ANTHROPICS",
+      "visual": "Black screen. At 77s, small monospace 'ANTHROPICS' fades in bottom-center (#4A5568 muted gray). Holds still until end."
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+      .frame { position: absolute; inset: 0; width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="80"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div
+        id="el-01-intro"
+        class="frame"
+        data-composition-id="01-intro"
+        data-composition-src="compositions/frames/01-intro.html"
+        data-start="0"
+        data-duration="15.604"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-02-rise"
+        class="frame"
+        data-composition-id="02-rise"
+        data-composition-src="compositions/frames/02-rise.html"
+        data-start="15.604"
+        data-duration="20.758"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-03-peak"
+        class="frame"
+        data-composition-id="03-peak"
+        data-composition-src="compositions/frames/03-peak.html"
+        data-start="36.362"
+        data-duration="20.806"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-04-breakdown"
+        class="frame"
+        data-composition-id="04-breakdown"
+        data-composition-src="compositions/frames/04-breakdown.html"
+        data-start="57.168"
+        data-duration="13.862"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-05-finale"
+        class="frame"
+        data-composition-id="05-finale"
+        data-composition-src="compositions/frames/05-finale.html"
+        data-start="71.03"
+        data-duration="8.97"
+        data-track-index="1"
+      ></div>
+
+      <!-- BGM -->
+      <audio id="el-bgm" src="assets/bgm.mp3" data-start="0" data-duration="80"
+        data-track-index="11" data-volume="0.9"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

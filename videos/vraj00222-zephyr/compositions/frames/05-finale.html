@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<div id="root" data-composition-id="05-finale" data-width="1080" data-height="1920" data-duration="8.970">
+<style>
+#root {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background-color: #0A0E1A;
+  font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif;
+}
+
+@font-face {
+  font-family: 'Bebas Neue';
+  src: local('Bebas Neue'), local('BebasNeue-Regular');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Impact';
+  src: local('Impact');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Arial Black';
+  src: local('Arial Black');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.clip {
+  position: absolute;
+}
+
+#artist-tag {
+  top: 120px;
+  right: 60px;
+  font-size: 72px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: #E8F0FF;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  transform-origin: right center;
+}
+
+#flash-overlay {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(0, 217, 255, 0.3) 100%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+
+#void-overlay {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#glow-tag {
+  left: 50%;
+  top: 50%;
+  font-size: 96px;
+  font-weight: 400;
+  letter-spacing: 6px;
+  color: #00D9FF;
+  text-transform: uppercase;
+  text-shadow: 
+    0 0 40px rgba(0, 217, 255, 1),
+    0 0 80px rgba(0, 217, 255, 0.8),
+    0 0 120px rgba(0, 217, 255, 0.6);
+  transform-origin: center center;
+}
+
+#beat-pulse-1,
+#beat-pulse-2,
+#beat-pulse-3 {
+  left: 50%;
+  top: 960px;
+  width: 600px;
+  height: 600px;
+  border: 4px solid #00D9FF;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 40px rgba(0, 217, 255, 0.6),
+    inset 0 0 40px rgba(0, 217, 255, 0.3);
+}
+</style>
+
+<div id="artist-tag" class="clip" data-start="0" data-duration="4.97" data-track-index="0">vraj00222</div>
+
+<div id="flash-overlay" class="clip" data-start="2.97" data-duration="0.2" data-track-index="1"></div>
+
+<div id="void-overlay" class="clip" data-start="4.97" data-duration="4.0" data-track-index="2"></div>
+
+<div id="glow-tag" class="clip" data-start="4.97" data-duration="4.0" data-track-index="3">vraj00222</div>
+
+<div id="beat-pulse-1" class="clip" data-start="0" data-duration="3.0" data-track-index="4"></div>
+<div id="beat-pulse-2" class="clip" data-start="1.0" data-duration="3.0" data-track-index="5"></div>
+<div id="beat-pulse-3" class="clip" data-start="2.0" data-duration="3.0" data-track-index="6"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+(function() {
+  window.__timelines = window.__timelines || {};
+  
+  var artistTag = document.getElementById('artist-tag');
+  var flashOverlay = document.getElementById('flash-overlay');
+  var voidOverlay = document.getElementById('void-overlay');
+  var glowTag = document.getElementById('glow-tag');
+  var beatPulse1 = document.getElementById('beat-pulse-1');
+  var beatPulse2 = document.getElementById('beat-pulse-2');
+  var beatPulse3 = document.getElementById('beat-pulse-3');
+  
+  gsap.set(artistTag, {autoAlpha: 0, scale: 0.8});
+  gsap.set(glowTag, {autoAlpha: 0, xPercent: -50, yPercent: -50, scale: 0.7});
+  gsap.set(beatPulse1, {autoAlpha: 0, xPercent: -50, yPercent: -50, scale: 0});
+  gsap.set(beatPulse2, {autoAlpha: 0, xPercent: -50, yPercent: -50, scale: 0});
+  gsap.set(beatPulse3, {autoAlpha: 0, xPercent: -50, yPercent: -50, scale: 0});
+  
+  var tl = gsap.timeline({paused: true});
+  
+  tl.to(artistTag, {autoAlpha: 1, scale: 1, duration: 0.3, ease: 'back.out(2)'}, 0.05);
+  
+  tl.to(artistTag, {scale: 1.15, duration: 0.1, ease: 'power2.out'}, 0.5);
+  tl.to(artistTag, {scale: 1, duration: 0.15, ease: 'power2.in'}, 0.6);
+  
+  tl.to(artistTag, {scale: 1.15, duration: 0.1, ease: 'power2.out'}, 1.0);
+  tl.to(artistTag, {scale: 1, duration: 0.15, ease: 'power2.in'}, 1.1);
+  
+  tl.to(artistTag, {scale: 1.15, duration: 0.1, ease: 'power2.out'}, 1.5);
+  tl.to(artistTag, {scale: 1, duration: 0.15, ease: 'power2.in'}, 1.6);
+  
+  tl.to(artistTag, {scale: 1.15, duration: 0.1, ease: 'power2.out'}, 2.0);
+  tl.to(artistTag, {scale: 1, duration: 0.15, ease: 'power2.in'}, 2.1);
+  
+  tl.to(beatPulse1, {autoAlpha: 0.6, scale: 0.3, duration: 0.05, ease: 'power2.out'}, 0.5);
+  tl.to(beatPulse1, {autoAlpha: 0, scale: 1.5, duration: 1.0, ease: 'power2.out'}, 0.55);
+  
+  tl.to(beatPulse2, {autoAlpha: 0.6, scale: 0.3, duration: 0.05, ease: 'power2.out'}, 1.5);
+  tl.to(beatPulse2, {autoAlpha: 0, scale: 1.5, duration: 1.0, ease: 'power2.out'}, 1.55);
+  
+  tl.to(beatPulse3, {autoAlpha: 0.6, scale: 0.3, duration: 0.05, ease: 'power2.out'}, 2.5);
+  tl.to(beatPulse3, {autoAlpha: 0, scale: 1.5, duration: 1.0, ease: 'power2.out'}, 2.55);
+  
+  tl.to(flashOverlay, {autoAlpha: 1, duration: 0.05, ease: 'power2.out'}, 2.97);
+  tl.to(flashOverlay, {autoAlpha: 0, duration: 0.15, ease: 'power2.in'}, 3.02);
+  
+  tl.to(artistTag, {scale: 1.3, duration: 0.1, ease: 'power3.out'}, 2.97);
+  
+  tl.to(artistTag, {autoAlpha: 0, duration: 0.3, ease: 'power2.in'}, 4.67);
+  tl.set(artistTag, {autoAlpha: 0}, 4.97);
+  
+  tl.set(beatPulse1, {autoAlpha: 0}, 4.97);
+  tl.set(beatPulse2, {autoAlpha: 0}, 4.97);
+  tl.set(beatPulse3, {autoAlpha: 0}, 4.97);
+  
+  tl.to(voidOverlay, {autoAlpha: 1, duration: 0.2, ease: 'power2.out'}, 4.97);
+  
+  tl.to(glowTag, {autoAlpha: 1, scale: 1, duration: 1.2, ease: 'power2.out'}, 5.2);
+  
+  tl.to(glowTag, {autoAlpha: 0, duration: 0.3, ease: 'power2.in'}, 8.67);
+  tl.set(glowTag, {autoAlpha: 0}, 8.970);
+  
+  tl.to(voidOverlay, {autoAlpha: 0, duration: 0.3, ease: 'power2.in'}, 8.67);
+  tl.set(voidOverlay, {autoAlpha: 0}, 8.970);
+  
+  tl.seek(0);
+  window.__timelines['05-finale'] = tl;
+})();
+</script>
+
+</div>
+</template>
+</body>
+</html>

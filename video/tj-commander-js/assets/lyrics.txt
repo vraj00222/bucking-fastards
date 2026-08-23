@@ -1,0 +1,35 @@
+[verse]
+npm install commander, now I run the throne
+lib/command.js so massive it's a zone of its own
+spawning child processes, forwarding signals raw
+examples/pizza ordering CLI, that's the law
+suggestSimilar.js whisperin' "did you mean --first?"
+command.option-misuse.test.js for the ones who hurt
+
+[chorus]
+npm install commander
+npm install commander
+one file rules the parser
+npm install commander
+
+[verse]
+incrementing inspector ports in the dead of night
+preAction, postAction, hooks wired up tight
+examples/deploy — no deploy, just the vibe
+passThroughOptions rolling through, unbothered, alive
+
+[bridge]
+three TODOs in the git hook, each one more vague
+"replace with appropriate checks" — three times, that's the plague
+nobody edits that file, it sits in the dark
+npm run test-all, still hitting the mark
+
+[chorus]
+npm install commander
+npm install commander
+one file rules the parser
+npm install commander
+
+[outro]
+Vue CLI bowed down, Create React App too
+28k stars and the cowbell never stops — skrrt skrrt skrrt through

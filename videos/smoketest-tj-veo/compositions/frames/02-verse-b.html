@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<div id="root" data-composition-id="02-verse-b" data-width="1080" data-height="1920" data-duration="6.014">
+<style>
+#root {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: #0D1117;
+  font-family: Menlo, Consolas, Monaco, 'Courier New', monospace;
+}
+
+@font-face {
+  font-family: 'Courier New';
+  src: local('Courier New');
+}
+
+.section-tag {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 18px;
+  color: #8B949E;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+.lyric-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  text-align: center;
+  z-index: 3;
+}
+
+.lyric-line {
+  font-size: 48px;
+  line-height: 1.4;
+  color: #C9D1D9;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+}
+
+.hero {
+  color: #58A6FF;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.hero-command {
+  text-shadow: 0 0 20px rgba(88, 166, 255, 0.6), 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.hero-zone {
+  text-shadow: 0 0 30px rgba(88, 166, 255, 0.8), 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.1;
+  background-image: 
+    linear-gradient(#58A6FF 1px, transparent 1px),
+    linear-gradient(90deg, #58A6FF 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  border: 2px solid #58A6FF;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.accent-bar {
+  position: absolute;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #58A6FF, transparent);
+  width: 100%;
+  z-index: 2;
+}
+
+.accent-bar-1 {
+  top: 30%;
+}
+
+.accent-bar-2 {
+  top: 70%;
+}
+</style>
+
+<div class="section-tag clip" id="section-tag" data-start="0" data-duration="6.014" data-track-index="0">[verse]</div>
+
+<div class="grid-bg clip" id="grid-bg" data-start="0" data-duration="6.014" data-track-index="0"></div>
+
+<div class="pulse-ring clip" id="pulse-ring" data-start="0" data-duration="6.014" data-track-index="1"></div>
+
+<div class="accent-bar accent-bar-1 clip" id="accent-bar-1" data-start="0" data-duration="6.014" data-track-index="1"></div>
+
+<div class="accent-bar accent-bar-2 clip" id="accent-bar-2" data-start="0" data-duration="6.014" data-track-index="1"></div>
+
+<div class="lyric-container clip" id="lyric-container" data-start="0" data-duration="6.014" data-track-index="2">
+  <div class="lyric-line" id="lyric-text">
+    lib/<span class="hero hero-command" id="hero-command">command.js</span> so massive it's a <span class="hero hero-zone" id="hero-zone">zone</span> of its own
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script>
+(function () {
+  window.__timelines = window.__timelines || {};
+  
+  var sectionTag = document.getElementById('section-tag');
+  var gridBg = document.getElementById('grid-bg');
+  var pulseRing = document.getElementById('pulse-ring');
+  var accentBar1 = document.getElementById('accent-bar-1');
+  var accentBar2 = document.getElementById('accent-bar-2');
+  var lyricContainer = document.getElementById('lyric-container');
+  var heroCommand = document.getElementById('hero-command');
+  var heroZone = document.getElementById('hero-zone');
+  
+  gsap.set(sectionTag, { autoAlpha: 0 });
+  gsap.set(gridBg, { autoAlpha: 0 });
+  gsap.set(pulseRing, { autoAlpha: 0, xPercent: -50, yPercent: -50, scale: 0.5 });
+  gsap.set(accentBar1, { autoAlpha: 0, scaleX: 0 });
+  gsap.set(accentBar2, { autoAlpha: 0, scaleX: 0 });
+  gsap.set(lyricContainer, { autoAlpha: 0, xPercent: -50, yPercent: -50, y: -100 });
+  
+  var tl = gsap.timeline({ paused: true });
+  
+  tl.to(sectionTag, { autoAlpha: 0.6, duration: 0.3 }, 0.05);
+  tl.to(gridBg, { autoAlpha: 0.1, duration: 0.4 }, 0.05);
+  
+  tl.to(pulseRing, { autoAlpha: 0.3, scale: 1, duration: 0.5, ease: 'power2.out' }, 0.05);
+  tl.to(pulseRing, { scale: 1.2, autoAlpha: 0.15, duration: 2, ease: 'sine.inOut', repeat: -1, yoyo: true }, 0.55);
+  
+  tl.to(accentBar1, { autoAlpha: 0.4, scaleX: 1, duration: 0.6, ease: 'power2.out' }, 0.1);
+  tl.to(accentBar2, { autoAlpha: 0.4, scaleX: 1, duration: 0.6, ease: 'power2.out' }, 0.2);
+  
+  tl.to(lyricContainer, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.05);
+  
+  tl.to(heroCommand, { 
+    opacity: 0.3, 
+    duration: 0.08, 
+    repeat: 3, 
+    yoyo: true, 
+    ease: 'steps(1)' 
+  }, 1.577);
+  
+  tl.to(heroZone, { 
+    scale: 1.3, 
+    duration: 0.3, 
+    ease: 'back.out(2)' 
+  }, 4.577);
+  
+  tl.to(heroZone, { 
+    textShadow: '0 0 40px rgba(88, 166, 255, 1), 0 0 80px rgba(88, 166, 255, 0.6), 0 2px 12px rgba(0, 0, 0, 0.8)', 
+    duration: 0.2 
+  }, 4.577);
+  
+  tl.to([sectionTag, gridBg, pulseRing, accentBar1, accentBar2, lyricContainer], { 
+    autoAlpha: 0, 
+    duration: 0.3 
+  }, 5.714);
+  
+  tl.set([sectionTag, gridBg, pulseRing, accentBar1, accentBar2, lyricContainer], { 
+    opacity: 0 
+  }, 6.014);
+  
+  tl.seek(0);
+  window.__timelines['02-verse-b'] = tl;
+})();
+</script>
+
+</div>
+</template>
+</body>
+</html>

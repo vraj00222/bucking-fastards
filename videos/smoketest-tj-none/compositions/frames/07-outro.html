@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<div id="root" data-composition-id="07-outro" data-width="1080" data-height="1920" data-duration="5.572">
+<style>
+#root {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background-color: #0D1117;
+  font-family: Consolas, 'Courier New', monospace;
+  color: #C9D1D9;
+}
+
+@font-face {
+  font-family: 'Consolas';
+  src: local("Consolas");
+}
+
+@font-face {
+  font-family: 'Courier New';
+  src: local("Courier New");
+}
+
+.section-tag {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+  color: #484F58;
+  z-index: 10;
+  opacity: 0;
+}
+
+.lyric-container {
+  position: absolute;
+  left: 60px;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  text-align: center;
+}
+
+.lyric-line {
+  font-size: 48px;
+  line-height: 1.4;
+  font-weight: bold;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+  opacity: 0;
+}
+
+.hero-word {
+  color: #58A6FF;
+  display: inline-block;
+}
+
+.stacked-names {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  z-index: 3;
+  text-align: center;
+  opacity: 0;
+}
+
+.competitor {
+  font-size: 42px;
+  font-weight: bold;
+  color: #484F58;
+  margin: 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stars-pulse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 72px;
+  font-weight: bold;
+  color: #58A6FF;
+  z-index: 4;
+  opacity: 0;
+  text-shadow: 0 0 20px rgba(88, 166, 255, 0.6);
+}
+
+.cowbell-line {
+  position: absolute;
+  left: 50%;
+  bottom: 25%;
+  transform: translateX(-50%);
+  font-size: 52px;
+  font-weight: bold;
+  color: #C9D1D9;
+  z-index: 5;
+  opacity: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cowbell-word {
+  color: #58A6FF;
+  text-shadow: 0 0 16px rgba(88, 166, 255, 0.5);
+}
+
+.ghost-echo {
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  color: #484F58;
+  z-index: 6;
+  opacity: 0;
+  letter-spacing: 4px;
+}
+</style>
+
+<div class="section-tag clip" id="section-tag" data-start="0" data-duration="5.572" data-track-index="0">[outro]</div>
+
+<div class="lyric-container">
+  <div class="lyric-line clip" id="lyric-main" data-start="0" data-duration="5.572" data-track-index="1">
+    VUE CLI BOWED DOWN, CREATE REACT APP TOO — <span class="hero-word">28K</span> STARS AND THE <span class="hero-word">COWBELL</span> NEVER STOPS
+  </div>
+</div>
+
+<div class="stacked-names clip" id="competitors" data-start="0" data-duration="5.572" data-track-index="2">
+  <div class="competitor">VUE CLI</div>
+  <div class="competitor">CREATE REACT APP</div>
+</div>
+
+<div class="stars-pulse clip" id="stars-display" data-start="0" data-duration="5.572" data-track-index="3">28K STARS</div>
+
+<div class="cowbell-line clip" id="cowbell-text" data-start="0" data-duration="5.572" data-track-index="4">
+  <span class="cowbell-word">COWBELL</span> NEVER STOPS
+</div>
+
+<div class="ghost-echo clip" id="ghost-text" data-start="0" data-duration="5.572" data-track-index="5">skrrt skrrt skrrt</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+(function () {
+  window.__timelines = window.__timelines || {};
+  
+  var sectionTag = document.getElementById('section-tag');
+  var lyricMain = document.getElementById('lyric-main');
+  var competitors = document.getElementById('competitors');
+  var starsDisplay = document.getElementById('stars-display');
+  var cowbellText = document.getElementById('cowbell-text');
+  var ghostText = document.getElementById('ghost-text');
+  
+  gsap.set(sectionTag, {autoAlpha: 0});
+  gsap.set(lyricMain, {autoAlpha: 0});
+  gsap.set(competitors, {autoAlpha: 0, xPercent: -50});
+  gsap.set(starsDisplay, {autoAlpha: 0});
+  gsap.set(cowbellText, {autoAlpha: 0});
+  gsap.set(ghostText, {autoAlpha: 0});
+  
+  var tl = gsap.timeline({ paused: true });
+  
+  tl.to(sectionTag, { autoAlpha: 0.6, duration: 0.4 }, 0.05);
+  tl.to(lyricMain, { autoAlpha: 1, duration: 0.5 }, 0.05);
+  
+  tl.to(competitors, { autoAlpha: 1, duration: 1.5, ease: "power2.out" }, 0);
+  
+  tl.to(starsDisplay, { autoAlpha: 1, duration: 0.3 }, 2);
+  tl.to(starsDisplay, { scale: 1.15, duration: 0.4, yoyo: true, repeat: 2, ease: "power1.inOut" }, 2.1);
+  
+  tl.to(cowbellText, { autoAlpha: 1, duration: 0.6 }, 3);
+  
+  tl.to(ghostText, { autoAlpha: 0.5, duration: 0.8 }, 4);
+  tl.to(ghostText, { y: -30, autoAlpha: 0, duration: 1.2, ease: "power2.in" }, 4.3);
+  
+  tl.to([sectionTag, lyricMain, competitors, starsDisplay, cowbellText], { autoAlpha: 0, duration: 0.3 }, 5.272);
+  tl.set([sectionTag, lyricMain, competitors, starsDisplay, cowbellText, ghostText], { autoAlpha: 0 }, 5.572);
+  
+  tl.seek(0);
+  window.__timelines["07-outro"] = tl;
+})();
+</script>
+
+</div>
+</template>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<div id="root" data-composition-id="05-outro" data-width="1080" data-height="1920" data-duration="9.405">
+<style>
+#root {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background-color: #0A0E12;
+  font-family: Courier New, Consolas, Monaco, monospace;
+}
+
+@font-face {
+  font-family: 'Courier New';
+  src: local("Courier New");
+}
+
+@font-face {
+  font-family: 'Consolas';
+  src: local("Consolas");
+}
+
+@font-face {
+  font-family: 'Monaco';
+  src: local("Monaco");
+}
+
+.lockup {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  color: #E8F0FF;
+  font-size: 96px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  filter: drop-shadow(0 0 40px rgba(0, 168, 232, 0.6));
+}
+
+.word {
+  display: block;
+  white-space: nowrap;
+}
+
+.outline-only {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(232, 240, 255, 0.2);
+  text-stroke: 1px rgba(232, 240, 255, 0.2);
+  filter: none;
+}
+</style>
+
+<div id="lockup" class="clip lockup" data-start="0" data-duration="9.405" data-track-index="0">
+  <span class="word" id="word-ship">SHIP</span>
+  <span class="word" id="word-faster">FASTER</span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+(function() {
+  var lockup = document.getElementById('lockup');
+  var wordShip = document.getElementById('word-ship');
+  var wordFaster = document.getElementById('word-faster');
+
+  gsap.set(lockup, {
+    autoAlpha: 0,
+    xPercent: -50,
+    yPercent: -50
+  });
+
+  window.__timelines = window.__timelines || {};
+  var tl = gsap.timeline({ paused: true });
+
+  tl.to(lockup, {
+    autoAlpha: 1,
+    duration: 0.05
+  }, 0.05);
+
+  tl.to(lockup, {
+    filter: 'drop-shadow(0 0 50px rgba(0, 168, 232, 0.8))',
+    duration: 0.4,
+    ease: 'power2.out'
+  }, 0.2);
+
+  tl.to(lockup, {
+    scale: 1.02,
+    duration: 0.15,
+    yoyo: true,
+    repeat: 1,
+    ease: 'power1.inOut'
+  }, 0.8);
+
+  tl.to(lockup, {
+    scale: 1.03,
+    duration: 0.15,
+    yoyo: true,
+    repeat: 1,
+    ease: 'power1.inOut'
+  }, 1.5);
+
+  tl.to(lockup, {
+    scale: 1.025,
+    duration: 0.15,
+    yoyo: true,
+    repeat: 1,
+    ease: 'power1.inOut'
+  }, 2.3);
+
+  tl.to(lockup, {
+    scale: 1.04,
+    duration: 0.15,
+    yoyo: true,
+    repeat: 1,
+    ease: 'power1.inOut'
+  }, 3.1);
+
+  tl.to(lockup, {
+    scale: 1.035,
+    duration: 0.15,
+    yoyo: true,
+    repeat: 1,
+    ease: 'power1.inOut'
+  }, 3.9);
+
+  tl.to(lockup, {
+    scale: 1.05,
+    duration: 0.15,
+    yoyo: true,
+    repeat: 1,
+    ease: 'power1.inOut'
+  }, 4.7);
+
+  tl.to(lockup, {
+    scale: 1.045,
+    duration: 0.15,
+    yoyo: true,
+    repeat: 1,
+    ease: 'power1.inOut'
+  }, 5.5);
+
+  tl.to(lockup, {
+    filter: 'drop-shadow(0 0 80px rgba(0, 168, 232, 1)) drop-shadow(0 0 120px rgba(0, 168, 232, 0.8))',
+    scale: 1.08,
+    duration: 0.2,
+    ease: 'power2.out'
+  }, 7.0);
+
+  tl.to(lockup, {
+    filter: 'drop-shadow(0 0 0px rgba(0, 168, 232, 0))',
+    duration: 0.1,
+    ease: 'power1.in'
+  }, 7.2);
+
+  tl.add(function() {
+    lockup.classList.add('outline-only');
+  }, 8.0);
+
+  tl.to(lockup, {
+    autoAlpha: 0,
+    duration: 0.3,
+    ease: 'power1.in'
+  }, 9.105);
+
+  tl.set(lockup, {
+    autoAlpha: 0
+  }, 9.405);
+
+  tl.seek(0);
+  window.__timelines["05-outro"] = tl;
+})();
+</script>
+</div>
+</template>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "anthropics-claude-code",
+  "private": true,
+  "scripts": {
+    "check": "npx --yes hyperframes@0.8.11 check .",
+    "render": "npx --yes hyperframes@0.8.11 render",
+    "publish": "npx --yes hyperframes@0.8.11 publish"
+  }
+}

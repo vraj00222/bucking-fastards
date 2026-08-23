@@ -1,0 +1,604 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <div
+        id="root"
+        data-composition-id="03-verse-body"
+        data-width="1080"
+        data-height="1920"
+        data-duration="11.990"
+      >
+        <style>
+          /* Impact is an OS-bundled system font — declare with local() so the
+             linter's font-face requirement is satisfied without a downloadable
+             file. */
+          @font-face {
+            font-family: "Impact";
+            src: local("Impact"), local("Impact Regular");
+            font-weight: 400 900;
+            font-style: normal;
+          }
+          /* ── Verse Body · DARK ─────────────────────────────────────────
+             bg #1C1410 · ink #F5F2EF · accent #D8000F
+             Portrait 1080x1920. G1: split-anchor-word-slot. G2:
+             typewriter-phrase-keyword-shuffle. */
+          #root {
+            position: absolute;
+            inset: 0;
+            width: 1080px;
+            height: 1920px;
+            overflow: hidden;
+            background: #1c1410;
+            color: #f5f2ef;
+            font-family: Impact, "Arial Black", sans-serif;
+          }
+          #root * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+
+          /* Hairline top+bottom borders — poster frame */
+          #root::before,
+          #root::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(245, 242, 239, 0.28);
+            z-index: 5;
+            pointer-events: none;
+          }
+          #root::before {
+            top: 96px;
+          }
+          #root::after {
+            bottom: 96px;
+          }
+
+          /* Scan-line texture */
+          .scan {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: repeating-linear-gradient(
+              to bottom,
+              rgba(245, 242, 239, 0.035) 0px,
+              rgba(245, 242, 239, 0.035) 1px,
+              transparent 1px,
+              transparent 4px
+            );
+            mix-blend-mode: screen;
+            opacity: 0.55;
+            z-index: 4;
+          }
+
+          /* Veo bg bed under G1 — bg_under_text treatment (montage.md). */
+          #g1_bed {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+            will-change: opacity;
+          }
+
+          /* Corner chrome tag (top-left) */
+          .tag {
+            position: absolute;
+            font-family: "Courier New", monospace;
+            font-size: 40px;
+            letter-spacing: 0.22em;
+            color: rgba(245, 242, 239, 0.62);
+            z-index: 6;
+            top: 130px;
+            left: 60px;
+          }
+          .tag .dot {
+            color: #d8000f;
+            margin-right: 12px;
+          }
+
+          /* Bg flip layer — hard cut lighter dark at t=3.063 for one beat. */
+          .bgflip {
+            position: absolute;
+            inset: 0;
+            background: #252525;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+          }
+
+          /* Group container — full-bleed, absolute-positioned stack */
+          .group {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+          }
+          /* Group 2 starts hidden — group 1 is visible at frame 0. */
+          #g2 {
+            visibility: hidden;
+            opacity: 0;
+          }
+
+          /* ═══════════════════════════════════════════════════════════
+             GROUP 1 — split-anchor-word-slot (portrait: TOP / BOTTOM)
+             ─────────────────────────────────────────────────────────── */
+
+          /* TOP half — column of 6 fixed anchor rows */
+          #g1_top {
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            top: 220px;
+            height: 780px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+          .anchor-row {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            opacity: 0.28;
+            will-change: opacity, transform;
+          }
+          .anchor-row.lit {
+            opacity: 1;
+          }
+          .anchor-bar {
+            width: 12px;
+            height: 72px;
+            background: #d8000f;
+            flex-shrink: 0;
+            transform: scaleY(0.2);
+            transform-origin: center;
+            will-change: transform;
+          }
+          .anchor-row.lit .anchor-bar {
+            transform: scaleY(1);
+          }
+          .anchor-label {
+            font-family: Impact, "Arial Black", sans-serif;
+            font-weight: 900;
+            font-size: 104px;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            color: #f5f2ef;
+            white-space: nowrap;
+          }
+
+          /* BOTTOM half — torn-paper word slot */
+          #g1_slot {
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            top: 1080px;
+            height: 620px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .slot-paper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #f5f2ef;
+            color: #1c1410;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* torn paper — jagged top+bottom edges via clip-path */
+            clip-path: polygon(
+              0% 6%, 4% 2%, 9% 7%, 14% 3%, 20% 8%, 26% 2%, 32% 7%,
+              38% 3%, 44% 8%, 50% 2%, 56% 7%, 62% 3%, 68% 8%, 74% 2%,
+              80% 7%, 86% 3%, 92% 8%, 96% 2%, 100% 6%,
+              100% 94%, 96% 98%, 92% 93%, 86% 97%, 80% 92%, 74% 98%,
+              68% 93%, 62% 97%, 56% 92%, 50% 98%, 44% 93%, 38% 97%,
+              32% 92%, 26% 98%, 20% 93%, 14% 97%, 9% 92%, 4% 98%, 0% 94%
+            );
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+          }
+          .slot-word {
+            font-family: Impact, "Arial Black", sans-serif;
+            font-weight: 900;
+            font-size: 180px;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            color: #1c1410;
+            white-space: nowrap;
+            will-change: opacity, transform;
+          }
+          .slot-word.hidden {
+            opacity: 0;
+            visibility: hidden;
+          }
+
+          /* Lyric line — always visible from first beat */
+          .lyric {
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            bottom: 160px;
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 26px;
+            letter-spacing: 0.14em;
+            line-height: 1.35;
+            color: rgba(245, 242, 239, 0.62);
+            text-transform: uppercase;
+            z-index: 6;
+            opacity: 0;
+            will-change: opacity;
+          }
+          .lyric .accent {
+            color: #d8000f;
+          }
+
+          /* ═══════════════════════════════════════════════════════════
+             GROUP 2 — typewriter-phrase-keyword-shuffle
+             ─────────────────────────────────────────────────────────── */
+          #g2 .stack {
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 18px;
+          }
+          #g2 .lead {
+            font-family: Impact, "Arial Black", sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: #f5f2ef;
+            white-space: nowrap;
+            font-size: 120px;
+            opacity: 0;
+            visibility: hidden;
+            will-change: opacity, transform;
+          }
+          #g2 .keyword {
+            font-weight: 900;
+            letter-spacing: -0.045em;
+            line-height: 0.88;
+            text-transform: uppercase;
+            color: #d8000f;
+            white-space: nowrap;
+            font-size: 420px;
+            margin-top: 40px;
+            opacity: 0;
+            visibility: hidden;
+            will-change: opacity, transform, font-family, font-weight, font-style;
+            font-family: Impact, "Arial Black", sans-serif;
+            font-style: normal;
+          }
+          #g2 .lyric {
+            opacity: 0;
+            visibility: hidden;
+          }
+        </style>
+
+        <div class="scan"></div>
+        <div class="bgflip" id="bgflip"></div>
+
+        <!-- Veo bed under G1 (bg_under_text, 0 → 5.99s) -->
+        <video
+          id="g1_bed"
+          class="clip"
+          src="assets/03g1-terminal-spawn.mp4"
+          muted
+          playsinline
+          preload="auto"
+          data-start="0"
+          data-duration="5.990"
+          data-track-index="0"
+          data-layout-allow-overlap
+        ></video>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             GROUP 1 · 0.0 → 5.990s
+             "SPAWNING CHILD PROCESSES, FORWARDING SIGNALS RAW"
+             ═══════════════════════════════════════════════════════════ -->
+        <div id="g1" class="group">
+          <div class="tag" id="g1_tag"><span class="dot">◆</span>VERSE 1C</div>
+
+          <div id="g1_top">
+            <div class="anchor-row" id="g1_a0">
+              <div class="anchor-bar"></div>
+              <div class="anchor-label">SPAWNING</div>
+            </div>
+            <div class="anchor-row" id="g1_a1">
+              <div class="anchor-bar"></div>
+              <div class="anchor-label">CHILD</div>
+            </div>
+            <div class="anchor-row" id="g1_a2">
+              <div class="anchor-bar"></div>
+              <div class="anchor-label">PROCESSES</div>
+            </div>
+            <div class="anchor-row" id="g1_a3">
+              <div class="anchor-bar"></div>
+              <div class="anchor-label">FORWARDING</div>
+            </div>
+            <div class="anchor-row" id="g1_a4">
+              <div class="anchor-bar"></div>
+              <div class="anchor-label">SIGNALS</div>
+            </div>
+            <div class="anchor-row" id="g1_a5">
+              <div class="anchor-bar"></div>
+              <div class="anchor-label">RAW</div>
+            </div>
+          </div>
+
+          <div id="g1_slot">
+            <div class="slot-paper">
+              <div class="slot-word hidden" id="g1_s0">SPAWNING</div>
+              <div class="slot-word hidden" id="g1_s1">CHILD</div>
+              <div class="slot-word hidden" id="g1_s2">PROCESSES</div>
+              <div class="slot-word hidden" id="g1_s3">FORWARDING</div>
+              <div class="slot-word hidden" id="g1_s4">SIGNALS</div>
+              <div class="slot-word hidden" id="g1_s5">RAW</div>
+            </div>
+          </div>
+
+          <div class="lyric" id="g1_lyric">
+            SPAWNING CHILD PROCESSES, FORWARDING SIGNALS <span class="accent">RAW</span>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             GROUP 2 · 5.990 → 11.990s
+             "EXAMPLES/PIZZA ORDERING CLI, THAT'S THE LAW"
+             ═══════════════════════════════════════════════════════════ -->
+        <div id="g2" class="group">
+          <div class="tag" id="g2_tag"><span class="dot">◆</span>VERSE 1C</div>
+          <div class="stack">
+            <div class="lead" id="g2_w1" style="font-family: 'Courier New', monospace; font-size: 88px; letter-spacing: 0.02em;">EXAMPLES/PIZZA</div>
+            <div class="lead" id="g2_w2">ORDERING CLI</div>
+            <div class="lead" id="g2_w3">THAT'S THE</div>
+            <div class="keyword" id="g2_kw">LAW</div>
+          </div>
+          <div class="lyric" id="g2_lyric">
+            EXAMPLES/PIZZA ORDERING CLI, THAT'S THE <span class="accent">LAW</span>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            window.__timelines = window.__timelines || {};
+
+            // Font preset library — the keyword cycles these on the shuffle beat.
+            var FONTS = [
+              { family: 'Impact, "Arial Black", sans-serif', weight: 900, style: "normal" },
+              { family: 'Georgia, "Times New Roman", Times, serif', weight: 800, style: "normal" },
+              { family: '"Courier New", Courier, monospace', weight: 700, style: "normal" },
+              { family: 'Georgia, "Times New Roman", serif', weight: 700, style: "italic" },
+              { family: '"Arial Narrow", "Helvetica Neue", sans-serif', weight: 800, style: "normal" },
+              { family: '"Helvetica Neue", Arial, sans-serif', weight: 300, style: "italic" },
+            ];
+            function fontProps(i) {
+              var f = FONTS[((i % FONTS.length) + FONTS.length) % FONTS.length];
+              return { fontFamily: f.family, fontWeight: f.weight, fontStyle: f.style };
+            }
+
+            // ── Refs ───────────────────────────────────────────────────
+            var g1 = document.getElementById("g1");
+            var g2 = document.getElementById("g2");
+            var bgflip = document.getElementById("bgflip");
+
+            var g1_lyric = document.getElementById("g1_lyric");
+            var g1_anchors = [
+              document.getElementById("g1_a0"),
+              document.getElementById("g1_a1"),
+              document.getElementById("g1_a2"),
+              document.getElementById("g1_a3"),
+              document.getElementById("g1_a4"),
+              document.getElementById("g1_a5"),
+            ];
+            var g1_slots = [
+              document.getElementById("g1_s0"),
+              document.getElementById("g1_s1"),
+              document.getElementById("g1_s2"),
+              document.getElementById("g1_s3"),
+              document.getElementById("g1_s4"),
+              document.getElementById("g1_s5"),
+            ];
+
+            var g2_w1 = document.getElementById("g2_w1");
+            var g2_w2 = document.getElementById("g2_w2");
+            var g2_w3 = document.getElementById("g2_w3");
+            var g2_kw = document.getElementById("g2_kw");
+            var g2_lyric = document.getElementById("g2_lyric");
+
+            var tl = gsap.timeline({ paused: true });
+
+            // ── Initial hidden state ───────────────────────────────────
+            gsap.set([g2_w1, g2_w2, g2_w3, g2_kw, g2_lyric], { autoAlpha: 0 });
+            gsap.set(g1_slots, { autoAlpha: 0 });
+            gsap.set(g1_lyric, { autoAlpha: 0 });
+            gsap.set(g1, { autoAlpha: 1 });
+            gsap.set(g2, { autoAlpha: 0 });
+            gsap.set(bgflip, { autoAlpha: 0 });
+            gsap.set(g2_kw, fontProps(0));
+
+            // Mirror into timeline at t=0
+            tl.set([g2_w1, g2_w2, g2_w3, g2_kw, g2_lyric], { autoAlpha: 0 }, 0);
+            tl.set(g1_slots, { autoAlpha: 0 }, 0);
+            tl.set(g1_lyric, { autoAlpha: 0 }, 0);
+            tl.set(g1, { autoAlpha: 1 }, 0);
+            tl.set(g2, { autoAlpha: 0 }, 0);
+            tl.set(bgflip, { autoAlpha: 0 }, 0);
+            tl.set(g2_kw, fontProps(0), 0);
+
+            // ── Veo bed (bg_under_text) — fade in 0→0.35, exit hard-kill at 5.99 ──
+            var g1_bed = document.getElementById("g1_bed");
+            gsap.set(g1_bed, { opacity: 0 });
+            tl.set(g1_bed, { opacity: 0 }, 0);
+            tl.to(g1_bed, { opacity: 0.35, duration: 0.4, ease: "power1.out" }, 0.063);
+            tl.to(g1_bed, { opacity: 0, duration: 0.3, ease: "power1.in" }, 5.69);
+            tl.set(g1_bed, { opacity: 0 }, 5.990);
+            // Reset all anchor rows to dim
+            for (var ai = 0; ai < g1_anchors.length; ai++) {
+              tl.call(
+                (function (el) {
+                  return function () { el.classList.remove("lit"); };
+                })(g1_anchors[ai]),
+                null,
+                0
+              );
+            }
+
+            // ── Group swap at 5.990s ───────────────────────────────────
+            tl.set(g1, { autoAlpha: 0 }, 5.990);
+            tl.set(g2, { autoAlpha: 1 }, 5.990);
+
+            // ═══════════════════════════════════════════════════════════
+            //  GROUP 1 — split-anchor-word-slot
+            //  onsets (local): [0.063, 1.063, 2.063, 3.063, 4.063, 5.063, 5.563]
+            //  6 words × onsets 0..5 → light anchor + pop into slot.
+            //  Last onset (5.563) → exit shake.
+            //  Bg flip: 3.063 on, 3.563 off (one-beat hard-cut lighter dark).
+            // ═══════════════════════════════════════════════════════════
+
+            var ONSETS_G1 = [0.063, 1.063, 2.063, 3.063, 4.063, 5.063];
+            var HOLD = 0.9; // slot word visible window before next pops
+
+            // Lyric on from first beat
+            tl.set(g1_lyric, { autoAlpha: 1 }, 0.063);
+
+            for (var i = 0; i < 6; i++) {
+              var t = ONSETS_G1[i];
+              var anchor = g1_anchors[i];
+              var slot = g1_slots[i];
+              var prevSlot = i > 0 ? g1_slots[i - 1] : null;
+
+              // Light the anchor row on its onset
+              tl.call(
+                (function (el) {
+                  return function () { el.classList.add("lit"); };
+                })(anchor),
+                null,
+                t
+              );
+
+              // Hide the previous slot word (hard cut) at this beat
+              if (prevSlot) {
+                tl.set(prevSlot, { autoAlpha: 0 }, t);
+              }
+
+              // Pop the new slot word IN
+              tl.fromTo(
+                slot,
+                { autoAlpha: 0, scale: 0.86, y: 10 },
+                {
+                  autoAlpha: 1,
+                  scale: 1,
+                  y: 0,
+                  duration: 0.1,
+                  ease: "back.out(2.2)",
+                  overwrite: "auto",
+                },
+                t
+              );
+            }
+
+            // Bg flip — hard cut on at 3.063, hard cut off at 3.563
+            tl.set(bgflip, { autoAlpha: 1 }, 3.063);
+            tl.set(bgflip, { autoAlpha: 0 }, 3.563);
+
+            // Exit shake at 5.563 on the slot word + anchors
+            tl.to(
+              [g1_slots[5]],
+              {
+                x: 12,
+                duration: 0.05,
+                repeat: 5,
+                yoyo: true,
+                ease: "power2.inOut",
+              },
+              5.563
+            );
+            tl.to(
+              "#g1_top",
+              {
+                x: -8,
+                duration: 0.05,
+                repeat: 5,
+                yoyo: true,
+                ease: "power2.inOut",
+              },
+              5.563
+            );
+            // Reset position after shake
+            tl.set([g1_slots[5], "#g1_top"], { x: 0 }, 5.89);
+
+            // ═══════════════════════════════════════════════════════════
+            //  GROUP 2 — typewriter-phrase-keyword-shuffle
+            //  onsets (local): [6.063, 7.063, 8.063, 9.063, 10.063, 11.063]
+            //  3 leads + 1 keyword = 4 reveals. Extra onsets punch shuffle.
+            //  Map: w1@6.063, w2@7.063, w3@8.063, kw@9.063
+            //  keywordShuffleAt = 11.063
+            // ═══════════════════════════════════════════════════════════
+
+            var POP_IN = { autoAlpha: 0, scale: 0.94, y: 8 };
+            var POP_OUT = {
+              autoAlpha: 1,
+              scale: 1,
+              y: 0,
+              duration: 0.1,
+              ease: "back.out(2)",
+              overwrite: "auto",
+            };
+
+            tl.fromTo(g2_w1, POP_IN, POP_OUT, 6.063);
+            tl.fromTo(g2_w2, POP_IN, POP_OUT, 7.063);
+            tl.fromTo(g2_w3, POP_IN, POP_OUT, 8.063);
+            tl.fromTo(g2_kw, POP_IN, POP_OUT, 9.063);
+            tl.set(g2_lyric, { autoAlpha: 1 }, 6.063);
+
+            // Extra onset punches — small pulse on the keyword base face
+            tl.to(
+              g2_kw,
+              { scale: 1.04, duration: 0.08, yoyo: true, repeat: 1, ease: "power2.out" },
+              10.063
+            );
+
+            // Keyword font shuffle at 11.063 — 4-5 faces every 60-80ms for ~500ms
+            var G2_SHUF = 11.063;
+            tl.set(g2_kw, fontProps(1), G2_SHUF + 0.0);
+            tl.set(g2_kw, fontProps(2), G2_SHUF + 0.07);
+            tl.set(g2_kw, fontProps(3), G2_SHUF + 0.14);
+            tl.set(g2_kw, fontProps(4), G2_SHUF + 0.21);
+            tl.set(g2_kw, fontProps(5), G2_SHUF + 0.28);
+            tl.set(g2_kw, fontProps(2), G2_SHUF + 0.35);
+            tl.set(g2_kw, fontProps(4), G2_SHUF + 0.42);
+            // Land back on Impact black at end of shuffle window (~500ms)
+            tl.set(g2_kw, fontProps(0), G2_SHUF + 0.5);
+
+            // Hold to end of frame
+            tl.to({}, { duration: 11.990 }, 0);
+
+            tl.seek(0);
+            window.__timelines["03-verse-body"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

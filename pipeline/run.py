@@ -22,6 +22,7 @@ import lyricist
 
 ROOT = Path(__file__).parent.parent
 MODAL_ENDPOINT = "https://vrajpatel00222--droptable-music-generate.modal.run"
+VIDEO_ENDPOINT = "https://vaibhavgeek--droptable-video-generate.modal.run"
 MASTER_FILTER = (
     "acompressor=threshold=-18dB:ratio=3:attack=20:release=250,"
     "equalizer=f=90:t=q:w=1:g=1.5,equalizer=f=3200:t=q:w=1:g=1,"
@@ -58,6 +59,8 @@ def main():
     ap.add_argument("--genius", action="store_true")
     ap.add_argument("--master", action="store_true")
     ap.add_argument("--pick", type=int, help="auto-pick take N (skip interactive picker)")
+    ap.add_argument("--video", action="store_true", help="generate a music video after audio")
+    ap.add_argument("--video-scenes", type=int, default=4, help="number of video scenes (default 4)")
     args = ap.parse_args()
 
     repo = args.repo.removeprefix("https://github.com/").removesuffix(".git").strip("/")
@@ -168,6 +171,43 @@ def main():
     db_path.write_text(json.dumps(db, indent=2))
     print(f"STAGE:done SLUG:{slug}", flush=True)
     print(f"\ndone: {out}/track.mp3  |  meta: {out}/meta.json  |  published to tracks.json")
+
+    # 5. optional music video generation
+    if args.video:
+        print("\nSTAGE:video", flush=True)
+        print(f"generating music video ({args.video_scenes} scenes) on Modal …")
+        t0 = time.time()
+        audio_b64 = base64.b64encode((out / "track.mp3").read_bytes()).decode()
+        r = requests.post(
+            VIDEO_ENDPOINT,
+            json={
+                "caption": song["caption"],
+                "lyrics": song["lyrics"],
+                "song_title": song["song_title"],
+                "artist": song["artist_name"],
+                "style": args.style,
+                "audio_b64": audio_b64,
+                "duration": args.duration,
+                "num_scenes": args.video_scenes,
+            },
+            timeout=1200,
+        )
+        r.raise_for_status()
+        video_path = out / "video.mp4"
+        video_path.write_bytes(base64.b64decode(r.json()["video_b64"]))
+        # publish alongside the audio
+        pub_video = ROOT / "web/public/videos" / f"{slug}.mp4"
+        pub_video.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(video_path, pub_video)
+        # persist video_url in tracks.json
+        db_path = ROOT / "data/tracks.json"
+        db = json.loads(db_path.read_text())
+        for t in db["tracks"]:
+            if t["slug"] == slug:
+                t["video_url"] = f"/videos/{slug}.mp4"
+        db_path.write_text(json.dumps(db, indent=2))
+        elapsed = round(time.time() - t0, 1)
+        print(f"video done in {elapsed}s → {pub_video}", flush=True)
 
 
 if __name__ == "__main__":

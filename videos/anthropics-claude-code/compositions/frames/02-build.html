@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<div id="root" data-composition-id="02-build" data-width="1080" data-height="1920" data-duration="16.212">
+<style>
+#root {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background-color: #0A0E12;
+  font-family: 'Courier New', Consolas, Monaco, monospace;
+}
+
+@font-face {
+  font-family: 'Courier New';
+  src: local('Courier New');
+}
+
+@font-face {
+  font-family: 'Consolas';
+  src: local('Consolas');
+}
+
+@font-face {
+  font-family: 'Monaco';
+  src: local('Monaco');
+}
+
+.letter-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  gap: 20px;
+  font-size: 140px;
+  font-weight: bold;
+  color: #E8F0FF;
+  letter-spacing: 0.05em;
+}
+
+.letter {
+  display: inline-block;
+  text-shadow: 0 0 40px rgba(0, 168, 232, 0.6);
+}
+
+.pulse-bg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 168, 232, 0.15) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.grid-line {
+  position: absolute;
+  background-color: rgba(0, 168, 232, 0.1);
+}
+
+.grid-h {
+  width: 100%;
+  height: 2px;
+  left: 0;
+}
+
+.grid-v {
+  height: 100%;
+  width: 2px;
+  top: 0;
+}
+</style>
+
+<div class="clip pulse-bg" id="pulse-bg" data-start="0" data-duration="16.212" data-track-index="0"></div>
+
+<div class="clip grid-line grid-h" id="grid-h1" data-start="0" data-duration="16.212" data-track-index="1" style="top: 25%;"></div>
+<div class="clip grid-line grid-h" id="grid-h2" data-start="0" data-duration="16.212" data-track-index="1" style="top: 50%;"></div>
+<div class="clip grid-line grid-h" id="grid-h3" data-start="0" data-duration="16.212" data-track-index="1" style="top: 75%;"></div>
+<div class="clip grid-line grid-v" id="grid-v1" data-start="0" data-duration="16.212" data-track-index="1" style="left: 25%;"></div>
+<div class="clip grid-line grid-v" id="grid-v2" data-start="0" data-duration="16.212" data-track-index="1" style="left: 50%;"></div>
+<div class="clip grid-line grid-v" id="grid-v3" data-start="0" data-duration="16.212" data-track-index="1" style="left: 75%;"></div>
+
+<div class="clip letter-container" id="word-container" data-start="0" data-duration="16.212" data-track-index="2">
+  <span class="letter" id="letter-a">A</span>
+  <span class="letter" id="letter-n">N</span>
+  <span class="letter" id="letter-t">T</span>
+  <span class="letter" id="letter-h">H</span>
+  <span class="letter" id="letter-r">R</span>
+  <span class="letter" id="letter-o">O</span>
+  <span class="letter" id="letter-p">P</span>
+  <span class="letter" id="letter-i">I</span>
+  <span class="letter" id="letter-c">C</span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+(function () {
+  window.__timelines = window.__timelines || {};
+  
+  var pulseBg = document.getElementById('pulse-bg');
+  var wordContainer = document.getElementById('word-container');
+  var letterA = document.getElementById('letter-a');
+  var letterN = document.getElementById('letter-n');
+  var letterT = document.getElementById('letter-t');
+  var letterH = document.getElementById('letter-h');
+  var letterR = document.getElementById('letter-r');
+  var letterO = document.getElementById('letter-o');
+  var letterP = document.getElementById('letter-p');
+  var letterI = document.getElementById('letter-i');
+  var letterC = document.getElementById('letter-c');
+  var gridH1 = document.getElementById('grid-h1');
+  var gridH2 = document.getElementById('grid-h2');
+  var gridH3 = document.getElementById('grid-h3');
+  var gridV1 = document.getElementById('grid-v1');
+  var gridV2 = document.getElementById('grid-v2');
+  var gridV3 = document.getElementById('grid-v3');
+  
+  var letters = [letterA, letterN, letterT, letterH, letterR, letterO, letterP, letterI, letterC];
+  var grids = [gridH1, gridH2, gridH3, gridV1, gridV2, gridV3];
+  
+  gsap.set(pulseBg, { autoAlpha: 0, xPercent: -50, yPercent: -50, scale: 0.5 });
+  gsap.set(wordContainer, { autoAlpha: 0, xPercent: -50, yPercent: -50 });
+  gsap.set(letters, { autoAlpha: 1, scale: 1, rotation: 0, x: 0 });
+  gsap.set(grids, { autoAlpha: 0 });
+  
+  var tl = gsap.timeline({ paused: true });
+  
+  tl.to(pulseBg, { autoAlpha: 0.4, duration: 0.05 }, 0.05);
+  tl.to(grids, { autoAlpha: 1, duration: 0.3, stagger: 0.05, overwrite: 'auto' }, 0.1);
+  
+  tl.to(wordContainer, { autoAlpha: 1, duration: 0.1 }, 0.05);
+  tl.from(letters, { 
+    scale: 0, 
+    rotation: -180, 
+    duration: 0.6, 
+    stagger: 0.08,
+    ease: 'back.out(2)',
+    overwrite: 'auto'
+  }, 0.2);
+  
+  tl.to(pulseBg, { scale: 1.2, duration: 0.4, ease: 'power2.out', overwrite: 'auto' }, 1.0);
+  
+  tl.to(letters, { 
+    x: '+=15', 
+    duration: 0.05, 
+    stagger: 0.02,
+    yoyo: true,
+    repeat: 1,
+    overwrite: 'auto'
+  }, 2.5);
+  
+  tl.to([letterA, letterH, letterP], { 
+    scale: 1.15, 
+    color: '#00A8E8',
+    duration: 0.08,
+    yoyo: true,
+    repeat: 1,
+    overwrite: 'auto'
+  }, 3.2);
+  
+  tl.to(letters, { 
+    x: '-=20', 
+    duration: 0.05, 
+    stagger: 0.015,
+    yoyo: true,
+    repeat: 1,
+    overwrite: 'auto'
+  }, 4.8);
+  
+  tl.to([letterN, letterR, letterI], { 
+    scale: 1.2, 
+    color: '#00A8E8',
+    duration: 0.1,
+    yoyo: true,
+    repeat: 1,
+    overwrite: 'auto'
+  }, 6.5);
+  
+  tl.to(letters, { 
+    x: '+=25', 
+    duration: 0.04, 
+    stagger: 0.01,
+    yoyo: true,
+    repeat: 1,
+    overwrite: 'auto'
+  }, 8.0);
+  
+  tl.to(pulseBg, { scale: 1.6, autoAlpha: 0.7, duration: 0.3, ease: 'power2.out', overwrite: 'auto' }, 9.5);
+  
+  tl.to(letters, { 
+    x: '-=30', 
+    duration: 0.06, 
+    stagger: 0.02,
+    yoyo: true,
+    repeat: 1,
+    overwrite: 'auto'
+  }, 10.2);
+  
+  tl.to([letterT, letterO, letterC], { 
+    scale: 1.25, 
+    color: '#00A8E8',
+    duration: 0.12,
+    yoyo: true,
+    repeat: 1,
+    overwrite: 'auto'
+  }, 11.8);
+  
+  tl.to(pulseBg, { scale: 2.0, autoAlpha: 1, duration: 0.2, ease: 'power4.out', overwrite: 'auto' }, 13.0);
+  tl.to(wordContainer, { scale: 1.3, duration: 0.3, ease: 'back.out(1.5)', overwrite: 'auto' }, 13.0);
+  tl.to(letters, { 
+    scale: 1.4, 
+    rotation: 360,
+    color: '#00A8E8',
+    duration: 0.4, 
+    stagger: 0.03,
+    ease: 'power2.out',
+    overwrite: 'auto'
+  }, 13.0);
+  
+  tl.to(grids, { autoAlpha: 0.6, duration: 0.2, overwrite: 'auto' }, 13.0);
+  
+  tl.to(letters, { 
+    x: '+=40', 
+    duration: 0.05, 
+    stagger: 0.015,
+    yoyo: true,
+    repeat: 3,
+    overwrite: 'auto'
+  }, 13.5);
+  
+  tl.to(letters, { 
+    x: '-=35', 
+    duration: 0.04, 
+    stagger: 0.01,
+    yoyo: true,
+    repeat: 3,
+    overwrite: 'auto'
+  }, 14.2);
+  
+  tl.to(letters, { 
+    scale: 1.5, 
+    duration: 0.15,
+    stagger: 0.02,
+    overwrite: 'auto'
+  }, 14.8);
+  
+  tl.to([pulseBg, wordContainer, grids], { autoAlpha: 0, duration: 0.3, overwrite: 'auto' }, 15.912);
+  tl.set([pulseBg, wordContainer, grids], { autoAlpha: 0 }, 16.212);
+  
+  tl.seek(0);
+  window.__timelines['02-build'] = tl;
+})();
+</script>
+
+</div>
+</template>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /></head>
+<body>
+<template>
+<div id="root" data-composition-id="03-break" data-width="1080" data-height="1920" data-duration="21.920">
+<style>
+#root {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background-color: #0A0E12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@font-face {
+  font-family: 'Courier New';
+  src: local('Courier New');
+}
+
+@font-face {
+  font-family: 'Consolas';
+  src: local('Consolas');
+}
+
+@font-face {
+  font-family: 'Monaco';
+  src: local('Monaco');
+}
+
+.word-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.word {
+  font-family: Courier New, Consolas, Monaco, monospace;
+  font-size: 88px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  color: #E8F0FF;
+  text-align: center;
+  line-height: 1;
+}
+
+#word-write {
+  color: #00A8E8;
+}
+
+#word-code {
+  color: #E8F0FF;
+}
+
+#word-think {
+  color: #00A8E8;
+}
+
+#word-faster {
+  color: #E8F0FF;
+}
+</style>
+
+<div class="word-stack">
+  <div id="word-write" class="word clip" data-start="0" data-duration="21.920" data-track-index="0">WRITE</div>
+  <div id="word-code" class="word clip" data-start="5" data-duration="16.920" data-track-index="1">CODE</div>
+  <div id="word-think" class="word clip" data-start="11" data-duration="10.920" data-track-index="2">THINK</div>
+  <div id="word-faster" class="word clip" data-start="16" data-duration="5.920" data-track-index="3">FASTER</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+(function () {
+  var write = document.getElementById('word-write');
+  var code = document.getElementById('word-code');
+  var think = document.getElementById('word-think');
+  var faster = document.getElementById('word-faster');
+
+  gsap.set(write, {autoAlpha: 0, scale: 0.9});
+  gsap.set(code, {autoAlpha: 0, scale: 0.9});
+  gsap.set(think, {autoAlpha: 0, scale: 0.9});
+  gsap.set(faster, {autoAlpha: 0, scale: 0.9});
+
+  window.__timelines = window.__timelines || {};
+  var tl = gsap.timeline({ paused: true });
+
+  tl.to(write, {autoAlpha: 1, scale: 1, duration: 0.6, ease: 'power2.out'}, 0.05);
+  tl.to(write, {scale: 1.08, duration: 0.15, ease: 'power2.out'}, 1.2);
+  tl.to(write, {scale: 1, duration: 0.15, ease: 'power2.in'}, 1.35);
+  tl.to(write, {scale: 1.08, duration: 0.15, ease: 'power2.out'}, 2.8);
+  tl.to(write, {scale: 1, duration: 0.15, ease: 'power2.in'}, 2.95);
+
+  tl.to(code, {autoAlpha: 1, scale: 1, duration: 0.6, ease: 'power2.out'}, 5.05);
+  tl.to(code, {scale: 1.08, duration: 0.15, ease: 'power2.out'}, 6.2);
+  tl.to(code, {scale: 1, duration: 0.15, ease: 'power2.in'}, 6.35);
+  tl.to(code, {scale: 1.08, duration: 0.15, ease: 'power2.out'}, 7.8);
+  tl.to(code, {scale: 1, duration: 0.15, ease: 'power2.in'}, 7.95);
+
+  tl.to(think, {autoAlpha: 1, scale: 1, duration: 0.6, ease: 'power2.out'}, 11.05);
+  tl.to(think, {scale: 1.08, duration: 0.15, ease: 'power2.out'}, 12.2);
+  tl.to(think, {scale: 1, duration: 0.15, ease: 'power2.in'}, 12.35);
+  tl.to(think, {scale: 1.08, duration: 0.15, ease: 'power2.out'}, 13.8);
+  tl.to(think, {scale: 1, duration: 0.15, ease: 'power2.in'}, 13.95);
+
+  tl.to(faster, {autoAlpha: 1, scale: 1, duration: 0.6, ease: 'power2.out'}, 16.05);
+  tl.to(faster, {scale: 1.08, duration: 0.15, ease: 'power2.out'}, 17.2);
+  tl.to(faster, {scale: 1, duration: 0.15, ease: 'power2.in'}, 17.35);
+  tl.to(faster, {scale: 1.08, duration: 0.15, ease: 'power2.out'}, 18.8);
+  tl.to(faster, {scale: 1, duration: 0.15, ease: 'power2.in'}, 18.95);
+
+  tl.to([write, code, think, faster], {y: 2400, autoAlpha: 0, duration: 0.5, ease: 'power3.in', overwrite: 'auto'}, 21.42);
+
+  tl.set(write, {autoAlpha: 0}, 21.920);
+  tl.set(code, {autoAlpha: 0}, 21.920);
+  tl.set(think, {autoAlpha: 0}, 21.920);
+  tl.set(faster, {autoAlpha: 0}, 21.920);
+
+  tl.seek(0);
+  window.__timelines['03-break'] = tl;
+})();
+</script>
+</div>
+</template>
+</body>
+</html>

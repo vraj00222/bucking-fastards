@@ -1,0 +1,438 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <div
+        id="root"
+        data-composition-id="05-bridge-todos"
+        data-width="1080"
+        data-height="1920"
+        data-duration="12.005"
+      >
+        <style>
+          /* Impact is an OS-bundled system font — declare with local() so the
+             linter's font-face requirement is satisfied without a downloadable
+             file. */
+          @font-face {
+            font-family: "Impact";
+            src: local("Impact"), local("Impact Regular");
+            font-weight: 400 900;
+            font-style: normal;
+          }
+          /* ── Bridge · TODOS ────────────────────────────────────────────
+             bg #1C1410 · ink #F5F2EF · accent #D8000F
+             Portrait 1080x1920.
+             G1: typewriter-phrase-keyword-shuffle (THREE / IN THE / GIT
+                 HOOK, / TODO) with invert-glitch on the DROPs.
+             G2: held-text-strobe-burst (TODO / TODO / TODO) with lyric
+                 line held for the full 6s. */
+          #root {
+            position: absolute;
+            inset: 0;
+            width: 1080px;
+            height: 1920px;
+            overflow: hidden;
+            background: #1c1410;
+            color: #f5f2ef;
+            font-family: Impact, "Arial Black", sans-serif;
+          }
+          #root * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+
+          /* Scan-line texture */
+          .scan {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: repeating-linear-gradient(
+              to bottom,
+              rgba(245, 242, 239, 0.035) 0px,
+              rgba(245, 242, 239, 0.035) 1px,
+              transparent 1px,
+              transparent 4px
+            );
+            mix-blend-mode: screen;
+            opacity: 0.55;
+            z-index: 4;
+          }
+
+          /* Corner chrome tag (top-left) */
+          .tag {
+            position: absolute;
+            font-family: "Courier New", monospace;
+            font-size: 40px;
+            letter-spacing: 0.22em;
+            color: rgba(245, 242, 239, 0.62);
+            z-index: 6;
+            top: 60px;
+            left: 60px;
+          }
+          .tag .dot {
+            color: #d8000f;
+            margin-right: 12px;
+          }
+
+          /* Group container — full-bleed, absolute-positioned stack */
+          .group {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+          }
+          /* Group 2 starts hidden — group 1 is visible at frame 0. */
+          #g2 {
+            visibility: hidden;
+            opacity: 0;
+          }
+
+          /* ═══════════════════════════════════════════════════════════
+             GROUP 1 — typewriter-phrase-keyword-shuffle
+             THREE (huge) / IN THE / GIT HOOK, / TODO (red)
+             ─────────────────────────────────────────────────────────── */
+          #g1_stack {
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 14px;
+          }
+          #g1 .lead {
+            font-family: Impact, "Arial Black", sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 0.88;
+            text-transform: uppercase;
+            color: #f5f2ef;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            will-change: opacity, transform;
+          }
+          #g1 .lead.huge {
+            font-size: 300px;
+            letter-spacing: -0.05em;
+            margin-bottom: 20px;
+          }
+          #g1 .lead.mid {
+            font-size: 128px;
+          }
+          #g1 .keyword {
+            font-weight: 900;
+            letter-spacing: -0.045em;
+            line-height: 0.88;
+            text-transform: uppercase;
+            color: #d8000f;
+            white-space: nowrap;
+            font-size: 260px;
+            margin-top: 30px;
+            opacity: 0;
+            visibility: hidden;
+            will-change: opacity, transform, font-family, font-weight, font-style;
+            font-family: Impact, "Arial Black", sans-serif;
+            font-style: normal;
+          }
+          /* Full-frame invert overlay for the DROP glitches */
+          #g1_invert {
+            position: absolute;
+            inset: 0;
+            background: #d8000f;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 8;
+            pointer-events: none;
+          }
+          /* When invert is active, flip text tokens black */
+          #g1.inverted .lead,
+          #g1.inverted .keyword {
+            color: #1c1410 !important;
+          }
+
+          /* ═══════════════════════════════════════════════════════════
+             GROUP 2 — held-text-strobe-burst
+             Three stacked "TODO" lines in red, lyric line below in white.
+             ─────────────────────────────────────────────────────────── */
+          /* Hairline top/bottom borders (Bold Poster decor) */
+          #g2_border_top,
+          #g2_border_bottom {
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            height: 2px;
+            background: rgba(245, 242, 239, 0.55);
+            z-index: 5;
+          }
+          #g2_border_top {
+            top: 140px;
+          }
+          #g2_border_bottom {
+            bottom: 140px;
+          }
+
+          #g2_stack {
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 4px;
+          }
+          #g2 .mark {
+            font-family: Impact, "Arial Black", sans-serif;
+            font-weight: 900;
+            font-size: 300px;
+            letter-spacing: -0.05em;
+            line-height: 0.86;
+            text-transform: uppercase;
+            color: #d8000f;
+            white-space: nowrap;
+            -webkit-text-stroke: 0 transparent;
+            will-change: color, -webkit-text-stroke;
+          }
+          #g2 .lyric {
+            margin-top: 60px;
+            font-family: Impact, "Arial Black", sans-serif;
+            font-weight: 900;
+            font-size: 64px;
+            letter-spacing: 0.02em;
+            line-height: 1.05;
+            text-transform: uppercase;
+            color: #f5f2ef;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 100%;
+          }
+        </style>
+
+        <div class="scan"></div>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             GROUP 1 · 0.0 → 6.005s · typewriter-phrase-keyword-shuffle
+             "THREE TODOS IN THE GIT HOOK"
+             onsets LOCAL: [0.068, 1.068, 2.068, 3.068, 4.068, 4.568]
+             ═══════════════════════════════════════════════════════════ -->
+        <div id="g1" class="group">
+          <div class="tag" id="g1_tag"><span class="dot">◆</span>BRIDGE</div>
+
+          <div id="g1_stack">
+            <div class="lead huge" id="g1_w1">THREE</div>
+            <div class="lead mid" id="g1_w2">IN THE</div>
+            <div class="lead mid" id="g1_w3">GIT HOOK,</div>
+            <div class="keyword" id="g1_kw">TODO</div>
+          </div>
+          <div id="g1_invert"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             GROUP 2 · 6.005 → 12.005s · held-text-strobe-burst
+             "REPLACE WITH APPROPRIATE CHECKS — THREE TIMES"
+             onsets LOCAL: [6.068, 7.068, 8.068, 9.068, 10.068, 11.068]
+             ═══════════════════════════════════════════════════════════ -->
+        <div id="g2" class="group">
+          <div class="tag" id="g2_tag"><span class="dot">◆</span>BRIDGE II</div>
+          <div id="g2_border_top"></div>
+          <div id="g2_border_bottom"></div>
+
+          <div id="g2_stack">
+            <div class="mark" id="g2_m1">TODO</div>
+            <div class="mark" id="g2_m2">TODO</div>
+            <div class="mark" id="g2_m3">TODO</div>
+            <div class="lyric" id="g2_lyric">
+              REPLACE WITH APPROPRIATE CHECKS — THREE TIMES
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            window.__timelines = window.__timelines || {};
+
+            // Font preset library — the keyword shuffles through 4-5 faces,
+            // ending on Impact.
+            var FONTS = [
+              { family: 'Impact, "Arial Black", sans-serif', weight: 900, style: "normal" },
+              { family: 'Georgia, "Times New Roman", Times, serif', weight: 800, style: "normal" },
+              { family: '"Courier New", Courier, monospace', weight: 700, style: "normal" },
+              { family: 'Georgia, "Times New Roman", serif', weight: 700, style: "italic" },
+              { family: '"Arial Narrow", "Helvetica Neue", sans-serif', weight: 800, style: "normal" },
+            ];
+            function fontProps(i) {
+              var f = FONTS[((i % FONTS.length) + FONTS.length) % FONTS.length];
+              return { fontFamily: f.family, fontWeight: f.weight, fontStyle: f.style };
+            }
+
+            // ── Refs ───────────────────────────────────────────────────
+            var g1 = document.getElementById("g1");
+            var g2 = document.getElementById("g2");
+
+            var g1_w1 = document.getElementById("g1_w1");
+            var g1_w2 = document.getElementById("g1_w2");
+            var g1_w3 = document.getElementById("g1_w3");
+            var g1_kw = document.getElementById("g1_kw");
+            var g1_invert = document.getElementById("g1_invert");
+
+            var g2_marks = [
+              document.getElementById("g2_m1"),
+              document.getElementById("g2_m2"),
+              document.getElementById("g2_m3"),
+            ];
+
+            var tl = gsap.timeline({ paused: true });
+
+            // ── Initial hidden state ───────────────────────────────────
+            gsap.set([g1_w1, g1_w2, g1_w3, g1_kw], { autoAlpha: 0 });
+            gsap.set(g1_invert, { autoAlpha: 0 });
+            gsap.set(g1, { autoAlpha: 1 });
+            gsap.set(g2, { autoAlpha: 0 });
+            gsap.set(g1_kw, fontProps(0));
+            // Marks start in solid-red idle state.
+            gsap.set(g2_marks, {
+              color: "#D8000F",
+              webkitTextStroke: "0px transparent",
+            });
+
+            // Mirror into timeline at t=0
+            tl.set([g1_w1, g1_w2, g1_w3, g1_kw], { autoAlpha: 0 }, 0);
+            tl.set(g1_invert, { autoAlpha: 0 }, 0);
+            tl.set(g1, { autoAlpha: 1 }, 0);
+            tl.set(g2, { autoAlpha: 0 }, 0);
+            tl.set(g1_kw, fontProps(0), 0);
+            tl.set(g2_marks, { color: "#D8000F", webkitTextStroke: "0px transparent" }, 0);
+
+            // ═══════════════════════════════════════════════════════════
+            //  GROUP 1 — typewriter-phrase-keyword-shuffle
+            //  onsets LOCAL: [0.068, 1.068, 2.068, 3.068, 4.068, 4.568]
+            //    0.068 → w1 THREE
+            //    1.068 → (hold — beat pulse on THREE)
+            //    2.068 → w2 IN THE
+            //    3.068 → w3 GIT HOOK,
+            //    4.068 → kw TODO (reveal + first DROP invert glitch)
+            //    4.568 → keyword font shuffle (400ms, ends on Impact) +
+            //            second DROP invert glitch
+            // ═══════════════════════════════════════════════════════════
+
+            var POP_IN = { autoAlpha: 0, scale: 0.94, y: 8 };
+            var POP_OUT = {
+              autoAlpha: 1,
+              scale: 1,
+              y: 0,
+              duration: 0.12,
+              ease: "back.out(2)",
+              overwrite: "auto",
+            };
+
+            // 0.068 — THREE lands (the counting motif)
+            tl.fromTo(g1_w1, POP_IN, POP_OUT, 0.068);
+
+            // 1.068 — punch pulse on THREE (marks the second beat)
+            tl.to(
+              g1_w1,
+              { scale: 1.06, duration: 0.09, yoyo: true, repeat: 1, ease: "power2.out" },
+              1.068
+            );
+
+            // 2.068 — IN THE
+            tl.fromTo(g1_w2, POP_IN, POP_OUT, 2.068);
+            // 3.068 — GIT HOOK,
+            tl.fromTo(g1_w3, POP_IN, POP_OUT, 3.068);
+            // 4.068 — TODO (keyword reveal)
+            tl.fromTo(g1_kw, POP_IN, POP_OUT, 4.068);
+
+            // ── DROP glitch #1 at 4.068 — 100ms full-frame invert ──────
+            // Background flashes to #D8000F, text tokens flip to #1C1410.
+            tl.set(g1_invert, { autoAlpha: 1 }, 4.068);
+            tl.call(function () { g1.classList.add("inverted"); }, null, 4.068);
+            tl.set(g1_invert, { autoAlpha: 0 }, 4.168);
+            tl.call(function () { g1.classList.remove("inverted"); }, null, 4.168);
+
+            // ── Keyword font shuffle at 4.568 ─────────────────────────
+            //   4-5 face swaps every 70ms for ~400ms, ending on Impact.
+            var G1_SHUF = 4.568;
+            tl.set(g1_kw, fontProps(1), G1_SHUF + 0.0);
+            tl.set(g1_kw, fontProps(2), G1_SHUF + 0.07);
+            tl.set(g1_kw, fontProps(3), G1_SHUF + 0.14);
+            tl.set(g1_kw, fontProps(4), G1_SHUF + 0.21);
+            tl.set(g1_kw, fontProps(2), G1_SHUF + 0.28);
+            // Land back on Impact black at end of shuffle window (~400ms)
+            tl.set(g1_kw, fontProps(0), G1_SHUF + 0.4);
+
+            // ── DROP glitch #2 at 4.568 — 100ms full-frame invert ──────
+            tl.set(g1_invert, { autoAlpha: 1 }, 4.568);
+            tl.call(function () { g1.classList.add("inverted"); }, null, 4.568);
+            tl.set(g1_invert, { autoAlpha: 0 }, 4.668);
+            tl.call(function () { g1.classList.remove("inverted"); }, null, 4.668);
+
+            // ── Group swap at 6.005s ───────────────────────────────────
+            tl.set(g1, { autoAlpha: 0 }, 6.005);
+            tl.set(g2, { autoAlpha: 1 }, 6.005);
+            // Ensure the invert flag doesn't leak into g2 area
+            tl.call(function () { g1.classList.remove("inverted"); }, null, 6.005);
+
+            // ═══════════════════════════════════════════════════════════
+            //  GROUP 2 — held-text-strobe-burst
+            //  onsets LOCAL: [6.068, 7.068, 8.068, 9.068, 10.068, 11.068]
+            //  On each onset, cycle the "TODO" marks through 4 texture
+            //  states over ~200ms (4 swaps × 50ms):
+            //     solid red → outline red → filled white → outline white
+            //     → back to solid red.
+            //  Between bursts the mark holds dead-still in solid red.
+            //  The lyric line is CSS-visible from the moment g2 turns on
+            //  (autoAlpha 1 at 6.005) through the end of the frame.
+            // ═══════════════════════════════════════════════════════════
+
+            // Texture state helpers — applied to all 3 mark lines together.
+            var STATE_SOLID_RED = {
+              color: "#D8000F",
+              webkitTextStroke: "0px transparent",
+            };
+            var STATE_OUTLINE_RED = {
+              color: "transparent",
+              webkitTextStroke: "3px #D8000F",
+            };
+            var STATE_SOLID_WHITE = {
+              color: "#F5F2EF",
+              webkitTextStroke: "0px transparent",
+            };
+            var STATE_OUTLINE_WHITE = {
+              color: "transparent",
+              webkitTextStroke: "3px #F5F2EF",
+            };
+
+            var G2_ONSETS = [6.068, 7.068, 8.068, 9.068, 10.068, 11.068];
+            for (var j = 0; j < G2_ONSETS.length; j++) {
+              var t0 = G2_ONSETS[j];
+              // 4 swaps every 50ms → 200ms burst.
+              tl.set(g2_marks, STATE_OUTLINE_RED, t0 + 0.0);
+              tl.set(g2_marks, STATE_SOLID_WHITE, t0 + 0.05);
+              tl.set(g2_marks, STATE_OUTLINE_WHITE, t0 + 0.1);
+              tl.set(g2_marks, STATE_SOLID_RED, t0 + 0.15);
+              // Hold state after the burst (redundant but explicit)
+              tl.set(g2_marks, STATE_SOLID_RED, t0 + 0.2);
+            }
+
+            // Hold to end of frame
+            tl.to({}, { duration: 12.005 }, 0);
+
+            tl.seek(0);
+            window.__timelines["05-bridge-todos"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

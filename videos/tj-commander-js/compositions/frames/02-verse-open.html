@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <div
+        id="root"
+        data-composition-id="02-verse-open"
+        data-width="1080"
+        data-height="1920"
+        data-duration="12.005"
+      >
+        <style>
+          /* Impact is an OS-bundled system font — declare with local() so the
+             linter's font-face requirement is satisfied without a downloadable
+             file. Arial Black + Courier New + Georgia + Helvetica Neue etc.
+             are all auto-resolved. */
+          @font-face {
+            font-family: "Impact";
+            src: local("Impact"), local("Impact Regular");
+            font-weight: 400 900;
+            font-style: normal;
+          }
+          /* ── Verse Open · DARK ─────────────────────────────────────────
+             bg #1C1410 · ink #F5F2EF · accent #D8000F
+             Portrait 1080x1920. Two typewriter-phrase-keyword-shuffle
+             groups back to back. */
+          #root {
+            position: absolute;
+            inset: 0;
+            width: 1080px;
+            height: 1920px;
+            overflow: hidden;
+            background: #1c1410;
+            color: #f5f2ef;
+            font-family: Impact, "Arial Black", sans-serif;
+          }
+          #root * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+
+          /* Hairline top+bottom borders — poster frame */
+          #root::before,
+          #root::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(245, 242, 239, 0.28);
+            z-index: 5;
+            pointer-events: none;
+          }
+          #root::before {
+            top: 96px;
+          }
+          #root::after {
+            bottom: 96px;
+          }
+
+          /* Scan-line texture */
+          .scan {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: repeating-linear-gradient(
+              to bottom,
+              rgba(245, 242, 239, 0.035) 0px,
+              rgba(245, 242, 239, 0.035) 1px,
+              transparent 1px,
+              transparent 4px
+            );
+            mix-blend-mode: screen;
+            opacity: 0.55;
+            z-index: 4;
+          }
+
+          /* Corner chrome tag (top-left) */
+          .tag {
+            position: absolute;
+            font-family: "Courier New", monospace;
+            font-size: 40px;
+            letter-spacing: 0.22em;
+            color: rgba(245, 242, 239, 0.62);
+            z-index: 6;
+            top: 130px;
+            left: 60px;
+          }
+          .tag .dot {
+            color: #d8000f;
+            margin-right: 12px;
+          }
+
+          /* Group container — full-bleed, absolute-positioned stack */
+          .group {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 60px;
+            z-index: 2;
+          }
+          /* Group 2 starts hidden — group 1 is visible at frame 0. */
+          #g2 {
+            visibility: hidden;
+            opacity: 0;
+          }
+          /* Words + lyrics start hidden — GSAP reveals them on their onsets. */
+          .lead,
+          .keyword,
+          .lyric {
+            visibility: hidden;
+          }
+
+          /* Centered stack: 3 lead lines above, keyword below */
+          .stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 18px;
+            width: 100%;
+          }
+
+          .lead {
+            font-family: Impact, "Arial Black", sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: #f5f2ef;
+            white-space: nowrap;
+            font-size: 128px;
+            opacity: 0;
+            will-change: opacity, transform;
+          }
+
+          /* Keyword: red, huge, sits below leads */
+          .keyword {
+            font-weight: 900;
+            letter-spacing: -0.045em;
+            line-height: 0.88;
+            text-transform: uppercase;
+            color: #d8000f;
+            white-space: nowrap;
+            font-size: 340px;
+            margin-top: 40px;
+            opacity: 0;
+            will-change: opacity, transform, font-family, font-weight, font-style;
+            /* base font — Impact, matches lead face */
+            font-family: Impact, "Arial Black", sans-serif;
+            font-style: normal;
+          }
+
+          /* Lyric line — always visible from first word land, sits at bottom */
+          .lyric {
+            position: absolute;
+            left: 60px;
+            right: 60px;
+            bottom: 160px;
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 28px;
+            letter-spacing: 0.14em;
+            line-height: 1.35;
+            color: rgba(245, 242, 239, 0.62);
+            text-transform: uppercase;
+            z-index: 6;
+            opacity: 0;
+            will-change: opacity;
+          }
+          .lyric .accent {
+            color: #d8000f;
+          }
+        </style>
+
+        <div class="scan"></div>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             GROUP 1 · 0.0 → 5.991s
+             "NPM INSTALL · COMMANDER, NOW I · RUN THE · THRONE"
+             ═══════════════════════════════════════════════════════════ -->
+        <div id="g1" class="group">
+          <div class="tag" id="g1_tag"><span class="dot">◆</span>VERSE 1</div>
+          <div class="stack">
+            <div class="lead" id="g1_w1">NPM INSTALL</div>
+            <div class="lead" id="g1_w2">COMMANDER, NOW I</div>
+            <div class="lead" id="g1_w3">RUN THE</div>
+            <div class="keyword" id="g1_kw">THRONE</div>
+          </div>
+          <div class="lyric" id="g1_lyric">
+            NPM INSTALL COMMANDER, NOW I RUN THE <span class="accent">THRONE</span>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             GROUP 2 · 5.991 → 12.005s
+             "LIB/COMMAND.JS · SO MASSIVE IT'S A · ZONE OF ITS · OWN"
+             ═══════════════════════════════════════════════════════════ -->
+        <div id="g2" class="group">
+          <div class="tag" id="g2_tag"><span class="dot">◆</span>VERSE 1B</div>
+          <div class="stack">
+            <div class="lead" id="g2_w1" style="font-family: 'Courier New', monospace; font-size: 96px; letter-spacing: 0.02em;">LIB/COMMAND.JS</div>
+            <div class="lead" id="g2_w2">SO MASSIVE IT'S A</div>
+            <div class="lead" id="g2_w3">ZONE OF ITS</div>
+            <div class="keyword" id="g2_kw">OWN</div>
+          </div>
+          <div class="lyric" id="g2_lyric">
+            LIB/COMMAND.JS SO MASSIVE IT'S A ZONE OF ITS <span class="accent">OWN</span>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            window.__timelines = window.__timelines || {};
+
+            // Font preset library — the keyword cycles these on the shuffle beat.
+            // Offline-safe generic stacks only. Index 0 is the base face.
+            var FONTS = [
+              { family: 'Impact, "Arial Black", sans-serif', weight: 900, style: "normal" },
+              { family: 'Georgia, "Times New Roman", Times, serif', weight: 800, style: "normal" },
+              { family: '"Courier New", Courier, monospace', weight: 700, style: "normal" },
+              { family: 'Georgia, "Times New Roman", serif', weight: 700, style: "italic" },
+              { family: '"Arial Narrow", "Helvetica Neue", sans-serif', weight: 800, style: "normal" },
+              { family: '"Helvetica Neue", Arial, sans-serif', weight: 300, style: "italic" },
+            ];
+            function fontProps(i) {
+              var f = FONTS[((i % FONTS.length) + FONTS.length) % FONTS.length];
+              return { fontFamily: f.family, fontWeight: f.weight, fontStyle: f.style };
+            }
+
+            // ── Group refs ─────────────────────────────────────────────
+            var g1 = document.getElementById("g1");
+            var g2 = document.getElementById("g2");
+
+            var g1_w1 = document.getElementById("g1_w1");
+            var g1_w2 = document.getElementById("g1_w2");
+            var g1_w3 = document.getElementById("g1_w3");
+            var g1_kw = document.getElementById("g1_kw");
+            var g1_lyric = document.getElementById("g1_lyric");
+
+            var g2_w1 = document.getElementById("g2_w1");
+            var g2_w2 = document.getElementById("g2_w2");
+            var g2_w3 = document.getElementById("g2_w3");
+            var g2_kw = document.getElementById("g2_kw");
+            var g2_lyric = document.getElementById("g2_lyric");
+
+            var tl = gsap.timeline({ paused: true });
+
+            // ── Initial hidden state — set immediately so frame 0 renders
+            //    with words/lyric/g2 hidden. tl.set at position 0 does not
+            //    render at exactly playhead=0 in a paused timeline. ──────
+            gsap.set(
+              [g1_w1, g1_w2, g1_w3, g1_kw, g1_lyric, g2_w1, g2_w2, g2_w3, g2_kw, g2_lyric],
+              { autoAlpha: 0 },
+            );
+            gsap.set(g1, { autoAlpha: 1 });
+            gsap.set(g2, { autoAlpha: 0 });
+            // Keyword base font
+            gsap.set(g1_kw, fontProps(0));
+            gsap.set(g2_kw, fontProps(0));
+
+            // Mirror into the timeline at t=0 so seeking back to 0 restores state.
+            tl.set(
+              [g1_w1, g1_w2, g1_w3, g1_kw, g1_lyric, g2_w1, g2_w2, g2_w3, g2_kw, g2_lyric],
+              { autoAlpha: 0 },
+              0,
+            );
+            tl.set(g1, { autoAlpha: 1 }, 0);
+            tl.set(g2, { autoAlpha: 0 }, 0);
+            tl.set(g1_kw, fontProps(0), 0);
+            tl.set(g2_kw, fontProps(0), 0);
+
+            // ── Group visibility swap at 5.991s ────────────────────────
+            tl.set(g1, { autoAlpha: 0 }, 5.991);
+            tl.set(g2, { autoAlpha: 1 }, 5.991);
+
+            // ═══════════════════════════════════════════════════════════
+            //  GROUP 1 — onsets (frame-local):
+            //  [0.068, 1.068, 1.968, 2.868, 3.768, 4.668, 5.368]
+            //  7 onsets, 3 leads + 1 keyword = 4 word reveals.
+            //  Map: w1@0.068, w2@1.068, w3@1.968, kw@2.868
+            //  Extra onsets (3.768, 4.668, 5.368) reinforce shuffle beats.
+            //  keywordShuffleAt = 4.568 → 6 swaps × ~80ms ≈ 600ms
+            // ═══════════════════════════════════════════════════════════
+
+            var POP_IN = { autoAlpha: 0, scale: 0.94, y: 8 };
+            var POP_OUT = {
+              autoAlpha: 1,
+              scale: 1,
+              y: 0,
+              duration: 0.1,
+              ease: "back.out(2)",
+              overwrite: "auto",
+            };
+
+            // Lead words type in
+            tl.fromTo(g1_w1, POP_IN, POP_OUT, 0.068);
+            tl.fromTo(g1_w2, POP_IN, POP_OUT, 1.068);
+            tl.fromTo(g1_w3, POP_IN, POP_OUT, 1.968);
+            // Keyword types in (base face)
+            tl.fromTo(g1_kw, POP_IN, POP_OUT, 2.868);
+            // Lyric line always visible from moment first word lands
+            tl.set(g1_lyric, { autoAlpha: 1 }, 0.068);
+
+            // Keyword font shuffle — 6 faces every ~80ms starting at 4.568
+            var G1_SHUF = 4.568;
+            tl.set(g1_kw, fontProps(1), G1_SHUF + 0.0);
+            tl.set(g1_kw, fontProps(2), G1_SHUF + 0.08);
+            tl.set(g1_kw, fontProps(3), G1_SHUF + 0.16);
+            tl.set(g1_kw, fontProps(4), G1_SHUF + 0.24);
+            tl.set(g1_kw, fontProps(5), G1_SHUF + 0.32);
+            tl.set(g1_kw, fontProps(1), G1_SHUF + 0.4);
+            tl.set(g1_kw, fontProps(2), G1_SHUF + 0.48);
+            // Land back on base at end of shuffle window (~600ms)
+            tl.set(g1_kw, fontProps(0), G1_SHUF + 0.6);
+
+            // ═══════════════════════════════════════════════════════════
+            //  GROUP 2 — onsets (frame-local):
+            //  [6.068, 7.068, 8.068, 9.068, 10.068, 10.568]
+            //  6 onsets, 3 leads + 1 keyword = 4 reveals.
+            //  Map: w1@6.068, w2@7.068, w3@8.068, kw@9.068
+            //  keywordShuffleAt = 10.568 → shuffle window ~600ms
+            // ═══════════════════════════════════════════════════════════
+
+            tl.fromTo(g2_w1, POP_IN, POP_OUT, 6.068);
+            tl.fromTo(g2_w2, POP_IN, POP_OUT, 7.068);
+            tl.fromTo(g2_w3, POP_IN, POP_OUT, 8.068);
+            tl.fromTo(g2_kw, POP_IN, POP_OUT, 9.068);
+            tl.set(g2_lyric, { autoAlpha: 1 }, 6.068);
+
+            // Keyword font shuffle for g2
+            var G2_SHUF = 10.568;
+            tl.set(g2_kw, fontProps(1), G2_SHUF + 0.0);
+            tl.set(g2_kw, fontProps(2), G2_SHUF + 0.08);
+            tl.set(g2_kw, fontProps(3), G2_SHUF + 0.16);
+            tl.set(g2_kw, fontProps(4), G2_SHUF + 0.24);
+            tl.set(g2_kw, fontProps(5), G2_SHUF + 0.32);
+            tl.set(g2_kw, fontProps(1), G2_SHUF + 0.4);
+            tl.set(g2_kw, fontProps(0), G2_SHUF + 0.48);
+
+            // Hold to end of frame
+            tl.to({}, { duration: 12.005 }, 0);
+
+            tl.seek(0);
+            window.__timelines["02-verse-open"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>
