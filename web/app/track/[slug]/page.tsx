@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Cover from "@/components/Cover";
 import Lyrics from "@/components/Lyrics";
+import NowPlayingLyrics from "@/components/NowPlayingLyrics";
 import Player from "@/components/Player";
 import { getTrack, getTracks } from "@/lib/data";
 import { presetFor } from "@/lib/presets";
@@ -41,7 +42,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
     <div className="mx-auto max-w-7xl px-5 py-10 lg:py-16">
       {/* hero: engraved plate left, credits + player right */}
       <div className="grid gap-10 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-14">
-        <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
+        <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
           <Cover
             repo={track.repo}
             style={track.style}
@@ -49,6 +50,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             artist={track.artist_name}
             size="lg"
           />
+          <NowPlayingLyrics lyrics={track.lyrics} audioUrl={track.audio_url} />
         </div>
 
         <div className="flex min-w-0 flex-col gap-5">

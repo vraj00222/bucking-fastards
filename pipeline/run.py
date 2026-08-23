@@ -17,6 +17,7 @@ import requests
 
 sys.path.insert(0, str(Path(__file__).parent))
 import greptile_client
+import github_target
 import local_intel
 import lyricist
 
@@ -50,7 +51,7 @@ def previous_track(repo):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo", required=True, help="owner/name or full GitHub URL")
+    ap.add_argument("--repo", required=True, help="owner/name, GitHub repo URL, or GitHub PR URL")
     ap.add_argument("--style", default="phonk")
     ap.add_argument("--duration", type=float, default=75.0)
     ap.add_argument("--takes", type=int, default=3)
@@ -60,8 +61,9 @@ def main():
     ap.add_argument("--pick", type=int, help="auto-pick take N (skip interactive picker)")
     args = ap.parse_args()
 
-    repo = args.repo.removeprefix("https://github.com/").removesuffix(".git").strip("/")
-    slug = greptile_client.slugify(repo)
+    target = github_target.parse_target(args.repo)
+    repo = target["repo"]
+    slug = target["slug"]
     existing = json.loads((ROOT / "data/tracks.json").read_text())["tracks"]
     if any(t["slug"] == slug and t.get("style") != args.style for t in existing):
         slug = f"{slug}-{args.style}"  # second album, don't clobber the first
@@ -90,6 +92,11 @@ def main():
                 facts = None
         if facts is None:
             facts = local_intel.mine(repo)
+        facts["target_type"] = target["kind"]
+        facts["target_label"] = target["label"]
+        if target["kind"] == "pull-request":
+            print(f"reading pull request #{target['number']} ...", flush=True)
+            facts["pull_request"] = github_target.collect_pull_request(repo, target["number"])
         facts_path.write_text(json.dumps(facts, indent=2))
     timing["intel_s"] = round(time.time() - t0, 1)
 
@@ -143,6 +150,8 @@ def main():
     meta = {
         "slug": slug,
         "repo": repo,
+        "target": target["label"],
+        "pull_request": facts.get("pull_request"),
         "style": args.style,
         "song_title": song["song_title"],
         "artist_name": song["artist_name"],

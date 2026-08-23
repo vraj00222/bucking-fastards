@@ -17,10 +17,10 @@ export default function Player({ audioUrl }: { audioUrl: string; accent?: string
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const announcePlayback = (isPlaying: boolean) => {
+  const announcePlayback = (isPlaying: boolean, currentTime = 0, trackDuration = 0) => {
     window.dispatchEvent(
       new CustomEvent("droptable:playback", {
-        detail: { audioUrl, playing: isPlaying },
+        detail: { audioUrl, playing: isPlaying, currentTime, duration: trackDuration },
       }),
     );
   };
@@ -43,17 +43,20 @@ export default function Player({ audioUrl }: { audioUrl: string; accent?: string
     ws.on("ready", () => setReady(true));
     ws.on("play", () => {
       setPlaying(true);
-      announcePlayback(true);
+      announcePlayback(true, ws.getCurrentTime(), ws.getDuration());
     });
     ws.on("pause", () => {
       setPlaying(false);
-      announcePlayback(false);
+      announcePlayback(false, ws.getCurrentTime(), ws.getDuration());
     });
     ws.on("finish", () => {
       setPlaying(false);
-      announcePlayback(false);
+      announcePlayback(false, ws.getCurrentTime(), ws.getDuration());
     });
-    ws.on("timeupdate", setTime);
+    ws.on("timeupdate", (currentTime) => {
+      setTime(currentTime);
+      announcePlayback(ws.isPlaying(), currentTime, ws.getDuration());
+    });
     ws.on("decode", setDuration);
     return () => {
       announcePlayback(false);

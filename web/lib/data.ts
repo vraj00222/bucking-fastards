@@ -30,6 +30,21 @@ export type Track = {
   take: number;
 };
 
+export type SourceReviewRecord = {
+  id: string;
+  priority: "P0" | "P1" | "P2" | "P3";
+  sourceName: string;
+  sourceType: string;
+  sourceUrl: string;
+  collectionTags: string[];
+  rightsStatus: "public-metadata-only" | "unknown";
+  trustLevel: "untrusted";
+  extractionStatus: "queued" | "metadata-captured" | "reviewed" | "rejected";
+  linkedCatalogRecordCount: number;
+  reviewerDecision: "pending" | "approved" | "rejected";
+  rejectionReason: string | null;
+};
+
 export function getTracks(): Track[] {
   try {
     const raw = readFileSync(join(process.cwd(), "../data/tracks.json"), "utf8");
@@ -41,4 +56,13 @@ export function getTracks(): Track[] {
 
 export function getTrack(slug: string): Track | undefined {
   return getTracks().find((t) => t.slug === slug);
+}
+
+export function getSourceReviewQueue(): SourceReviewRecord[] {
+  try {
+    const raw = readFileSync(join(process.cwd(), "../data/source-review-queue.json"), "utf8");
+    return (JSON.parse(raw).records ?? []) as SourceReviewRecord[];
+  } catch {
+    return [];
+  }
 }
