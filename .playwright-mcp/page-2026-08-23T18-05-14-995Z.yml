@@ -1,0 +1,113 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "DROPTABLE RECORDS;" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - link "Roster" [ref=e6] [cursor=pointer]:
+          - /url: /roster
+        - link "Sign a repo" [ref=e7] [cursor=pointer]:
+          - /url: /sign
+  - main [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e12]:
+          - generic [ref=e15]:
+            - generic [ref=e16]:
+              - generic [ref=e17]: Signed to DropTable Records
+              - generic [ref=e18]: 33⅓
+            - generic [ref=e19]:
+              - heading "npm install Commander" [level=3] [ref=e20]
+              - paragraph [ref=e21]: Comma-nd.R
+          - generic [ref=e22]: ExplicitCode
+        - generic [ref=e23]:
+          - paragraph [ref=e24]: Signed to DropTable Records
+          - generic [ref=e26]:
+            - heading "npm install Commander" [level=1] [ref=e27]
+            - paragraph [ref=e28]: Comma-nd.R
+          - paragraph [ref=e29]: node.js command-line interfaces made easy
+          - generic [ref=e30]:
+            - generic [ref=e31]: phonk
+            - link "tj/commander.js ↗" [ref=e32] [cursor=pointer]:
+              - /url: https://github.com/tj/commander.js
+            - generic [ref=e33]: ★ 28K
+            - generic [ref=e34]: JavaScript
+          - generic [ref=e35]:
+            - button "Play" [disabled] [ref=e39]
+            - generic [ref=e43]:
+              - generic [ref=e44]: 0:00
+              - generic [ref=e45]: cutting the wax…
+          - generic [ref=e46]:
+            - link "Download the single ↓" [ref=e47] [cursor=pointer]:
+              - /url: /tracks/tj-commander.js.mp3
+            - paragraph [ref=e48]: mined in 0s · written in 11s · recorded in 109.9s
+      - generic [ref=e49]:
+        - heading "Liner notes;" [level=2] [ref=e50]
+        - paragraph [ref=e51]: Underlined lines were mined from the repo
+        - generic [ref=e52]:
+          - paragraph [ref=e53]: verse
+          - paragraph [ref=e55]:
+            - mark [ref=e56]: npm install commander
+            - text: ", now I run the throne"
+          - paragraph [ref=e57]:
+            - mark [ref=e58]: lib/command.js
+            - text: so massive it's a zone of its own
+          - paragraph [ref=e59]: spawning child processes, forwarding signals raw
+          - paragraph [ref=e60]:
+            - mark [ref=e61]: examples/pizza
+            - text: ordering CLI, that's the law
+          - paragraph [ref=e62]:
+            - mark [ref=e63]: suggestSimilar.js
+            - text: whisperin' "
+            - mark [ref=e64]: did you mean --first
+            - text: "?\""
+          - paragraph [ref=e65]:
+            - mark [ref=e66]: command.option-misuse.test.js
+            - text: for the ones who hurt
+          - paragraph [ref=e67]: chorus
+          - paragraph [ref=e69]:
+            - mark [ref=e70]: npm install commander
+          - paragraph [ref=e71]:
+            - mark [ref=e72]: npm install commander
+          - paragraph [ref=e73]: one file rules the parser
+          - paragraph [ref=e74]:
+            - mark [ref=e75]: npm install commander
+          - paragraph [ref=e76]: verse
+          - paragraph [ref=e78]:
+            - mark [ref=e79]: incrementing inspector ports
+            - text: in the dead of night
+          - paragraph [ref=e80]:
+            - mark [ref=e81]: preAction, postAction
+            - text: ", hooks wired up tight"
+          - paragraph [ref=e82]:
+            - mark [ref=e83]: examples/deploy
+            - text: — no deploy, just the vibe
+          - paragraph [ref=e84]:
+            - mark [ref=e85]: passThroughOptions
+            - text: rolling through, unbothered, alive
+          - paragraph [ref=e86]: bridge
+          - paragraph [ref=e88]: three TODOs in the git hook, each one more vague
+          - paragraph [ref=e89]:
+            - text: "\""
+            - mark [ref=e90]: replace with appropriate checks
+            - text: "\" — three times, that's the plague"
+          - paragraph [ref=e91]: nobody edits that file, it sits in the dark
+          - paragraph [ref=e92]:
+            - mark [ref=e93]: npm run test-all
+            - text: ", still hitting the mark"
+          - paragraph [ref=e94]: chorus
+          - paragraph [ref=e96]:
+            - mark [ref=e97]: npm install commander
+          - paragraph [ref=e98]:
+            - mark [ref=e99]: npm install commander
+          - paragraph [ref=e100]: one file rules the parser
+          - paragraph [ref=e101]:
+            - mark [ref=e102]: npm install commander
+          - paragraph [ref=e103]: outro
+          - paragraph [ref=e105]: Vue CLI bowed down, Create React App too
+          - paragraph [ref=e106]: 28k stars and the cowbell never stops — skrrt skrrt skrrt through
+  - contentinfo [ref=e107]:
+    - generic [ref=e108]:
+      - paragraph [ref=e109]: DROPTABLE RECORDS
+      - paragraph [ref=e110]: Every repo has a song in it
+      - paragraph [ref=e111]: DROP TABLE records; -- 0 rows returned
