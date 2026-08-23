@@ -21,13 +21,12 @@ export type Track = {
   lyrics: string; // [verse]/[chorus] tags on their own lines
   facts_highlights: string[];
   audio_url: string; // "/tracks/<slug>.mp3"
-  video_url?: string | null; // "/videos/<slug>.mp4" rendered locally from the release
   cover_url: string | null; // null -> derive via lib/art
   stars: number;
   language: string;
   description: string;
   sources: Source[];
-  timing: { intel_s: number; lyrics_s: number; audio_s: number; video_s?: number };
+  timing: { intel_s: number; lyrics_s: number; audio_s: number };
   take: number;
 };
 

@@ -20,7 +20,6 @@ import greptile_client
 import github_target
 import local_intel
 import lyricist
-import release_video
 
 ROOT = Path(__file__).parent.parent
 MODAL_ENDPOINT = "https://vrajpatel00222--droptable-music-generate.modal.run"
@@ -59,7 +58,6 @@ def main():
     ap.add_argument("--skip-index", action="store_true")
     ap.add_argument("--genius", action="store_true")
     ap.add_argument("--master", action="store_true")
-    ap.add_argument("--no-video", action="store_true", help="Skip the local lyric-video render.")
     ap.add_argument("--pick", type=int, help="auto-pick take N (skip interactive picker)")
     args = ap.parse_args()
 
@@ -164,26 +162,6 @@ def main():
         shutil.copy(out / "track_master.mp3", out / "track.mp3")
         print("mastered.")
 
-    # 5. local visual release — original label art, waveform, and the generated
-    # lyrics. This stays local; the Modal service currently generates audio only.
-    video_url = None
-    if not args.no_video:
-        print("STAGE:video", flush=True)
-        t0 = time.time()
-        try:
-            video = release_video.render_release_video(
-                out / "track.mp3", song["lyrics"], song["song_title"], song["artist_name"], repo, out / "video.mp4"
-            )
-            videos_dir = ROOT / "web" / "public" / "videos"
-            videos_dir.mkdir(parents=True, exist_ok=True)
-            shutil.copy(video["path"], videos_dir / f"{slug}.mp4")
-            video_url = f"/videos/{slug}.mp4"
-            timing["video_s"] = round(time.time() - t0, 1)
-            print(f"  lyric video: {video_url} in {timing['video_s']}s", flush=True)
-        except Exception as exc:
-            timing["video_s"] = round(time.time() - t0, 1)
-            print(f"video unavailable ({exc}); audio release will continue", flush=True)
-
     meta = {
         "slug": slug,
         "repo": repo,
@@ -198,7 +176,6 @@ def main():
         "lyrics": song["lyrics"],
         "facts_highlights": song.get("facts_highlights", []),
         "audio_url": f"/tracks/{slug}.mp3",
-        "video_url": video_url,
         "cover_url": None,
         "stars": facts.get("stars"),
         "language": facts.get("language"),

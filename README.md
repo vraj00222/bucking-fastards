@@ -36,12 +36,8 @@ cp .env.example .env
 ```
 
 The command writes release metadata to `data/tracks.json` and the chosen audio
-to `web/public/tracks/`. It also uses local `ffmpeg` to cut an original MP4
-lyric video into `web/public/videos/`, rendered from the release lyrics, audio,
-label-owned illustrated A&R character, source-session panel, and waveform. The
-Modal service currently generates audio only; pass `--no-video` to skip the
-local video cut. To use the UI's “Sign a repo” flow, set `PYTHON` to the same
-virtual-environment interpreter if it is not `.venv/bin/python`.
+to `web/public/tracks/`. To use the UI's “Sign a repo” flow, set `PYTHON` to
+the same virtual-environment interpreter if it is not `.venv/bin/python`.
 
 GitHub supplies fresh public repository metadata, active issue titles, PR
 scope, review state/comments, and limited GitHub-profile context on every run.
