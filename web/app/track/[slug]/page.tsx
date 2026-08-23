@@ -127,7 +127,12 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
         <p className="mono-label mt-1 mb-8 text-[10px] text-ink-dim">
           Underlined lines were mined from the repo
         </p>
-        <Lyrics lyrics={track.lyrics} facts={track.facts_highlights} accent={accent} />
+        <Lyrics
+          lyrics={track.lyrics}
+          facts={track.facts_highlights}
+          audioUrl={track.audio_url}
+          accent={accent}
+        />
       </section>
     </div>
   );

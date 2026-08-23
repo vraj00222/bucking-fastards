@@ -17,6 +17,14 @@ export default function Player({ audioUrl }: { audioUrl: string; accent?: string
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
+  const announcePlayback = (isPlaying: boolean) => {
+    window.dispatchEvent(
+      new CustomEvent("droptable:playback", {
+        detail: { audioUrl, playing: isPlaying },
+      }),
+    );
+  };
+
   useEffect(() => {
     if (!containerRef.current) return;
     const ws = WaveSurfer.create({
@@ -33,12 +41,22 @@ export default function Player({ audioUrl }: { audioUrl: string; accent?: string
     });
     wsRef.current = ws;
     ws.on("ready", () => setReady(true));
-    ws.on("play", () => setPlaying(true));
-    ws.on("pause", () => setPlaying(false));
-    ws.on("finish", () => setPlaying(false));
+    ws.on("play", () => {
+      setPlaying(true);
+      announcePlayback(true);
+    });
+    ws.on("pause", () => {
+      setPlaying(false);
+      announcePlayback(false);
+    });
+    ws.on("finish", () => {
+      setPlaying(false);
+      announcePlayback(false);
+    });
     ws.on("timeupdate", setTime);
     ws.on("decode", setDuration);
     return () => {
+      announcePlayback(false);
       wsRef.current = null;
       try {
         ws.destroy();
