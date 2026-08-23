@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+.venv/
+out/
+node_modules/
+.next/
+__pycache__/
+*.py[cod]
+
+# Local development and design artifacts
+.playwright-mcp/
+screenshots/
+background/
+HANDOFF.md
+SCRATCH.md

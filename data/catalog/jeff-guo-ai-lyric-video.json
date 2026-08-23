@@ -1,0 +1,30 @@
+{
+  "id": "jeff-guo-ai-lyric-video",
+  "slug": "jeff-guo-ai-lyric-video",
+  "title": "I asked Fable 5 to make me a lyric video",
+  "artist": "Jeff Guo",
+  "sourceUrl": "https://youtu.be/gFx-NjTw3sM?si=P6cfEp1u3LDNE4P6",
+  "canonicalUrl": "https://www.youtube.com/watch?v=gFx-NjTw3sM",
+  "sourceType": "youtube-video",
+  "publisher": "Jeff Guo",
+  "themes": ["tech-satire", "software-engineering", "ai-coding"],
+  "tags": ["viral", "ai-coding", "lyric-video"],
+  "contentRating": "unknown",
+  "structure": ["unknown"],
+  "musicAttributes": {
+    "energy": "high",
+    "moods": ["playful", "upbeat"],
+    "vocalFormats": ["rhythmic vocals"],
+    "instrumentation": ["modern pop production"]
+  },
+  "originalSynopsis": "A video in which Jeff Guo uses an AI coding model to generate a lyric video for one of his songs.",
+  "rightsStatus": "public-metadata-only",
+  "trustLevel": "untrusted",
+  "provenance": {
+    "retrievedAt": "2026-08-23T18:20:00Z",
+    "extractionMethod": "metadata-import",
+    "sourceNotes": "Public oEmbed metadata only. Channel: https://www.youtube.com/@JeffGwoah"
+  },
+  "createdAt": "2026-08-23T18:20:00Z",
+  "updatedAt": "2026-08-23T18:20:00Z"
+}

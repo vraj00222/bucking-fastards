@@ -1,0 +1,587 @@
+{
+  "tracks": [
+    {
+      "slug": "tj-commander.js",
+      "repo": "tj/commander.js",
+      "style": "phonk",
+      "song_title": "npm install Commander",
+      "artist_name": "Comma-nd.R",
+      "caption": "aggressive phonk, memphis rap, distorted 808 cowbell, dark, fast, male rap vocals, gym hype, cold CLI energy, heavy distortion, relentless hi-hats",
+      "lyrics": "[verse]\nnpm install commander, now I run the throne\nlib/command.js so massive it's a zone of its own\nspawning child processes, forwarding signals raw\nexamples/pizza ordering CLI, that's the law\nsuggestSimilar.js whisperin' \"did you mean --first?\"\ncommand.option-misuse.test.js for the ones who hurt\n\n[chorus]\nnpm install commander\nnpm install commander\none file rules the parser\nnpm install commander\n\n[verse]\nincrementing inspector ports in the dead of night\npreAction, postAction, hooks wired up tight\nexamples/deploy \u2014 no deploy, just the vibe\npassThroughOptions rolling through, unbothered, alive\n\n[bridge]\nthree TODOs in the git hook, each one more vague\n\"replace with appropriate checks\" \u2014 three times, that's the plague\nnobody edits that file, it sits in the dark\nnpm run test-all, still hitting the mark\n\n[chorus]\nnpm install commander\nnpm install commander\none file rules the parser\nnpm install commander\n\n[outro]\nVue CLI bowed down, Create React App too\n28k stars and the cowbell never stops \u2014 skrrt skrrt skrrt through",
+      "facts_highlights": [
+        "npm install commander",
+        "lib/command.js",
+        "examples/pizza",
+        "suggestSimilar.js",
+        "did you mean --first",
+        "command.option-misuse.test.js",
+        "incrementing inspector ports",
+        "preAction, postAction",
+        "examples/deploy",
+        "passThroughOptions",
+        "replace with appropriate checks",
+        "npm run test-all"
+      ],
+      "audio_url": "/tracks/tj-commander.js.mp3",
+      "cover_url": null,
+      "stars": 28370,
+      "language": "JavaScript",
+      "description": "node.js command-line interfaces made easy",
+      "sources": [
+        {
+          "filepath": "tests/command.positionalOptions.test.js",
+          "linestart": 472,
+          "summary": "  describe('passThroughOptions(xxx) and option after command-argument', () => {"
+        },
+        {
+          "filepath": "tests/command.positionalOptions.test.js",
+          "linestart": 504,
+          "summary": "  describe('enablePositionalOptions(xxx) and shared option after subcommand', () => {"
+        },
+        {
+          "filepath": "package-lock.json",
+          "linestart": 1194,
+          "summary": "      \"integrity\": \"sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==\","
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 22,
+          "summary": "# Replace the TODO placeholders with appropriate checks according to your"
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 27,
+          "summary": "\t# TODO: Replace with appropriate checks (e.g. spell checking)."
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 35,
+          "summary": "\t# TODO: Replace with appropriate checks for this patch"
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 41,
+          "summary": "\t# TODO: Replace with appropriate checks for the whole series"
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 52,
+          "summary": "\tworktree=$(mktemp --tmpdir -d sendemail-validate.XXXXXXX) &&"
+        }
+      ],
+      "timing": {
+        "intel_s": 0.0,
+        "lyrics_s": 11.0,
+        "audio_s": 109.9
+      },
+      "take": 1
+    },
+    {
+      "slug": "ace-step-ace-step-1.5",
+      "repo": "ace-step/ACE-Step-1.5",
+      "style": "hyperpop",
+      "song_title": "repaint_waveform_splice",
+      "artist_name": "ACE-Step-Sunno",
+      "caption": "hyperpop, glitchy, pitched-up vocals, chaotic, extremely catchy, 160 bpm, digital euphoria, synth-shredding, vocal chop frenzy",
+      "lyrics": "[verse]\nText prompt in, full song out in two seconds flat\nA100 screaming, RTX can't handle that\nOpen llm_inference dot py, line two-nine-five-five\nQwen3 weight prefix hacks just to stay alive\n\n[chorus]\npip install ace-step, pip install ace-step\nWe outperform Suno and we don't charge a cent\npip install ace-step, pip install ace-step\nThe tokenizer's too slow and we found no fix yet!\n\n[verse]\nrepaint_step_injection straight into your vein\nnull_duration_fixes_test is questioning its name\nsecure_secret_store dot py \u2014 for a MUSIC model, babe\nhacking required, that's all the comment says\n\n[bridge]\nFive files, one dream \u2014 TODO: Support separate initialization\nFive files, one copied TODO, zero implementation\n`<|audio_code_XXX|>` regex on line two-eight-one-nine\nDCW primitives? Never spelled out, and that's fine\n\n[chorus]\npip install ace-step, pip install ace-step\nWe outperform Suno and we don't charge a cent\npip install ace-step, pip install ace-step\nThe tokenizer's too slow and we found no fix yet!\n\n[outro]\nbash .claude/skills/acestep/scripts/acestep.sh\nbash .claude/skills/acestep/scripts/acestep.sh\n(glitch) (glitch) acestep dot sh",
+      "facts_highlights": [
+        "llm_inference dot py, line two-nine-five-five",
+        "pip install ace-step",
+        "tokenizer's too slow and we found no fix yet",
+        "repaint_step_injection",
+        "null_duration_fixes_test",
+        "secure_secret_store dot py",
+        "hacking required",
+        "TODO: Support separate initialization",
+        "`<|audio_code_XXX|>` regex on line two-eight-one-nine",
+        "DCW primitives",
+        "bash .claude/skills/acestep/scripts/acestep.sh"
+      ],
+      "audio_url": "/tracks/ace-step-ace-step-1.5.mp3",
+      "cover_url": null,
+      "stars": 12344,
+      "language": "Python",
+      "description": "The most powerful local music generation model that outperforms almost all commercial alternatives, supporting Mac, AMD, Intel, and CUDA devices.",
+      "sources": [
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 48,
+          "summary": "    \"backend_info\": \"Motor para o LM 5Hz. vLLM = infer\u00eancia significativamente mais r\u00e1pida, recomendado para GPUs NVIDIA"
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 106,
+          "summary": "    \"mode_info_custom\": \"Custom: Controle manual total sobre legenda, letra, BPM, tom, dura\u00e7\u00e3o e todos os par\u00e2metros de "
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 110,
+          "summary": "    \"mode_info_lego\": \"Lego: Substitua uma faixa espec\u00edfica (ex.: bateria, vocais) no seu \u00e1udio fonte mantendo todo o re"
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 164,
+          "summary": "    \"use_adg_info\": \"M\u00e9todo alternativo de orienta\u00e7\u00e3o que pode melhorar a ader\u00eancia ao prompt com menos artefatos do que"
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 167,
+          "summary": "    \"infer_method_label\": \"M\u00e9todo de Infer\u00eancia\","
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 189,
+          "summary": "    \"lm_top_p_info\": \"Mant\u00e9m apenas os tokens cuja probabilidade acumulada atinge P. 0.9 = considerar os 90% tokens mais"
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 195,
+          "summary": "    \"cot_metas_info\": \"Quando ativado, o LM 'pensa' nos metadados musicais (BPM, tonalidade, estrutura) antes de gerar. "
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 244,
+          "summary": "    \"parallel_thinking_info\": \"Ao gerar m\u00faltiplas amostras (tamanho de lote > 1), processa todo o racioc\u00ednio do LM em pa"
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 290,
+          "summary": "    \"all_files_label\": \"\ud83d\udcc1 Todos os Arquivos Gerados (Download)\","
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 363,
+          "summary": "    \"step2_instruction\": \"Clique no bot\u00e3o abaixo para usar IA e gerar metadados automaticamente para todos os arquivos d"
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 368,
+          "summary": "    \"step5_details\": \"Este passo ir\u00e1:\\n- Codificar \u00e1udio para latentes VAE\\n- Codificar legendas e letras para embedding"
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 377,
+          "summary": "    \"genre_ratio_info\": \"0%=Toda Legenda, 100%=Todo G\u00eanero. A sobreposi\u00e7\u00e3o de amostra individual tem prioridade.\","
+        },
+        {
+          "filepath": "acestep/ui/gradio/i18n/pt.json",
+          "linestart": 512,
+          "summary": "    \"generation_retake\": \"## Retake (Gera\u00e7\u00e3o de Varia\u00e7\u00e3o)\\n\\n**Ideal para:** produzir varia\u00e7\u00f5es controladas e suaves de "
+        },
+        {
+          "filepath": "acestep/ui/gradio/interfaces/user_preferences.py",
+          "linestart": 11,
+          "summary": "hacking required."
+        },
+        {
+          "filepath": "acestep/third_parts/nano-vllm/nanovllm/engine/llm_engine.py",
+          "linestart": 66,
+          "summary": "                    # TODO: Implement automatic \"NO USER INPUT\" replacement if possible"
+        },
+        {
+          "filepath": "acestep/llm_inference.py",
+          "linestart": 611,
+          "summary": "            # TODO: load tokenizer too slow, not found solution yet"
+        },
+        {
+          "filepath": "acestep/llm_inference.py",
+          "linestart": 1319,
+          "summary": "                  Only used when batch_size > 1. TODO: not used yet"
+        },
+        {
+          "filepath": "acestep/llm_inference.py",
+          "linestart": 2819,
+          "summary": "        # Extract audio codes - find all <|audio_code_XXX|> patterns"
+        },
+        {
+          "filepath": "acestep/llm_inference.py",
+          "linestart": 2955,
+          "summary": "                # the \"model.\" prefix (e.g. \"layers.0.xxx\" instead of"
+        },
+        {
+          "filepath": "acestep/llm_inference.py",
+          "linestart": 2956,
+          "summary": "                # \"model.layers.0.xxx\") which is what mlx-lm's Qwen3 model"
+        },
+        {
+          "filepath": "acestep/models/turbo/modeling_acestep_v15_turbo.py",
+          "linestart": 565,
+          "summary": "        TODO: Support separate initialization for encoders and decoders."
+        },
+        {
+          "filepath": "acestep/models/xl_turbo/modeling_acestep_v15_xl_turbo.py",
+          "linestart": 565,
+          "summary": "        TODO: Support separate initialization for encoders and decoders."
+        },
+        {
+          "filepath": "acestep/models/xl_sft/modeling_acestep_v15_xl_base.py",
+          "linestart": 568,
+          "summary": "        TODO: Support separate initialization for encoders and decoders."
+        },
+        {
+          "filepath": "acestep/models/xl_base/modeling_acestep_v15_xl_base.py",
+          "linestart": 568,
+          "summary": "        TODO: Support separate initialization for encoders and decoders."
+        },
+        {
+          "filepath": "acestep/models/sft/modeling_acestep_v15_base.py",
+          "linestart": 568,
+          "summary": "        TODO: Support separate initialization for encoders and decoders."
+        },
+        {
+          "filepath": "acestep/models/base/modeling_acestep_v15_base.py",
+          "linestart": 568,
+          "summary": "        TODO: Support separate initialization for encoders and decoders."
+        },
+        {
+          "filepath": "acestep/text_tasks/secure_secret_store.py",
+          "linestart": 5,
+          "summary": "# TODO(1larity): Split OpenSSL and keyring backends into smaller modules after"
+        },
+        {
+          "filepath": "claude/skills/acestep/api-reference.md",
+          "linestart": 29,
+          "summary": "    \"task_id\": \"xxx\","
+        },
+        {
+          "filepath": "claude/skills/acestep-docs/api/Openrouter_API.md",
+          "linestart": 286,
+          "summary": "data: {\"id\":\"chatcmpl-xxx\",\"object\":\"chat.completion.chunk\",\"created\":1706688000,\"model\":\"acemusic/acestep-v1.5-turbo\",\""
+        }
+      ],
+      "timing": {
+        "intel_s": 33.1,
+        "lyrics_s": 12.9,
+        "audio_s": 119.6
+      },
+      "take": 1
+    },
+    {
+      "slug": "vraj00222-zephyr",
+      "repo": "vraj00222/zephyr",
+      "style": "shanty",
+      "song_title": "Engrave the Paper",
+      "artist_name": "The Zephyr Boys",
+      "caption": "traditional sea shanty, stomping, male choir, accordion, folk, rousing, printing press rhythms, hackathon urgency, triumphant",
+      "lyrics": "[verse]\nHaul away, lads, we've got a PDF,\nA thousand pages dense enough to make a grown man deaf,\nWe'll feed it to the press through `engrave/route.ts`,\nAnd pray the Mistral winds don't make the pipeline wrecked!\n\n[chorus]\nEngrave the paper, boys, engrave the paper!\n`cd site && npm install`, then we'll see her!\nFrom arXiv link to fine-press beautiful edition,\nMaking paper beautiful \u2014 that's our only mission!\n\n[verse]\nThe `press-prompt.ts` is loaded, the `pipeline.ts` runs hot,\nWe changed the cobalt orange mid-hackathon \u2014 forgot!\nDeepSeek R1 JSON is one thousand lines of pain,\nBut `cat-companion.tsx` is purring just the same!\n\n[chorus]\nEngrave the paper, boys, engrave the paper!\n`cd site && npm install`, then we'll see her!\nFrom arXiv link to fine-press beautiful edition,\nMaking paper beautiful \u2014 that's our only mission!\n\n[bridge]\nThe `hiss.m4a` is screaming, `meow.m4a` cries,\nHANDOFF.md says \"HACKATHON DAY STATE\" \u2014 midday, God help our lives!\nThe backend is a Next.js route, there's no server behind,\nBut `ask-edition.tsx` is FANCY \u2014 never mind!\n\n[chorus]\nEngrave the paper, boys, engrave the paper!\n`cd site && npm install`, then we'll see her!\nFrom arXiv link to fine-press beautiful edition,\nMaking paper beautiful \u2014 that's our only mission!\n\n[outro]\nHaul away... haul away...\nThe cat and robot walk together into `press-run.tsx` today!",
+      "facts_highlights": [
+        "engrave/route.ts",
+        "`cd site && npm install`",
+        "`press-prompt.ts`",
+        "`pipeline.ts`",
+        "cobalt orange mid-hackathon",
+        "one thousand lines",
+        "`cat-companion.tsx`",
+        "`hiss.m4a`",
+        "`meow.m4a`",
+        "HANDOFF.md says \"HACKATHON DAY STATE\"",
+        "`ask-edition.tsx`",
+        "`press-run.tsx`"
+      ],
+      "audio_url": "/tracks/vraj00222-zephyr.mp3",
+      "cover_url": null,
+      "stars": 0,
+      "language": "TypeScript",
+      "description": "making paper beautiful",
+      "sources": [
+        {
+          "filepath": "DEMO.md",
+          "linestart": 1,
+          "summary": "# Z\u00c9PHYR \u2014 DEMO KIT (Mistral Vibe hackathon, 2026-08-22)"
+        },
+        {
+          "filepath": "site/app/globals.css",
+          "linestart": 7,
+          "summary": "  --cobalt: #fa500f; /* hackathon: Mistral orange; original cobalt #2440c9 */"
+        },
+        {
+          "filepath": "site/package-lock.json",
+          "linestart": 3785,
+          "summary": "      \"integrity\": \"sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==\","
+        },
+        {
+          "filepath": "site/package-lock.json",
+          "linestart": 6928,
+          "summary": "        \"url\": \"https://github.com/sponsors/colinhacks\""
+        },
+        {
+          "filepath": "site/AGENTS.md",
+          "linestart": 37,
+          "summary": "## In progress / TODO"
+        },
+        {
+          "filepath": "site/data/papers/deepseek-v3-technical-report.json",
+          "linestart": 524,
+          "summary": "          \"text\": \"Rule-Based RM: For verifiable tasks (math, LeetCode), rules or compilers validate correctness. Model-"
+        }
+      ],
+      "timing": {
+        "intel_s": 27.1,
+        "lyrics_s": 13.6,
+        "audio_s": 36.9
+      },
+      "take": 1
+    },
+    {
+      "slug": "anthropics-claude-code",
+      "repo": "anthropics/claude-code",
+      "style": "techrap",
+      "song_title": "Just Type Claude",
+      "artist_name": "Anthropic Panic",
+      "caption": "playful tech-satire rap-pop, upbeat rhythmic male vocals, punchy synth bass, bouncy 808s, memorable repeated hook, viral energy, 102 bpm, autonomous agent swagger, terminal-core aesthetics, glitchy vocal chops",
+      "lyrics": "[verse]\nCurl the install script, pipe it straight to bash\ncurl -fsSL https://claude.ai/install.sh | bash\nNavigate your project, watch the AI do the dash\nGot a plugin called ralph-wiggum, yes that's really its name\nRunning ralph-loop overnight building startups \u2014 no shame\nSix repos by morning at a Y Combinator test\nSilent-failure-hunter on the case, no rest\n\n[chorus]\nJust type claude, just type claude\nNatural language, let it go ham\nJust type claude, just type claude\nThe terminal's the AI's Instagram\n\n[verse]\nCHANGELOG dot M-D five thousand lines deep\n\"Fixed shell commands splitting\" \u2014 someone lost sleep\nTodoWrite is gone on Sonnet Five and Opus Four point Eight\nThe TODO to add the progress bar? Still waiting, babe\n\n[bridge]\nCI check says ERROR: TODOs found in commands\nBut the file banning TODOs has TODOs in the canned samples\ngit's own hooks say TODO: replace with appropriate checks\nWe're TODOs all the way down, baby, what did you expect\n\n[chorus]\nJust type claude, just type claude\nNatural language, let it go ham\nJust type claude, just type claude\nThe terminal's the AI's Instagram\n\n[outro]\nType /bug to report bugs \u2014 inside the bug machine\nOutput the promise tag COMPLETE when you're done with the dream\n",
+      "facts_highlights": [
+        "curl -fsSL https://claude.ai/install.sh | bash",
+        "ralph-wiggum",
+        "ralph-loop",
+        "Six repos by morning at a Y Combinator test",
+        "silent-failure-hunter",
+        "CHANGELOG dot M-D five thousand lines deep",
+        "Fixed shell commands splitting",
+        "TodoWrite is gone on Sonnet Five and Opus Four point Eight",
+        "ERROR: TODOs found in commands",
+        "TODO: replace with appropriate checks",
+        "/bug",
+        "Output the promise tag COMPLETE"
+      ],
+      "audio_url": "/tracks/anthropics-claude-code.mp3",
+      "cover_url": null,
+      "stars": 142739,
+      "language": "Python",
+      "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
+      "sources": [
+        {
+          "filepath": "feed.xml",
+          "linestart": 227,
+          "summary": "&lt;p&gt;\u2022 Fixed consecutive shell commands splitting into multiple \"Ran 1 shell command\" rows when todo/task updates we"
+        },
+        {
+          "filepath": "feed.xml",
+          "linestart": 285,
+          "summary": "&lt;p&gt;\u2022 Todo/task-tracking tools (TaskCreate/Get/Update/List, TodoWrite) are no longer available on Opus 4.8, Sonnet "
+        },
+        {
+          "filepath": "CHANGELOG.md",
+          "linestart": 196,
+          "summary": "- Fixed consecutive shell commands splitting into multiple \"Ran 1 shell command\" rows when todo/task updates were interl"
+        },
+        {
+          "filepath": "CHANGELOG.md",
+          "linestart": 251,
+          "summary": "- Todo/task-tracking tools (TaskCreate/Get/Update/List, TodoWrite) are no longer available on Opus 4.8, Sonnet 5, Fable "
+        },
+        {
+          "filepath": "CHANGELOG.md",
+          "linestart": 1828,
+          "summary": "- Markdown output now renders GFM task list checkboxes (`- [ ] todo` / `- [x] done`) instead of plain bullets"
+        },
+        {
+          "filepath": "CHANGELOG.md",
+          "linestart": 4335,
+          "summary": "- Fixed an issue where `/config`, `/context`, `/model`, and `/todos` command overlays could close unexpectedly"
+        },
+        {
+          "filepath": "CHANGELOG.md",
+          "linestart": 5033,
+          "summary": "- Remove deprecated .claude.json allowedTools, ignorePatterns, env, and todoFeatureEnabled config options (instead, conf"
+        },
+        {
+          "filepath": "CHANGELOG.md",
+          "linestart": 5156,
+          "summary": "- Added /todos command to list current todo items"
+        },
+        {
+          "filepath": "CHANGELOG.md",
+          "linestart": 5524,
+          "summary": "- Improved todo list handling during compaction"
+        },
+        {
+          "filepath": "CHANGELOG.md",
+          "linestart": 5607,
+          "summary": "- Improved latency for startup, todo tool, and file edits"
+        },
+        {
+          "filepath": "CHANGELOG.md",
+          "linestart": 5631,
+          "summary": "- Claude now has access to a Todo list that helps it stay on track and be more organized"
+        },
+        {
+          "filepath": "plugins/feature-dev/agents/code-reviewer.md",
+          "linestart": 4,
+          "summary": "tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput"
+        },
+        {
+          "filepath": "plugins/feature-dev/agents/code-explorer.md",
+          "linestart": 4,
+          "summary": "tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput"
+        },
+        {
+          "filepath": "plugins/feature-dev/agents/code-architect.md",
+          "linestart": 4,
+          "summary": "tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput"
+        },
+        {
+          "filepath": "plugins/feature-dev/README.md",
+          "linestart": 168,
+          "summary": "- Updates todos as progress is made"
+        },
+        {
+          "filepath": "plugins/feature-dev/README.md",
+          "linestart": 215,
+          "summary": "- Marks all todos complete"
+        },
+        {
+          "filepath": "plugins/feature-dev/commands/feature-dev.md",
+          "linestart": 16,
+          "summary": "- **Use TodoWrite**: Track all progress throughout"
+        },
+        {
+          "filepath": "plugins/feature-dev/commands/feature-dev.md",
+          "linestart": 27,
+          "summary": "1. Create todo list with all phases"
+        },
+        {
+          "filepath": "plugins/feature-dev/commands/feature-dev.md",
+          "linestart": 97,
+          "summary": "6. Update todos as you progress"
+        },
+        {
+          "filepath": "plugins/feature-dev/commands/feature-dev.md",
+          "linestart": 118,
+          "summary": "1. Mark all todos complete"
+        },
+        {
+          "filepath": "plugins/learning-output-style/hooks-handlers/session-start.sh",
+          "linestart": 10,
+          "summary": "    \"additionalContext\": \"You are in 'learning' output style mode, which combines interactive learning with educational "
+        },
+        {
+          "filepath": "plugins/code-review/commands/code-review.md",
+          "linestart": 91,
+          "summary": "- Create a todo list before starting."
+        },
+        {
+          "filepath": "plugins/plugin-dev/commands/create-plugin.md",
+          "linestart": 4,
+          "summary": "allowed-tools: [\"Read\", \"Write\", \"Grep\", \"Glob\", \"Bash\", \"TodoWrite\", \"AskUserQuestion\", \"Skill\", \"Task\"]"
+        },
+        {
+          "filepath": "plugins/plugin-dev/commands/create-plugin.md",
+          "linestart": 18,
+          "summary": "- **Use TodoWrite**: Track all progress throughout all phases"
+        },
+        {
+          "filepath": "plugins/plugin-dev/commands/create-plugin.md",
+          "linestart": 29,
+          "summary": "1. Create todo list with all 7 phases"
+        },
+        {
+          "filepath": "plugins/plugin-dev/commands/create-plugin.md",
+          "linestart": 227,
+          "summary": "**Progress tracking**: Update todos as each component is completed"
+        },
+        {
+          "filepath": "plugins/plugin-dev/commands/create-plugin.md",
+          "linestart": 325,
+          "summary": "   - Mark all todos complete"
+        },
+        {
+          "filepath": "plugins/plugin-dev/commands/create-plugin.md",
+          "linestart": 349,
+          "summary": "- **Use TodoWrite** to track progress at every phase"
+        },
+        {
+          "filepath": "plugins/plugin-dev/skills/command-development/references/marketplace-considerations.md",
+          "linestart": 757,
+          "summary": "- [ ] No TODO comments"
+        },
+        {
+          "filepath": "plugins/plugin-dev/skills/command-development/references/documentation-patterns.md",
+          "linestart": 590,
+          "summary": "  - TODO: Add support for TOML format"
+        }
+      ],
+      "timing": {
+        "intel_s": 28.3,
+        "lyrics_s": 14.2,
+        "audio_s": 118.8
+      },
+      "take": 1
+    },
+    {
+      "slug": "tj-commander.js-boombap",
+      "repo": "tj/commander.js",
+      "style": "boombap",
+      "song_title": "lib/command.js",
+      "artist_name": "Commander-in-Chief.js",
+      "caption": "classic 90s boom-bap hip-hop, dusty drum breaks, vinyl crackle, jazzy horn stabs, confident male rap vocals, 92 bpm, head-nod groove, chanted hook, monolithic energy, CLI swagger, jazzy flute loops",
+      "lyrics": "[verse]\nDropTable said do a second album, pressure on my neck\nLast track went platinum off one `npm install commander` check\nNow I'm back in the booth, deeper in the source\nOpened lib/command.js \u2014 lost my mind, of course\nMonolithic giant, one class runs the world\nSubcommand dispatch, signal forwarding unfurled\nInspector ports incrementing in the dead of night\ntests/command.executableSubcommand.signals.test.js, that's the haunted file, right?\n\n[chorus]\nProgram dot parse \u2014 just call it, it's done\nProgram dot parse \u2014 28,000 stars, son\nThe whole CLI easy, every argument won\nProgram dot parse, program dot parse, run\n\n[verse]\nExamples/pizza orderin' toppings through the terminal\nexamples/pm, fake package manager, comical\nlib/suggestSimilar.js whisperin' \"Did you mean \u2014first?\"\nCatch-all asterisk command swallowing the worst\n\n[bridge]\nNo TODO in the source, they cleaned up every crime\ntests/command.option-misuse.test.js catching yours and mine\nNode split.js -s - --first a-b-c, watch it drop one\n[ 'a' ] in the output \u2014 that's the only pun\n\n[chorus]\nProgram dot parse \u2014 just call it, it's done\nProgram dot parse \u2014 28,000 stars, son\nThe whole CLI easy, every argument won\nProgram dot parse, program dot parse, run\n\n[outro]\nVue CLI, Create React App, they all pay dues\nCommander in the node_modules, dusty boom-bap groove",
+      "facts_highlights": [
+        "`npm install commander`",
+        "lib/command.js",
+        "tests/command.executableSubcommand.signals.test.js",
+        "Program dot parse",
+        "examples/pizza",
+        "examples/pm",
+        "lib/suggestSimilar.js",
+        "Did you mean \u2014first?",
+        "tests/command.option-misuse.test.js",
+        "node split.js -s - --first a-b-c",
+        "[ 'a' ]"
+      ],
+      "audio_url": "/tracks/tj-commander.js-boombap.mp3",
+      "cover_url": null,
+      "stars": 28370,
+      "language": "JavaScript",
+      "description": "node.js command-line interfaces made easy",
+      "sources": [
+        {
+          "filepath": "tests/command.positionalOptions.test.js",
+          "linestart": 472,
+          "summary": "  describe('passThroughOptions(xxx) and option after command-argument', () => {"
+        },
+        {
+          "filepath": "tests/command.positionalOptions.test.js",
+          "linestart": 504,
+          "summary": "  describe('enablePositionalOptions(xxx) and shared option after subcommand', () => {"
+        },
+        {
+          "filepath": "package-lock.json",
+          "linestart": 1194,
+          "summary": "      \"integrity\": \"sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==\","
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 22,
+          "summary": "# Replace the TODO placeholders with appropriate checks according to your"
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 27,
+          "summary": "\t# TODO: Replace with appropriate checks (e.g. spell checking)."
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 35,
+          "summary": "\t# TODO: Replace with appropriate checks for this patch"
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 41,
+          "summary": "\t# TODO: Replace with appropriate checks for the whole series"
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 52,
+          "summary": "\tworktree=$(mktemp --tmpdir -d sendemail-validate.XXXXXXX) &&"
+        }
+      ],
+      "timing": {
+        "intel_s": 19.8,
+        "lyrics_s": 13.1,
+        "audio_s": 37.2
+      },
+      "take": 1
+    }
+  ]
+}

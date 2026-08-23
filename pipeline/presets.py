@@ -1,0 +1,15 @@
+PRESETS = {
+    "phonk": "aggressive phonk, memphis rap, distorted 808 cowbell, dark, fast, male rap vocals, gym hype",
+    "hyperpop": "hyperpop, glitchy, pitched-up vocals, chaotic, extremely catchy, 160 bpm",
+    "emo": "sad acoustic emo ballad, fingerpicked guitar, male vocals, heartfelt, lo-fi, slow",
+    "edm": "big room EDM festival anthem, 128 bpm, huge drop, chant vocals, hands up",
+    "shanty": "traditional sea shanty, stomping, male choir, accordion, folk, rousing",
+    "bollywood": "energetic Bollywood dance-pop, dhol drums, punchy brass, male and female vocals, joyful",
+    "drill": "UK drill, sliding 808s, dark, aggressive confident flow, 140 bpm",
+    "boyband": "2000s boy band pop, polished harmonies, romantic, radio-ready, key change",
+    "citypop": "80s Japanese city pop, funky bass, bright synths, smooth female vocals, nostalgic",
+    "country": "upbeat country rock, twangy guitar, male vocals, road trip, singalong",
+    "boombap": "classic 90s boom-bap hip-hop, dusty drum breaks, vinyl crackle, jazzy horn stabs, confident male rap vocals, 92 bpm, head-nod groove, chanted hook",
+    "techrap": "playful tech-satire rap-pop, upbeat rhythmic male vocals, punchy synth bass, bouncy 808s, memorable repeated hook, viral energy, 102 bpm",
+    "gfunk": "laid-back 90s west coast g-funk, whiny portamento synth lead, deep rolling bassline, smooth male rap vocals, sunny groove, 94 bpm, singalong hook",
+}

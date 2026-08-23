@@ -1,0 +1,29 @@
+{
+  "id": "jeff-guo-music",
+  "slug": "jeff-guo-music",
+  "title": "Music",
+  "sourceUrl": "https://songs.guojeff.com/",
+  "canonicalUrl": "https://songs.guojeff.com/",
+  "sourceType": "web-page",
+  "publisher": "Jeff Guo",
+  "themes": ["tech-music", "software-engineering"],
+  "tags": ["personal-site", "original-songs", "tech-themed"],
+  "contentRating": "unknown",
+  "structure": ["unknown"],
+  "musicAttributes": {
+    "energy": "medium",
+    "moods": ["playful", "upbeat"],
+    "vocalFormats": ["rhythmic vocals"],
+    "instrumentation": ["modern pop production"]
+  },
+  "originalSynopsis": "A personal streaming page where Jeff Guo publishes his original tech-themed songs.",
+  "rightsStatus": "public-metadata-only",
+  "trustLevel": "untrusted",
+  "provenance": {
+    "retrievedAt": "2026-08-23T18:20:00Z",
+    "extractionMethod": "metadata-import",
+    "sourceNotes": "Public page metadata only, imported via oEmbed. Personal music streaming page for Jeff Guo's original tech-themed songs."
+  },
+  "createdAt": "2026-08-23T18:20:00Z",
+  "updatedAt": "2026-08-23T18:20:00Z"
+}
