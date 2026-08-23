@@ -98,61 +98,41 @@ export default function Theater({
   };
 
   const totalS = job ? Math.max(0, Math.round((now() - job.startedAt) / 1000)) : 0;
+  const progressPct =
+    job?.stage === "done" ? 100 : ((stageIdx + 0.5) / STAGES.length) * 100;
 
   // Portal: escape the hero's z-10 stacking context so the overlay covers the nav.
   return createPortal(
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-bg">
-      {/* backdrop: gallery painting, nearly swallowed by the dark */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/art/bg2.jpg"
-        alt=""
-        className="pointer-events-none fixed inset-0 h-full w-full object-cover opacity-[0.14]"
-        style={{ filter: "grayscale(0.7) contrast(1.1)" }}
-      />
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-paper">
+      {/* backdrop: engraved vinyl grooves radiating from behind the record */}
       <div
-        className="pointer-events-none fixed inset-0"
+        className="pointer-events-none fixed inset-0 opacity-[0.07]"
         style={{
-          background: `radial-gradient(60% 50% at 50% 30%, ${accent}14, transparent 70%), linear-gradient(rgba(13,11,9,0.55), rgba(13,11,9,0.92))`,
+          background:
+            "repeating-radial-gradient(circle at 50% 30%, var(--cobalt) 0 1.5px, transparent 1.5px 28px)",
         }}
       />
 
       <div className="grain relative mx-auto flex min-h-full w-full max-w-3xl flex-col items-center px-5 py-14 text-center">
-        <p className="text-[11px] uppercase tracking-[0.35em] text-ink-dim">
+        <p className="mono-label text-[11px] text-cobalt">
           DropTable Records — session in progress
         </p>
         <p className="mt-2 font-mono text-xs text-ink-dim">{repo}</p>
 
-        {/* vinyl */}
-        <div className="relative mt-10 h-56 w-56 sm:h-64 sm:w-64">
-          <div
-            className={failed ? "h-full w-full rounded-full" : "vinyl-spin h-full w-full rounded-full"}
-            style={{
-              background:
-                "repeating-radial-gradient(circle at 50% 50%, #181310 0 2.5px, #0a0806 2.5px 5px)",
-              boxShadow: `0 0 90px ${accent}33, inset 0 0 40px rgba(0,0,0,0.8)`,
-            }}
-          >
-            {/* light sheen across the grooves */}
-            <div
-              className="absolute inset-0 rounded-full"
-              style={{
-                background:
-                  "conic-gradient(from 210deg, transparent 0deg, rgba(236,227,210,0.10) 25deg, transparent 60deg, transparent 180deg, rgba(236,227,210,0.06) 210deg, transparent 245deg)",
-              }}
-            />
-            {/* center label */}
-            <div
-              className="absolute left-1/2 top-1/2 flex h-[38%] w-[38%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full text-black"
-              style={{ background: accent }}
-            >
-              <span className="font-display text-[9px] uppercase leading-tight tracking-widest">
-                DropTable
-                <br />
-                Records;
-              </span>
-              <span className="mt-1 h-2 w-2 rounded-full bg-bg" />
-            </div>
+        {/* vinyl: cobalt grooves, gold label center */}
+        <div
+          className="relative mt-10 h-56 w-56 rounded-full sm:h-64 sm:w-64"
+          style={{ boxShadow: "0 2px 8px rgba(30,58,158,0.12)" }}
+        >
+          <div className={`vinyl-disc h-full w-full ${failed ? "" : "vinyl-spin"}`} />
+          {/* label text sits still while the disc spins */}
+          <div className="absolute left-1/2 top-1/2 flex h-[36%] w-[36%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full">
+            <span className="font-display text-[9px] uppercase leading-tight tracking-widest text-ink">
+              DropTable
+              <br />
+              Records;
+            </span>
+            <span className="mt-1 h-2 w-2 rounded-full bg-paper" />
           </div>
         </div>
 
@@ -160,35 +140,44 @@ export default function Theater({
         <div className="mt-10 min-h-[7rem]">
           {failed ? (
             <>
-              <h2 className="font-display display-tight text-4xl text-paper sm:text-5xl">
+              <h2 className="font-display display-tight text-4xl text-ink sm:text-5xl">
                 The session fell apart.
               </h2>
               <p className="mt-3 text-sm text-ink-dim">{job?.error}</p>
             </>
           ) : job?.title ? (
             <>
-              <p className="text-[11px] uppercase tracking-[0.35em]" style={{ color: accent }}>
-                Now recording
-              </p>
-              <h2 className="font-display display-tight mt-2 text-4xl text-paper sm:text-5xl">
+              <p className="mono-label text-[11px] text-cobalt">Now recording</p>
+              <h2 className="font-display display-tight mt-2 text-4xl text-ink sm:text-5xl">
                 {job.title}
               </h2>
             </>
           ) : (
-            <h2 className="font-display display-tight text-4xl text-paper sm:text-5xl">
+            <h2 className="font-display display-tight text-4xl text-ink sm:text-5xl">
               Cutting a record…
             </h2>
           )}
           {job?.fact && !failed && (
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink-dim">
-              we found:{" "}
-              <span className="italic text-ink">&ldquo;{job.fact}&rdquo;</span>
-            </p>
+            <div
+              className="mx-auto mt-5 max-w-xl border-l-[3px] border-gold bg-card px-4 py-3 text-left font-mono text-xs leading-relaxed text-ink"
+              style={{ boxShadow: "0 2px 8px rgba(30,58,158,0.12)" }}
+            >
+              <span className="text-ink-dim">A&amp;R found: </span>
+              &ldquo;{job.fact}&rdquo;
+            </div>
           )}
         </div>
 
+        {/* cobalt progress hairline */}
+        <div className="mt-8 h-px w-full max-w-md bg-line">
+          <div
+            className="h-px bg-cobalt transition-[width] duration-700"
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
+
         {/* stages */}
-        <div className="mt-8 w-full max-w-md text-left">
+        <div className="w-full max-w-md text-left">
           {STAGES.map((s, i) => {
             const state = failed
               ? i < stageIdx ? "done" : i === stageIdx ? "failed" : "pending"
@@ -201,11 +190,20 @@ export default function Theater({
               <div
                 key={s.key}
                 className="flex items-baseline gap-4 border-b border-line py-3"
-                style={{ opacity: state === "pending" ? 0.35 : 1 }}
+                style={{ opacity: state === "pending" ? 0.4 : 1 }}
               >
                 <span
                   className="w-4 text-center font-mono text-xs"
-                  style={{ color: state === "active" || state === "failed" ? accent : "var(--ink-dim)" }}
+                  style={{
+                    color:
+                      state === "failed"
+                        ? accent
+                        : state === "active"
+                          ? "var(--cobalt)"
+                          : state === "done"
+                            ? "var(--gold)"
+                            : "var(--ink-dim)",
+                  }}
                 >
                   {state === "done" ? "✓" : state === "failed" ? "✗" : state === "active" ? "●" : "○"}
                 </span>
@@ -228,12 +226,12 @@ export default function Theater({
 
         {failed && (
           <div className="mt-6 w-full max-w-md text-left">
-            <pre className="max-h-40 overflow-y-auto border border-line bg-bg-raised p-3 font-mono text-[11px] leading-relaxed text-ink-dim">
+            <pre className="max-h-40 overflow-y-auto border border-line bg-card p-3 font-mono text-[11px] leading-relaxed text-ink-dim">
               {job?.log.slice(-8).join("\n")}
             </pre>
             <button
               onClick={onClose}
-              className="mt-6 w-full border border-line px-6 py-3 font-display text-sm uppercase tracking-widest text-ink transition-colors hover:border-ink-dim"
+              className="mt-6 w-full border border-line px-6 py-3 font-display text-sm uppercase tracking-widest text-ink transition-colors hover:border-cobalt"
             >
               Back to the desk
             </button>
@@ -241,7 +239,7 @@ export default function Theater({
         )}
 
         {job?.stage === "done" && (
-          <p className="mt-6 text-[11px] uppercase tracking-[0.35em]" style={{ color: accent }}>
+          <p className="mono-label mt-6 text-[11px] text-cobalt">
             Signed. Taking you to the release…
           </p>
         )}

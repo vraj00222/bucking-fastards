@@ -1,0 +1,179 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "DROPTABLE RECORDS;" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - link "Roster" [ref=e6] [cursor=pointer]:
+          - /url: /roster
+        - link "Sign a repo" [ref=e7] [cursor=pointer]:
+          - /url: /sign
+  - main [ref=e9]:
+    - generic [ref=e10]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - paragraph [ref=e14]: A record label for codebases
+          - heading [level=1] [ref=e15]:
+            - text: Every repo has a song in it.
+            - generic [ref=e16]:
+              - text: We
+              - emphasis [ref=e17]: sign
+              - text: them.
+          - paragraph [ref=e18]: Paste a GitHub repo. Pick a sound. Our A&R reads the source and cuts a full track about what it finds — hooks, verses, and the skeletons in your utils/ folder.
+          - generic [ref=e19]:
+            - generic [ref=e20]:
+              - generic [ref=e21]: A&R intake
+              - generic [ref=e22]: Form DTR/1
+            - generic [ref=e23]:
+              - generic [ref=e24]: The artist
+              - textbox "The artist" [ref=e25]:
+                - /placeholder: github.com/owner/repo
+              - paragraph [ref=e26]: The sound
+              - generic [ref=e27]:
+                - button "phonk" [pressed] [ref=e28]
+                - button "hyperpop" [ref=e31]
+                - button "emo" [ref=e34]
+                - button "edm" [ref=e37]
+                - button "shanty" [ref=e40]
+                - button "bollywood" [ref=e43]
+                - button "drill" [ref=e46]
+                - button "boyband" [ref=e49]
+                - button "citypop" [ref=e52]
+                - button "country" [ref=e55]
+                - button "boombap" [ref=e58]
+                - button "techrap" [ref=e61]
+                - button "gfunk" [ref=e64]
+              - paragraph [ref=e67]: Memphis menace for cursed monorepos
+              - button "Sign this repo" [ref=e68]
+        - img "Engraved statue in gold sunglasses drinking a smoothie — head of A&R" [ref=e71]
+      - generic [ref=e72]:
+        - generic [ref=e74]:
+          - heading "Now on the roster" [level=2] [ref=e75]
+          - link "Full roster →" [ref=e76] [cursor=pointer]:
+            - /url: /roster
+        - generic [ref=e78]:
+          - link "Signed to DropTable Records 33⅓ Explicit Code npm install Commander Comma-nd.R" [ref=e79] [cursor=pointer]:
+            - /url: /track/tj-commander.js
+            - generic [ref=e80]:
+              - generic [ref=e81]:
+                - generic [ref=e82]: Signed to DropTable Records
+                - generic [ref=e83]: 33⅓
+              - generic [ref=e84]: ExplicitCode
+              - generic [ref=e87]:
+                - heading "npm install Commander" [level=3] [ref=e88]
+                - paragraph [ref=e89]: Comma-nd.R
+          - link "Signed to DropTable Records 33⅓ Explicit Code repaint_waveform_splice ACE-Step-Sunno" [ref=e90] [cursor=pointer]:
+            - /url: /track/ace-step-ace-step-1.5
+            - generic [ref=e91]:
+              - generic [ref=e92]:
+                - generic [ref=e93]: Signed to DropTable Records
+                - generic [ref=e94]: 33⅓
+              - generic [ref=e95]: ExplicitCode
+              - generic [ref=e98]:
+                - heading "repaint_waveform_splice" [level=3] [ref=e99]
+                - paragraph [ref=e100]: ACE-Step-Sunno
+          - link "Signed to DropTable Records 33⅓ Explicit Code Engrave the Paper The Zephyr Boys" [ref=e101] [cursor=pointer]:
+            - /url: /track/vraj00222-zephyr
+            - generic [ref=e102]:
+              - generic [ref=e103]:
+                - generic [ref=e104]: Signed to DropTable Records
+                - generic [ref=e105]: 33⅓
+              - generic [ref=e106]: ExplicitCode
+              - generic [ref=e109]:
+                - heading "Engrave the Paper" [level=3] [ref=e110]
+                - paragraph [ref=e111]: The Zephyr Boys
+          - link "Signed to DropTable Records 33⅓ Explicit Code Just Type Claude Anthropic Panic" [ref=e112] [cursor=pointer]:
+            - /url: /track/anthropics-claude-code
+            - generic [ref=e113]:
+              - generic [ref=e114]:
+                - generic [ref=e115]: Signed to DropTable Records
+                - generic [ref=e116]: 33⅓
+              - generic [ref=e117]: ExplicitCode
+              - generic [ref=e120]:
+                - heading "Just Type Claude" [level=3] [ref=e121]
+                - paragraph [ref=e122]: Anthropic Panic
+          - link "Signed to DropTable Records 33⅓ Explicit Code lib/command.js Commander-in-Chief.js" [ref=e123] [cursor=pointer]:
+            - /url: /track/tj-commander.js-boombap
+            - generic [ref=e124]:
+              - generic [ref=e125]:
+                - generic [ref=e126]: Signed to DropTable Records
+                - generic [ref=e127]: 33⅓
+              - generic [ref=e128]: ExplicitCode
+              - generic [ref=e131]:
+                - heading "lib/command.js" [level=3] [ref=e132]
+                - paragraph [ref=e133]: Commander-in-Chief.js
+          - link [ref=e134] [cursor=pointer]:
+            - /url: /track/tj-commander.js
+            - generic [ref=e135]:
+              - generic [ref=e136]:
+                - generic [ref=e137]: Signed to DropTable Records
+                - generic [ref=e138]: 33⅓
+              - generic [ref=e139]: ExplicitCode
+              - generic [ref=e142]:
+                - heading [level=3] [ref=e143]: npm install Commander
+                - paragraph [ref=e144]: Comma-nd.R
+          - link [ref=e145] [cursor=pointer]:
+            - /url: /track/ace-step-ace-step-1.5
+            - generic [ref=e146]:
+              - generic [ref=e147]:
+                - generic [ref=e148]: Signed to DropTable Records
+                - generic [ref=e149]: 33⅓
+              - generic [ref=e150]: ExplicitCode
+              - generic [ref=e153]:
+                - heading [level=3] [ref=e154]: repaint_waveform_splice
+                - paragraph [ref=e155]: ACE-Step-Sunno
+          - link [ref=e156] [cursor=pointer]:
+            - /url: /track/vraj00222-zephyr
+            - generic [ref=e157]:
+              - generic [ref=e158]:
+                - generic [ref=e159]: Signed to DropTable Records
+                - generic [ref=e160]: 33⅓
+              - generic [ref=e161]: ExplicitCode
+              - generic [ref=e164]:
+                - heading [level=3] [ref=e165]: Engrave the Paper
+                - paragraph [ref=e166]: The Zephyr Boys
+          - link [ref=e167] [cursor=pointer]:
+            - /url: /track/anthropics-claude-code
+            - generic [ref=e168]:
+              - generic [ref=e169]:
+                - generic [ref=e170]: Signed to DropTable Records
+                - generic [ref=e171]: 33⅓
+              - generic [ref=e172]: ExplicitCode
+              - generic [ref=e175]:
+                - heading [level=3] [ref=e176]: Just Type Claude
+                - paragraph [ref=e177]: Anthropic Panic
+          - link [ref=e178] [cursor=pointer]:
+            - /url: /track/tj-commander.js-boombap
+            - generic [ref=e179]:
+              - generic [ref=e180]:
+                - generic [ref=e181]: Signed to DropTable Records
+                - generic [ref=e182]: 33⅓
+              - generic [ref=e183]: ExplicitCode
+              - generic [ref=e186]:
+                - heading [level=3] [ref=e187]: lib/command.js
+                - paragraph [ref=e188]: Commander-in-Chief.js
+      - generic [ref=e191]:
+        - paragraph [ref=e192]: How the label works
+        - heading "From clone to chart in one session" [level=2] [ref=e193]
+        - generic [ref=e194]:
+          - generic [ref=e195]:
+            - text: "01"
+            - heading "A&R reads the source" [level=3] [ref=e196]
+            - paragraph [ref=e197]: The label interrogates the repo, Greptile-style — real files, real TODOs, the comment somebody hoped nobody would find.
+          - generic [ref=e198]:
+            - text: "02"
+            - heading "Claude writes the track" [level=3] [ref=e199]
+            - paragraph [ref=e200]: The intel becomes verses. Every bar cites an actual file; the hook is usually the thing you should have refactored.
+          - generic [ref=e201]:
+            - text: "03"
+            - heading "ACE-Step cuts the record" [level=3] [ref=e202]
+            - paragraph [ref=e203]: ACE-Step 1.5 on a Modal L40S GPU sings it back — about 75 seconds of tape per take.
+          - generic [ref=e204]:
+            - text: "04"
+            - heading "Mastered & pressed" [level=3] [ref=e205]
+            - paragraph [ref=e206]: Loudness-normalized, pressed to the roster, streaming on this very page. Signed to DropTable Records.
+  - contentinfo [ref=e207]:
+    - generic [ref=e210]:
+      - paragraph [ref=e211]: DROPTABLE RECORDS
+      - paragraph [ref=e212]: Est. 2026 — Every repo has a song in it
+      - paragraph [ref=e213]: DROP TABLE records; -- 0 rows returned

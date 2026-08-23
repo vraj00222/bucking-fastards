@@ -7,25 +7,24 @@ export const dynamic = "force-dynamic";
 
 export const metadata = { title: "The Roster — DropTable Records" };
 
-function ReleaseCard({ track, showArtist = true }: { track: Track; showArtist?: boolean }) {
+function ReleaseCard({
+  track,
+  catalog,
+  showArtist = true,
+}: {
+  track: Track;
+  catalog: string;
+  showArtist?: boolean;
+}) {
   const { accent } = presetFor(track.style);
   return (
     <Link href={`/track/${track.slug}`} className="group block">
       <div className="relative">
-        {/* accent glow on hover */}
+        {/* vinyl peek: cobalt grooved disc slides out from behind the plate */}
         <div
           aria-hidden
-          className="absolute -inset-3 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-30"
-          style={{ background: accent }}
-        />
-        {/* vinyl peek: record slides out from behind the sleeve */}
-        <div
-          aria-hidden
-          className="absolute inset-[3%] rounded-full transition-transform duration-300 ease-out group-hover:translate-x-[13%] group-hover:rotate-12"
-          style={{
-            background: `radial-gradient(circle, ${accent} 0 17%, #0a0806 17.5% 20%, transparent 20.5%), repeating-radial-gradient(circle, #1b1712 0 2px, #0a0806 2px 5px)`,
-            boxShadow: "4px 0 14px rgba(0,0,0,0.6)",
-          }}
+          className="vinyl-disc absolute inset-[3%] transition-transform duration-300 ease-out group-hover:translate-x-[13%] group-hover:rotate-12"
+          style={{ boxShadow: "0 2px 8px rgba(30,58,158,0.12)" }}
         />
         <div className="relative transition-transform duration-300 ease-out group-hover:-translate-y-1.5">
           <Cover repo={track.repo} style={track.style} title={track.song_title} artist={track.artist_name} size="sm" />
@@ -33,12 +32,13 @@ function ReleaseCard({ track, showArtist = true }: { track: Track; showArtist?: 
       </div>
 
       <div className="relative z-10 mt-4">
+        <p className="mono-label text-[10px] text-cobalt">{catalog}</p>
         {showArtist && (
-          <p className="font-display display-tight text-lg text-ink group-hover:text-paper transition-colors">
+          <p className="font-display display-tight mt-1 text-lg text-ink transition-colors group-hover:text-cobalt">
             {track.artist_name}
           </p>
         )}
-        <p className={`text-sm text-ink-dim ${showArtist ? "mt-0.5" : "font-display display-tight text-lg text-ink group-hover:text-paper transition-colors"}`}>
+        <p className={`text-sm text-ink-dim ${showArtist ? "mt-0.5" : "font-display display-tight mt-1 text-lg text-ink transition-colors group-hover:text-cobalt"}`}>
           {track.song_title}
         </p>
         <div className="mt-2 flex items-center gap-3">
@@ -56,8 +56,11 @@ function ReleaseCard({ track, showArtist = true }: { track: Track; showArtist?: 
 }
 
 export default function RosterPage() {
-  // tracks.json is append-only; reverse so the newest signing leads.
-  const tracks = getTracks().slice().reverse();
+  // tracks.json is append-only; catalog numbers follow signing order.
+  const all = getTracks();
+  const catalogOf = new Map(all.map((t, i) => [t.slug, `DTR-${String(i + 1).padStart(3, "0")}`]));
+  // Reverse so the newest signing leads.
+  const tracks = all.slice().reverse();
 
   // Group by repo, keeping newest-first order of first appearance.
   const groups: { repo: string; tracks: Track[] }[] = [];
@@ -74,28 +77,29 @@ export default function RosterPage() {
 
   return (
     <div>
-      {/* header band: reading-room fresco under heavy dark scrim */}
-      <section className="grain relative overflow-hidden border-b border-line">
+      {/* header: catalog-card masthead with the blue angel as side art */}
+      <section className="grain relative overflow-hidden border-b border-line bg-paper">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/art/bg3.jpg"
+          src="/art/long2.jpg"
           alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          style={{ filter: "grayscale(1) contrast(1.1)", opacity: 0.28 }}
+          aria-hidden
+          className="absolute inset-y-0 right-0 hidden h-full w-[36%] object-cover object-top md:block"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 30%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 30%)",
+          }}
         />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, rgba(13,11,9,0.55), rgba(13,11,9,0.92))" }}
-        />
-        <div className="relative z-10 mx-auto max-w-7xl px-5 pb-14 pt-20">
-          <p className="text-xs uppercase tracking-[0.35em] text-ink-dim">Label discography</p>
-          <h1 className="font-display display-tight mt-3 text-[18vw] leading-none text-paper sm:text-8xl md:text-9xl">
+        <div className="relative z-10 mx-auto max-w-7xl px-5 pb-12 pt-20">
+          <p className="mono-label text-[11px] text-ink-dim">Label discography</p>
+          <h1 className="font-display display-tight mt-3 text-[18vw] leading-none text-ink sm:text-8xl md:text-9xl">
             The Roster
           </h1>
-          <div className="mt-6 flex flex-wrap items-baseline gap-x-8 gap-y-2">
-            <p className="text-sm uppercase tracking-[0.2em] text-ink">
-              {groups.length} {groups.length === 1 ? "artist" : "artists"} signed
-              <span className="text-ink-dim"> · {tracks.length} {tracks.length === 1 ? "release" : "releases"}</span>
+          <div className="rule-double mt-6 max-w-2xl" />
+          <div className="mt-4 flex flex-wrap items-baseline gap-x-8 gap-y-2">
+            <p className="mono-label text-[11px] text-ink">
+              Artists on file: {groups.length}
+              <span className="text-ink-dim"> · Releases: {tracks.length}</span>
             </p>
             <p className="text-sm text-ink-dim">The label remembers every artist.</p>
           </div>
@@ -105,13 +109,14 @@ export default function RosterPage() {
       <section className="mx-auto max-w-7xl px-5 py-14">
         {tracks.length === 0 ? (
           <div className="flex flex-col items-start gap-6 py-20">
+            <div aria-hidden className="vinyl-disc tilt-l h-28 w-28" />
             <p className="font-display display-tight text-5xl text-ink sm:text-7xl">
               No artists signed yet.
             </p>
             <p className="text-ink-dim">Be the first A&amp;R.</p>
             <Link
-              href="/sign"
-              className="border border-ink px-6 py-3 text-xs uppercase tracking-[0.3em] text-ink transition-colors hover:bg-ink hover:text-bg"
+              href="/#sign"
+              className="border border-ink px-6 py-3 text-xs uppercase tracking-[0.3em] text-ink transition-colors hover:bg-ink hover:text-paper"
             >
               Sign a repo
             </Link>
@@ -120,22 +125,29 @@ export default function RosterPage() {
           <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
             {groups.map((g) =>
               g.tracks.length === 1 ? (
-                <ReleaseCard key={g.tracks[0].slug} track={g.tracks[0]} />
+                <ReleaseCard
+                  key={g.tracks[0].slug}
+                  track={g.tracks[0]}
+                  catalog={catalogOf.get(g.tracks[0].slug)!}
+                />
               ) : (
-                // an artist with multiple releases gets a full-width discography row
-                <div key={g.repo} className="col-span-full border-t border-line pt-8">
-                  <div className="mb-6 flex flex-wrap items-baseline gap-x-6 gap-y-1">
-                    <h2 className="font-display display-tight text-3xl text-paper sm:text-4xl">
+                // an artist with multiple releases gets a full-width catalog-card row
+                <div key={g.repo} className="rule-line col-span-full pt-8">
+                  <div className="mb-6 flex flex-wrap items-baseline gap-x-6 gap-y-2">
+                    <h2 className="font-display display-tight text-3xl text-ink sm:text-4xl">
                       {g.tracks[0].artist_name}
                     </h2>
-                    <p className="text-[11px] uppercase tracking-[0.3em] text-ink-dim">
+                    <p className="mono-label text-[11px] text-ink-dim">
                       Discography · {g.tracks.length} releases
                     </p>
                     <p className="font-mono text-[11px] text-ink-dim">{g.repo}</p>
+                    <span className="mono-label tilt-r border border-gold px-2 py-1 text-[10px] text-gold">
+                      The difficult second album
+                    </span>
                   </div>
                   <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
                     {g.tracks.map((t) => (
-                      <ReleaseCard key={t.slug} track={t} showArtist={false} />
+                      <ReleaseCard key={t.slug} track={t} catalog={catalogOf.get(t.slug)!} showArtist={false} />
                     ))}
                   </div>
                 </div>

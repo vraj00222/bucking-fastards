@@ -1,5 +1,6 @@
-// Liner notes: [verse]/[chorus] tags become section labels; any line containing
-// a mined fact gets an accent highlight. Server-safe.
+// Liner notes: [verse]/[chorus] tags become cobalt catalog labels; any line
+// containing a mined fact gets a gold underline + paper-yellow wash. Server-safe.
+// accent stays in the contract; section furniture keeps to house cobalt/gold.
 
 function escapeRe(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -8,11 +9,10 @@ function escapeRe(s: string) {
 export default function Lyrics({
   lyrics,
   facts,
-  accent,
 }: {
   lyrics: string;
   facts: string[];
-  accent: string;
+  accent?: string;
 }) {
   // Longest facts first so "npm install commander" wins over "commander".
   const factRe = facts.length
@@ -30,11 +30,13 @@ export default function Lyrics({
           return (
             <p
               key={i}
-              className="mt-8 mb-2 flex items-baseline gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] first:mt-0"
-              style={{ color: accent }}
+              className="mono-label mt-8 mb-2 flex items-baseline gap-3 text-[11px] text-cobalt first:mt-0"
             >
               {tag[1]}
-              <span className="h-px w-10 self-center" style={{ background: accent, opacity: 0.4 }} />
+              <span
+                className="h-px w-10 self-center"
+                style={{ background: "var(--cobalt)", opacity: 0.4 }}
+              />
             </p>
           );
         }
@@ -47,12 +49,10 @@ export default function Lyrics({
                 <mark
                   key={j}
                   title="mined from the repo"
-                  className="cursor-help bg-transparent"
+                  className="cursor-help bg-transparent text-ink"
                   style={{
-                    color: "var(--paper)",
-                    borderBottom: `1px solid ${accent}`,
-                    boxShadow: `inset 0 -0.4em ${accent}26`,
-                    textShadow: `0 0 14px ${accent}59`,
+                    borderBottom: "1px solid var(--gold)",
+                    boxShadow: "inset 0 -0.45em rgba(195,148,29,0.16)",
                   }}
                 >
                   {part}

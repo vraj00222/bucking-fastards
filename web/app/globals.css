@@ -1,44 +1,58 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0d0b09;
-  --bg-raised: #151109;
-  --ink: #ece3d2;
-  --ink-dim: #9a8f7c;
-  --paper: #e3d9c2;
-  --line: #2a241c;
-  /* per-style accents (mirror of lib/presets.ts) */
-  --accent-phonk: #ff2d2d;
-  --accent-hyperpop: #ff5ce1;
-  --accent-emo: #7a8fff;
-  --accent-edm: #00e5ff;
-  --accent-shanty: #2fd27d;
-  --accent-bollywood: #ffb300;
-  --accent-drill: #9aa0a6;
-  --accent-boyband: #ff8fab;
-  --accent-citypop: #b28dff;
-  --accent-country: #e0a458;
+  /* paper / ink / cobalt / gold — "blue engraving" light theme */
+  --paper: #f6f2e9;
+  --card: #fdfbf5;
+  --ink: #16130e;
+  --ink-dim: #6f6553;
+  --line: #ddd5c4;
+  --cobalt: #1e3a9e;
+  --cobalt-hover: #2447d8;
+  --gold: #c3941d;
+  /* legacy aliases kept so existing bg-bg / bg-bg-raised classes stay valid */
+  --bg: var(--paper);
+  --bg-raised: var(--card);
+  /* per-style accents (mirror of lib/presets.ts), tuned for paper ground */
+  --accent-phonk: #c11212;
+  --accent-hyperpop: #d81b9e;
+  --accent-emo: #4a5fd0;
+  --accent-edm: #0e7fa8;
+  --accent-shanty: #1c7a4a;
+  --accent-bollywood: #c77800;
+  --accent-drill: #444a52;
+  --accent-boyband: #d24a6e;
+  --accent-citypop: #7a3fd1;
+  --accent-country: #a06a1f;
+  --accent-boombap: #8a5a12;
+  --accent-techrap: #1e3a9e;
+  --accent-gfunk: #5b2fb8;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-raised: var(--bg-raised);
+  --color-paper: var(--paper);
+  --color-card: var(--card);
   --color-ink: var(--ink);
   --color-ink-dim: var(--ink-dim);
-  --color-paper: var(--paper);
   --color-line: var(--line);
+  --color-cobalt: var(--cobalt);
+  --color-cobalt-hover: var(--cobalt-hover);
+  --color-gold: var(--gold);
   --font-display: var(--font-anton);
   --font-body: var(--font-inter);
 }
 
 body {
-  background: var(--bg);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Film grain: apply to a positioned element; noise renders in its ::after. */
+/* Paper grain: apply to a positioned element; noise renders in its ::after.
+   Very low opacity — texture, not atmosphere. */
 .grain {
   position: relative;
 }
@@ -48,8 +62,9 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 5;
-  opacity: 0.55;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 /* Full-viewport variant for page-level atmosphere. */
 .grain-fixed::after {
@@ -65,6 +80,70 @@ body {
   text-transform: uppercase;
   line-height: 0.88;
   letter-spacing: -0.01em;
+}
+
+/* Archival catalog-card label: uppercase letter-spaced mono. */
+.mono-label {
+  font-family: var(--font-geist-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+/* Engraved hairline rules, letterpress-certificate style. */
+.rule-line {
+  border-top: 1px solid color-mix(in srgb, var(--cobalt) 40%, transparent);
+}
+.rule-double {
+  border-top: 3px double var(--cobalt);
+}
+
+/* Cobalt duotone for images: shadows -> cobalt, highlights -> paper.
+   Wrap an <img> (or bg div) in a .duotone-cobalt container. */
+.duotone-cobalt {
+  position: relative;
+  isolation: isolate;
+}
+.duotone-cobalt img {
+  filter: grayscale(1) contrast(1.18) brightness(1.04);
+}
+.duotone-cobalt::before,
+.duotone-cobalt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.duotone-cobalt::before {
+  z-index: 1;
+  background: var(--cobalt);
+  mix-blend-mode: lighten;
+}
+.duotone-cobalt::after {
+  z-index: 2;
+  background: var(--paper);
+  mix-blend-mode: darken;
+}
+
+/* Cobalt halftone dot texture — use as an edge strip or accent band. */
+.halftone {
+  background-image: radial-gradient(color-mix(in srgb, var(--cobalt) 55%, transparent) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+/* Pasted-in collage tilt for stickers/covers. */
+.tilt-l { rotate: -1deg; }
+.tilt-r { rotate: 1deg; }
+
+/* Vinyl: cobalt disc with engraved grooves, gold label center. */
+.vinyl-disc {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--gold) 0 18%, transparent 18.5%),
+    repeating-radial-gradient(
+      circle,
+      var(--cobalt) 0 1.5px,
+      color-mix(in srgb, var(--cobalt) 82%, var(--paper)) 1.5px 3px
+    );
 }
 
 @keyframes marquee {
@@ -91,6 +170,6 @@ body {
 }
 
 ::selection {
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--cobalt);
+  color: var(--paper);
 }
