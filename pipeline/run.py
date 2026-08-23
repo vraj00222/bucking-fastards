@@ -5,6 +5,7 @@ python pipeline/run.py --repo owner/name --style phonk [--duration 75] [--takes 
 import argparse
 import base64
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -61,6 +62,9 @@ def main():
 
     repo = args.repo.removeprefix("https://github.com/").removesuffix(".git").strip("/")
     slug = greptile_client.slugify(repo)
+    existing = json.loads((ROOT / "data/tracks.json").read_text())["tracks"]
+    if any(t["slug"] == slug and t.get("style") != args.style for t in existing):
+        slug = f"{slug}-{args.style}"  # second album, don't clobber the first
     out = ROOT / "out" / slug
     out.mkdir(parents=True, exist_ok=True)
     timing = {}
@@ -73,12 +77,18 @@ def main():
         facts = json.loads(facts_path.read_text())
         print(f"facts: cached ({facts_path})")
     else:
-        try:
-            facts = greptile_client.mine(repo, genius=args.genius, skip_index=args.skip_index)
-            if all(v.startswith("(query failed") for v in facts["answers"].values()):
-                raise RuntimeError("all greptile queries failed")
-        except Exception as e:
-            print(f"greptile unavailable ({e}); falling back to local intel")
+        facts = None
+        # ponytail: Greptile query API is sunset + sends the GitHub token to a third
+        # party, so it's opt-in via GREPTILE_ENABLE=1 (flip it if the booth revives it)
+        if os.environ.get("GREPTILE_ENABLE"):
+            try:
+                facts = greptile_client.mine(repo, genius=args.genius, skip_index=args.skip_index)
+                if all(v.startswith("(query failed") for v in facts["answers"].values()):
+                    raise RuntimeError("all greptile queries failed")
+            except Exception as e:
+                print(f"greptile unavailable ({e}); falling back to local intel")
+                facts = None
+        if facts is None:
             facts = local_intel.mine(repo)
         facts_path.write_text(json.dumps(facts, indent=2))
     timing["intel_s"] = round(time.time() - t0, 1)

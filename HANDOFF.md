@@ -14,7 +14,12 @@
 - Skills package workflow `skills-package`: `.claude/skills/{tech-music-catalog,viral-song-briefing}/` + `data/catalog/` seeds + `tests/test_skills.py` (plain python asserts). Rights-aware music-reference cataloging + original-brief generation; Jeff Guo sources seeded public-metadata-only.
 
 ## Environment
-- Keys in `.env` (gitignored): GREPTILE_API_KEY, GITHUB_TOKEN, ANTHROPIC_API_KEY. Modal auth in `~/.modal.toml` (profile vrajpatel00222). GitHub user: **vraj00222**.
+- Keys in `.env` (gitignored, never committed): GREPTILE_API_KEY, GITHUB_TOKEN, ANTHROPIC_API_KEY. Modal auth in `~/.modal.toml` (profile vrajpatel00222). GitHub user: **vraj00222**.
+
+## GITHUB_TOKEN security (action needed by user)
+Current fine-grained PAT is over-scoped: probes confirmed it can READ PRIVATE REPOS and WRITE (issue-create passes auth). The pipeline only ever reads public data.
+- **Rotate it**: github.com/settings/personal-access-tokens → delete current → new fine-grained token: Repository access = "Public repositories" (read-only), Account permissions = none, expiry = 7 days. Paste into `.env`.
+- **Code layers already in place**: token is optional everywhere (pipeline runs unauthenticated on public repos if GITHUB_TOKEN is unset — only cost is GitHub's 60 req/hr anonymous rate limit); token is only ever sent to api.github.com; Greptile (the one third party that received it) is now OPT-IN via `GREPTILE_ENABLE=1` and off by default since their query API is sunset.
 - Python: `.venv/` (3.14; modal, requests, python-dotenv, anthropic 1.x). Web: `web/` npm.
 - claude-mem plugin installed (user scope) — activates on session restart; worker UI localhost:37777.
 

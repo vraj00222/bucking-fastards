@@ -1,0 +1,30 @@
+{
+  "id": "jeff-guo-music-player-app",
+  "slug": "jeff-guo-music-player-app",
+  "title": "I made a music player app, except it's only my music",
+  "artist": "Jeff Guo",
+  "sourceUrl": "https://www.youtube.com/watch?v=yMhGpYiFrdQ",
+  "canonicalUrl": "https://www.youtube.com/watch?v=yMhGpYiFrdQ",
+  "sourceType": "youtube-video",
+  "publisher": "Jeff Guo",
+  "themes": ["software-engineering", "personal-projects", "tech-music"],
+  "tags": ["music-player", "app-development", "devlog"],
+  "contentRating": "unknown",
+  "structure": ["unknown"],
+  "musicAttributes": {
+    "energy": "medium",
+    "moods": ["playful", "upbeat"],
+    "vocalFormats": ["rhythmic vocals"],
+    "instrumentation": ["modern pop production"]
+  },
+  "originalSynopsis": "A video in which Jeff Guo demonstrates a personal music player app he built that plays only his own songs.",
+  "rightsStatus": "public-metadata-only",
+  "trustLevel": "untrusted",
+  "provenance": {
+    "retrievedAt": "2026-08-23T18:20:00Z",
+    "extractionMethod": "metadata-import",
+    "sourceNotes": "Public oEmbed metadata only. Channel: https://www.youtube.com/@JeffGwoah"
+  },
+  "createdAt": "2026-08-23T18:20:00Z",
+  "updatedAt": "2026-08-23T18:20:00Z"
+}

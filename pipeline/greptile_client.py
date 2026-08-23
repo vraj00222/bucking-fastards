@@ -15,10 +15,15 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 
 BASE = "https://api.greptile.com/v2"
 HEADERS = {
-    "Authorization": f"Bearer {os.environ['GREPTILE_API_KEY']}",
-    "X-GitHub-Token": os.environ["GITHUB_TOKEN"],
+    "Authorization": f"Bearer {os.environ.get('GREPTILE_API_KEY', '')}",
+    "X-GitHub-Token": os.environ.get("GITHUB_TOKEN", ""),
     "Content-Type": "application/json",
 }
+
+
+def gh_headers():
+    tok = os.environ.get("GITHUB_TOKEN")
+    return {"Authorization": f"Bearer {tok}"} if tok else {}
 
 QUESTIONS = {
     "purpose": "In 2-3 sentences: what does this repo actually do, and who uses it?",
@@ -32,7 +37,7 @@ QUESTIONS = {
 def default_branch(repo):
     r = requests.get(
         f"https://api.github.com/repos/{repo}",
-        headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"},
+        headers=gh_headers(),
         timeout=15,
     )
     if r.ok:

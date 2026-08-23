@@ -75,11 +75,13 @@ export async function POST(req: Request) {
     if (buf.trim()) handle(buf);
     if (job.stage !== "done") {
       job.stage = "error";
-      job.error = `pipeline exited with code ${code}`;
+      job.stageTimes.error = Date.now();
+      job.error = code === null ? "pipeline was interrupted" : `pipeline exited with code ${code}`;
     }
   });
   child.on("error", (e) => {
     job.stage = "error";
+    job.stageTimes.error = Date.now();
     job.error = String(e);
   });
 

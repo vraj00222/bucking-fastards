@@ -25,9 +25,10 @@ def sh(cmd, cwd=None):
 
 
 def mine(repo, branch=None, **_):
+    tok = os.environ.get("GITHUB_TOKEN")
     gh = requests.get(
         f"https://api.github.com/repos/{repo}",
-        headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"},
+        headers={"Authorization": f"Bearer {tok}"} if tok else {},
         timeout=15,
     ).json()
     with tempfile.TemporaryDirectory() as tmp:
