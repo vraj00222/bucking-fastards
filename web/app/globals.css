@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0d0b09;
+  --bg-raised: #151109;
+  --ink: #ece3d2;
+  --ink-dim: #9a8f7c;
+  --paper: #e3d9c2;
+  --line: #2a241c;
+  /* per-style accents (mirror of lib/presets.ts) */
+  --accent-phonk: #ff2d2d;
+  --accent-hyperpop: #ff5ce1;
+  --accent-emo: #7a8fff;
+  --accent-edm: #00e5ff;
+  --accent-shanty: #2fd27d;
+  --accent-bollywood: #ffb300;
+  --accent-drill: #9aa0a6;
+  --accent-boyband: #ff8fab;
+  --accent-citypop: #b28dff;
+  --accent-country: #e0a458;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-raised: var(--bg-raised);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-paper: var(--paper);
+  --color-line: var(--line);
+  --font-display: var(--font-anton);
+  --font-body: var(--font-inter);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Film grain: apply to a positioned element; noise renders in its ::after. */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.55;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Full-viewport variant for page-level atmosphere. */
+.grain-fixed::after {
+  position: fixed;
+}
+
+.font-display {
+  font-family: var(--font-anton), Impact, sans-serif;
+}
+
+/* Oversized condensed display setting. */
+.display-tight {
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 24s linear infinite;
+  will-change: transform;
+}
+
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.vinyl-spin {
+  animation: vinyl-spin 1.8s linear infinite; /* 33⅓ rpm */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee, .vinyl-spin {
+    animation: none;
+  }
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--bg);
+}

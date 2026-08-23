@@ -1,1 +1,80 @@
-{"tracks": []}
+{
+  "tracks": [
+    {
+      "slug": "tj-commander.js",
+      "repo": "tj/commander.js",
+      "style": "phonk",
+      "song_title": "npm install Commander",
+      "artist_name": "Comma-nd.R",
+      "caption": "aggressive phonk, memphis rap, distorted 808 cowbell, dark, fast, male rap vocals, gym hype, cold CLI energy, heavy distortion, relentless hi-hats",
+      "lyrics": "[verse]\nnpm install commander, now I run the throne\nlib/command.js so massive it's a zone of its own\nspawning child processes, forwarding signals raw\nexamples/pizza ordering CLI, that's the law\nsuggestSimilar.js whisperin' \"did you mean --first?\"\ncommand.option-misuse.test.js for the ones who hurt\n\n[chorus]\nnpm install commander\nnpm install commander\none file rules the parser\nnpm install commander\n\n[verse]\nincrementing inspector ports in the dead of night\npreAction, postAction, hooks wired up tight\nexamples/deploy \u2014 no deploy, just the vibe\npassThroughOptions rolling through, unbothered, alive\n\n[bridge]\nthree TODOs in the git hook, each one more vague\n\"replace with appropriate checks\" \u2014 three times, that's the plague\nnobody edits that file, it sits in the dark\nnpm run test-all, still hitting the mark\n\n[chorus]\nnpm install commander\nnpm install commander\none file rules the parser\nnpm install commander\n\n[outro]\nVue CLI bowed down, Create React App too\n28k stars and the cowbell never stops \u2014 skrrt skrrt skrrt through",
+      "facts_highlights": [
+        "npm install commander",
+        "lib/command.js",
+        "examples/pizza",
+        "suggestSimilar.js",
+        "did you mean --first",
+        "command.option-misuse.test.js",
+        "incrementing inspector ports",
+        "preAction, postAction",
+        "examples/deploy",
+        "passThroughOptions",
+        "replace with appropriate checks",
+        "npm run test-all"
+      ],
+      "audio_url": "/tracks/tj-commander.js.mp3",
+      "cover_url": null,
+      "stars": 28370,
+      "language": "JavaScript",
+      "description": "node.js command-line interfaces made easy",
+      "sources": [
+        {
+          "filepath": "tests/command.positionalOptions.test.js",
+          "linestart": 472,
+          "summary": "  describe('passThroughOptions(xxx) and option after command-argument', () => {"
+        },
+        {
+          "filepath": "tests/command.positionalOptions.test.js",
+          "linestart": 504,
+          "summary": "  describe('enablePositionalOptions(xxx) and shared option after subcommand', () => {"
+        },
+        {
+          "filepath": "package-lock.json",
+          "linestart": 1194,
+          "summary": "      \"integrity\": \"sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==\","
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 22,
+          "summary": "# Replace the TODO placeholders with appropriate checks according to your"
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 27,
+          "summary": "\t# TODO: Replace with appropriate checks (e.g. spell checking)."
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 35,
+          "summary": "\t# TODO: Replace with appropriate checks for this patch"
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 41,
+          "summary": "\t# TODO: Replace with appropriate checks for the whole series"
+        },
+        {
+          "filepath": "git/hooks/sendemail-validate.sample",
+          "linestart": 52,
+          "summary": "\tworktree=$(mktemp --tmpdir -d sendemail-validate.XXXXXXX) &&"
+        }
+      ],
+      "timing": {
+        "intel_s": 0.0,
+        "lyrics_s": 11.0,
+        "audio_s": 109.9
+      },
+      "take": 1
+    }
+  ]
+}
