@@ -35,6 +35,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 Sources
               </Link>
               <Link
+                href="/videos"
+                className="whitespace-nowrap underline-offset-4 decoration-cobalt transition-colors hover:text-cobalt hover:underline"
+              >
+                Videos
+              </Link>
+              <Link
                 href="/#sign"
                 className="whitespace-nowrap underline-offset-4 decoration-cobalt transition-colors hover:text-cobalt hover:underline"
               >

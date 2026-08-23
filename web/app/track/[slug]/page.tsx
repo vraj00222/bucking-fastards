@@ -4,6 +4,7 @@ import Cover from "@/components/Cover";
 import Lyrics from "@/components/Lyrics";
 import NowPlayingLyrics from "@/components/NowPlayingLyrics";
 import Player from "@/components/Player";
+import ReleaseVideo from "@/components/ReleaseVideo";
 import { getTrack, getTracks } from "@/lib/data";
 import { presetFor } from "@/lib/presets";
 
@@ -50,7 +51,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             artist={track.artist_name}
             size="lg"
           />
-          <NowPlayingLyrics lyrics={track.lyrics} audioUrl={track.audio_url} />
+          {!track.video_url && <NowPlayingLyrics lyrics={track.lyrics} audioUrl={track.audio_url} />}
         </div>
 
         <div className="flex min-w-0 flex-col gap-5">
@@ -92,6 +93,12 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
 
           <Player audioUrl={track.audio_url} accent={accent} />
 
+          {track.video_url && (
+            <ReleaseVideo videoUrl={track.video_url} audioUrl={track.audio_url}>
+              <NowPlayingLyrics lyrics={track.lyrics} audioUrl={track.audio_url} />
+            </ReleaseVideo>
+          )}
+
           <div className="flex flex-wrap items-baseline justify-between gap-3">
             <a
               href={track.audio_url}
@@ -103,7 +110,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             {track.timing && (
               <p className="mono-label text-[10px] text-ink-dim">
                 Mined {track.timing.intel_s}s · Written {track.timing.lyrics_s}s · Recorded{" "}
-                {track.timing.audio_s}s
+                {track.timing.audio_s}s{track.timing.video_s ? ` · Cut ${track.timing.video_s}s` : ""}
               </p>
             )}
           </div>

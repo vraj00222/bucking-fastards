@@ -18,9 +18,9 @@ export async function POST(req: Request) {
     .replace(/\/+$/, "");
   const style = String(body.style ?? "");
 
-  if (!/^[\w.-]+\/[\w.-]+(?:\/pull\/\d+)?$/.test(target)) {
+  if (!/^(?:[\w.-]+\/[\w.-]+(?:\/pull\/\d+)?|[\w-]+)$/.test(target)) {
     return NextResponse.json(
-      { error: "Paste owner/repo or a GitHub pull-request URL." },
+      { error: "Paste a GitHub profile, owner/repo, or GitHub pull-request URL." },
       { status: 400 },
     );
   }
@@ -34,7 +34,20 @@ export async function POST(req: Request) {
 
   const child = spawn(
     PYTHON,
-    ["pipeline/run.py", "--repo", target, "--style", style, "--takes", "1", "--pick", "1", "--duration", "75"],
+    [
+      "pipeline/run.py",
+      "--repo",
+      target,
+      "--style",
+      style,
+      "--takes",
+      "1",
+      "--pick",
+      "1",
+      "--duration",
+      "75",
+      ...(process.env.GREPTILE_GENIUS === "1" ? ["--genius"] : []),
+    ],
     { cwd: CWD },
   );
 

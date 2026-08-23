@@ -20,7 +20,7 @@ export default function Player({ audioUrl }: { audioUrl: string; accent?: string
   const announcePlayback = (isPlaying: boolean, currentTime = 0, trackDuration = 0) => {
     window.dispatchEvent(
       new CustomEvent("droptable:playback", {
-        detail: { audioUrl, playing: isPlaying, currentTime, duration: trackDuration },
+        detail: { audioUrl, playing: isPlaying, currentTime, duration: trackDuration, source: "audio" },
       }),
     );
   };

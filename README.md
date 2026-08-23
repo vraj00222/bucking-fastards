@@ -27,19 +27,36 @@ The catalog includes its published artwork and audio under `web/public/`.
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 cp .env.example .env
-# Fill in ANTHROPIC_API_KEY and GITHUB_TOKEN.
+# Fill in ANTHROPIC_API_KEY, GITHUB_TOKEN, and GREPTILE_API_KEY.
 .venv/bin/python pipeline/run.py --repo owner/repo --style phonk --takes 1 --pick 1
 # Or write about one pull request:
-.venv/bin/python pipeline/run.py --repo https://github.com/owner/repo/pull/123 --style techrap --takes 1 --pick 1
+.venv/bin/python pipeline/run.py --repo https://github.com/owner/repo/pull/123 --style techrap --takes 1 --pick 1 --genius
+# Or resolve an eligible public repository from a public GitHub profile:
+.venv/bin/python pipeline/run.py --repo https://github.com/garrytan --style techrap --takes 1 --pick 1 --genius
 ```
 
 The command writes release metadata to `data/tracks.json` and the chosen audio
-to `web/public/tracks/`. To use the UI's “Sign a repo” flow, set `PYTHON` to
-the same virtual-environment interpreter if it is not `.venv/bin/python`.
+to `web/public/tracks/`. It also uses local `ffmpeg` to cut an original MP4
+lyric video into `web/public/videos/`, rendered from the release lyrics, audio,
+label-owned illustrated A&R character, source-session panel, and waveform. The
+Modal service currently generates audio only; pass `--no-video` to skip the
+local video cut. To use the UI's “Sign a repo” flow, set `PYTHON` to the same
+virtual-environment interpreter if it is not `.venv/bin/python`.
 
-PR songs use public GitHub PR, repository, review, and limited GitHub-profile
-context only. The pipeline does not crawl LinkedIn or unrelated personal
-profiles. Lyrics are instructed to roast the engineering work—not a person.
+GitHub supplies fresh public repository metadata, active issue titles, PR
+scope, review state/comments, and limited GitHub-profile context on every run.
+When `GREPTILE_API_KEY` is configured, Greptile additionally indexes the
+default branch and answers bounded architecture, entrypoint, dependency,
+test/CI, hotspot, command, and source-location questions. The lyric model gets
+a size-limited evidence pack—not raw repository contents—and is instructed to
+make jokes about engineering work, not people. Set `GREPTILE_ENABLE=0` to use
+the local analysis fallback; set `GREPTILE_GENIUS=1` for the UI's deeper query
+mode. A profile target chooses the highest-starred eligible public, non-fork
+repository and records that selection in its release metadata.
+
+The pipeline does not crawl LinkedIn, social networks, or unrelated personal
+profiles. Issue titles remain untrusted project context, never proof that a PR
+caused a bug.
 
 ## Review music references
 
