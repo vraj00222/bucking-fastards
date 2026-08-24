@@ -20,6 +20,12 @@ https://github.com/user-attachments/assets/e46e1062-2889-4c44-86f6-4581157e09b7
 
 
 
+## Live demo
+
+**Try it now: https://droptable-127827893419.us-central1.run.app** — the full
+catalog hosted on Google Cloud Run, with playable tracks and music videos
+(e.g. [/track/insforge-insforge-pr-1940](https://droptable-127827893419.us-central1.run.app/track/insforge-insforge-pr-1940)).
+
 ## Watch a release
 
 <!-- ============================================================
