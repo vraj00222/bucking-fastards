@@ -118,7 +118,7 @@ export default function RosterPage() {
               href="/#sign"
               className="border border-ink px-6 py-3 text-xs uppercase tracking-[0.3em] text-ink transition-colors hover:bg-ink hover:text-paper"
             >
-              Sign a repo
+              Sing a repo
             </Link>
           </div>
         ) : (

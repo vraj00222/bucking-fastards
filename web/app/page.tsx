@@ -55,7 +55,7 @@ export default function Home() {
                     color: "var(--cobalt)",
                   }}
                 >
-                  sign
+                  sing
                 </em>{" "}
                 them.
               </span>

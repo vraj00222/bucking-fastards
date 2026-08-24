@@ -100,7 +100,7 @@ export default function SignForm() {
         className="mt-8 w-full px-8 py-4 font-display text-xl uppercase tracking-widest text-paper transition-[filter] hover:brightness-110 disabled:opacity-60 sm:w-auto"
         style={{ background: accent, boxShadow: "0 2px 8px rgba(30,58,158,0.12)" }}
       >
-        Sign this GitHub target
+        Sing this GitHub target
       </button>
       {error && <p className="mt-3 text-sm text-[color:var(--accent)]">{error}</p>}
 

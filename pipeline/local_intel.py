@@ -21,7 +21,10 @@ QUESTIONS = {
 
 
 def sh(cmd, cwd=None):
-    return subprocess.run(cmd, shell=True, cwd=cwd, capture_output=True, text=True).stdout
+    # errors="replace": repo files aren't guaranteed UTF-8; strict decoding crashes.
+    return subprocess.run(
+        cmd, shell=True, cwd=cwd, capture_output=True, text=True, errors="replace"
+    ).stdout
 
 
 def mine(repo, branch=None, **_):

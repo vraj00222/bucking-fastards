@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "DropTable Records",
-  description: "A record label for codebases. Sign your repo. Drop a track.",
+  description: "A record label for codebases. Sing your repo. Drop a track.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 href="/#sign"
                 className="whitespace-nowrap underline-offset-4 decoration-cobalt transition-colors hover:text-cobalt hover:underline"
               >
-                Sign a repo
+                Sing a repo
               </Link>
             </div>
           </nav>
