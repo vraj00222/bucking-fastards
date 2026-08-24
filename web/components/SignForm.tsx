@@ -40,7 +40,7 @@ export default function SignForm() {
   return (
     <form onSubmit={submit} style={{ "--accent": accent } as React.CSSProperties}>
       <label htmlFor="repo" className="mono-label block text-[11px] text-ink-dim">
-        The artist
+        The GitHub target
       </label>
       <input
         id="repo"
@@ -48,7 +48,7 @@ export default function SignForm() {
         required
         value={repo}
         onChange={(e) => setRepo(e.target.value)}
-        placeholder="github.com/owner/repo"
+        placeholder="github.com/owner/repo, /pull/123, or /profile"
         autoComplete="off"
         spellCheck={false}
         className="mt-2 w-full border border-line bg-paper px-3 py-3 font-mono text-lg text-ink outline-none transition-[border-color,box-shadow] placeholder:text-ink-dim/50 focus:border-cobalt focus:ring-2 focus:ring-cobalt/25"
@@ -100,7 +100,7 @@ export default function SignForm() {
         className="mt-8 w-full px-8 py-4 font-display text-xl uppercase tracking-widest text-paper transition-[filter] hover:brightness-110 disabled:opacity-60 sm:w-auto"
         style={{ background: accent, boxShadow: "0 2px 8px rgba(30,58,158,0.12)" }}
       >
-        Sign this repo
+        Sign this GitHub target
       </button>
       {error && <p className="mt-3 text-sm text-[color:var(--accent)]">{error}</p>}
 

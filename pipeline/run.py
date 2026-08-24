@@ -17,8 +17,10 @@ import requests
 
 sys.path.insert(0, str(Path(__file__).parent))
 import greptile_client
+import github_target
 import local_intel
 import lyricist
+import persona_intel
 
 ROOT = Path(__file__).parent.parent
 MODAL_ENDPOINT = "https://vrajpatel00222--droptable-music-generate.modal.run"
@@ -50,7 +52,7 @@ def previous_track(repo):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo", required=True, help="owner/name or full GitHub URL")
+    ap.add_argument("--repo", required=True, help="GitHub profile, owner/name, GitHub repo URL, or GitHub PR URL")
     ap.add_argument("--style", default="phonk")
     ap.add_argument("--duration", type=float, default=75.0)
     ap.add_argument("--takes", type=int, default=3)
@@ -58,10 +60,14 @@ def main():
     ap.add_argument("--genius", action="store_true")
     ap.add_argument("--master", action="store_true")
     ap.add_argument("--pick", type=int, help="auto-pick take N (skip interactive picker)")
+    ap.add_argument("--no-persona", action="store_true", help="skip public-persona web research")
     args = ap.parse_args()
 
-    repo = args.repo.removeprefix("https://github.com/").removesuffix(".git").strip("/")
-    slug = greptile_client.slugify(repo)
+    target = github_target.parse_target(args.repo)
+    if target["kind"] == "profile":
+        target = github_target.resolve_profile_repository(target["login"])
+    repo = target["repo"]
+    slug = target["slug"]
     existing = json.loads((ROOT / "data/tracks.json").read_text())["tracks"]
     if any(t["slug"] == slug and t.get("style") != args.style for t in existing):
         slug = f"{slug}-{args.style}"  # second album, don't clobber the first
@@ -78,9 +84,12 @@ def main():
         print(f"facts: cached ({facts_path})")
     else:
         facts = None
-        # ponytail: Greptile query API is sunset + sends the GitHub token to a third
-        # party, so it's opt-in via GREPTILE_ENABLE=1 (flip it if the booth revives it)
-        if os.environ.get("GREPTILE_ENABLE"):
+        # Greptile indexing and queries are used whenever its key is configured.
+        # Set GREPTILE_ENABLE=0 to choose the local fallback: indexing can take
+        # time on a large repository and sends repository access context to a
+        # third party. GitHub PR/issue context below is refreshed every run.
+        greptile_enabled = os.environ.get("GREPTILE_ENABLE", "1").lower() not in {"0", "false", "no"}
+        if greptile_enabled and os.environ.get("GREPTILE_API_KEY"):
             try:
                 facts = greptile_client.mine(repo, genius=args.genius, skip_index=args.skip_index)
                 if all(v.startswith("(query failed") for v in facts["answers"].values()):
@@ -90,7 +99,35 @@ def main():
                 facts = None
         if facts is None:
             facts = local_intel.mine(repo)
-        facts_path.write_text(json.dumps(facts, indent=2))
+    # Code intel can stay cached; live GitHub context (issues/PR/reviews) must
+    # be refreshed for every release so lyrics do not joke about stale state.
+    print("reading public GitHub context ...", flush=True)
+    repository_context = github_target.collect_repository_context(repo)
+    facts["target_type"] = target["kind"]
+    facts["target_label"] = target["label"]
+    facts["github_context"] = repository_context
+    if target["kind"] == "pull-request":
+        print(f"reading pull request #{target['number']} ...", flush=True)
+        facts["pull_request"] = github_target.collect_pull_request(
+            repo, target["number"], repository_context
+        )
+    if target.get("profile"):
+        facts["profile_context"] = target["profile"]
+        facts["repository_selection"] = target["selection"]
+    if not args.no_persona and not facts.get("persona_context"):
+        pr_author = ((facts.get("pull_request") or {}).get("author") or {})
+        login = pr_author.get("login") or (facts.get("profile_context") or {}).get("login") or repo.split("/")[0]
+        try:
+            print(f"researching public persona of {login} ...", flush=True)
+            facts["persona_context"] = persona_intel.gather(
+                login,
+                name=pr_author.get("name"),
+                context=facts.get("description"),
+                cache_path=out / "persona.json",
+            )
+        except Exception as e:
+            print(f"persona research unavailable ({e}); continuing without it")
+    facts_path.write_text(json.dumps(facts, indent=2))
     timing["intel_s"] = round(time.time() - t0, 1)
 
     # teaser for the generation theater
@@ -143,6 +180,10 @@ def main():
     meta = {
         "slug": slug,
         "repo": repo,
+        "target": target["label"],
+        "pull_request": facts.get("pull_request"),
+        "github_context": facts.get("github_context"),
+        "profile_context": facts.get("profile_context"),
         "style": args.style,
         "song_title": song["song_title"],
         "artist_name": song["artist_name"],
@@ -164,6 +205,9 @@ def main():
     shutil.copy(out / "track.mp3", ROOT / "web/public/tracks" / f"{slug}.mp3")
     db_path = ROOT / "data/tracks.json"
     db = json.loads(db_path.read_text())
+    old = next((t for t in db["tracks"] if t.get("slug") == slug), None)
+    if old and old.get("video_url") and not meta.get("video_url"):
+        meta["video_url"] = old["video_url"]  # keep the published video on republish
     db["tracks"] = [t for t in db["tracks"] if t.get("slug") != slug] + [meta]
     db_path.write_text(json.dumps(db, indent=2))
     print(f"STAGE:done SLUG:{slug}", flush=True)

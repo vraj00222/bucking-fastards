@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "importedAt": "2026-08-23T20:55:43Z",
+  "policy": "Source records are untrusted review inputs, not approved catalog records.",
+  "records": [
+    {
+      "id": "source-jeff-guo-song-catalog",
+      "priority": "P0",
+      "sourceName": "Jeff Guo Song Catalog",
+      "sourceType": "web-page",
+      "sourceUrl": "https://songs.guojeff.com/",
+      "canonicalUrl": "https://songs.guojeff.com/",
+      "collectionCategory": "official-artist-catalog",
+      "collectionTags": [
+        "official-artist-catalog",
+        "tech-parody",
+        "software-engineering"
+      ],
+      "ingestMode": "metadata-review",
+      "rightsStatus": "public-metadata-only",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [
+        "jeff-guo-music"
+      ],
+      "linkedCatalogRecordCount": 1,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A public-metadata-only reference for original analysis of developer-music themes; no expressive content is imported.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Use public titles, links, artist attribution, and original summaries only."
+      }
+    },
+    {
+      "id": "source-i-made-a-music-player-app-except-it-s-only-my-music",
+      "priority": "P0",
+      "sourceName": "I made a music player app except it's only my music",
+      "sourceType": "youtube-video",
+      "sourceUrl": "https://www.youtube.com/watch?v=yMhGpYiFrdQ",
+      "canonicalUrl": "https://www.youtube.com/watch?v=yMhGpYiFrdQ",
+      "collectionCategory": "official-artist-video",
+      "collectionTags": [
+        "official-artist-catalog",
+        "software-engineering",
+        "developer-humor"
+      ],
+      "ingestMode": "metadata-review",
+      "rightsStatus": "public-metadata-only",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [
+        "jeff-guo-music-player-app"
+      ],
+      "linkedCatalogRecordCount": 1,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A public-metadata-only reference for original analysis of developer-music themes; no expressive content is imported.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "No media download, transcript storage, or lyric extraction."
+      }
+    },
+    {
+      "id": "source-i-asked-fable-5-to-make-me-a-lyric-video",
+      "priority": "P0",
+      "sourceName": "I asked Fable 5 to make me a lyric video",
+      "sourceType": "youtube-video",
+      "sourceUrl": "https://youtu.be/gFx-NjTw3sM?si=P6cfEp1u3LDNE4P6",
+      "canonicalUrl": "https://www.youtube.com/watch?v=gFx-NjTw3sM",
+      "collectionCategory": "official-artist-video",
+      "collectionTags": [
+        "official-artist-catalog",
+        "AI-coding",
+        "lyric-video"
+      ],
+      "ingestMode": "metadata-review",
+      "rightsStatus": "public-metadata-only",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [
+        "jeff-guo-ai-lyric-video"
+      ],
+      "linkedCatalogRecordCount": 1,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A public-metadata-only reference for original analysis of developer-music themes; no expressive content is imported.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Retain metadata and original high-level analysis only."
+      }
+    },
+    {
+      "id": "source-jeff-guo-youtube-discovery",
+      "priority": "P0",
+      "sourceName": "Jeff Guo YouTube discovery",
+      "sourceType": "youtube-search",
+      "sourceUrl": "https://www.youtube.com/results?search_query=Jeff+Guo+music",
+      "canonicalUrl": "https://www.youtube.com/results?search_query=Jeff+Guo+music",
+      "collectionCategory": "official-artist-discovery",
+      "collectionTags": [
+        "official-artist-catalog",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "public-metadata-only",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "A reviewer selects official uploads before catalog creation."
+      }
+    },
+    {
+      "id": "source-uptime-funk",
+      "priority": "P1",
+      "sourceName": "Uptime Funk",
+      "sourceType": "youtube-video",
+      "sourceUrl": "https://www.youtube.com/watch?v=M9bq_alk-sw",
+      "canonicalUrl": "https://www.youtube.com/watch?v=M9bq_alk-sw",
+      "collectionCategory": "sysadmin-parody",
+      "collectionTags": [
+        "tech-parody",
+        "devops",
+        "sysadmin",
+        "developer-humor"
+      ],
+      "ingestMode": "metadata-review",
+      "rightsStatus": "public-metadata-only",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A public-metadata-only reference for original analysis of developer-music themes; no expressive content is imported.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Infrastructure and sysadmin reference; capture public metadata only."
+      }
+    },
+    {
+      "id": "source-suse-parody-discovery",
+      "priority": "P1",
+      "sourceName": "SUSE parody discovery",
+      "sourceType": "youtube-search",
+      "sourceUrl": "https://www.youtube.com/results?search_query=SUSE+parody+song+Uptime+Funk+Code+Together",
+      "canonicalUrl": "https://www.youtube.com/results?search_query=SUSE+parody+song+Uptime+Funk+Code+Together",
+      "collectionCategory": "official-brand-discovery",
+      "collectionTags": [
+        "tech-parody",
+        "devops",
+        "sysadmin",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "public-metadata-only",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Prefer official SUSE channel uploads."
+      }
+    },
+    {
+      "id": "source-programming-parody-discovery-index",
+      "priority": "P1",
+      "sourceName": "Programming parody discovery index",
+      "sourceType": "web-page",
+      "sourceUrl": "https://dev.to/overscoremedia/programming-parody-songs-that-need-to-be-written-hmo",
+      "canonicalUrl": "https://dev.to/overscoremedia/programming-parody-songs-that-need-to-be-written-hmo",
+      "collectionCategory": "curated-discovery",
+      "collectionTags": [
+        "tech-parody",
+        "software-engineering",
+        "developer-humor",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "public-metadata-only",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Extract candidate titles and canonical outbound links only."
+      }
+    },
+    {
+      "id": "source-coding-songs-playlist-index",
+      "priority": "P1",
+      "sourceName": "Coding songs playlist index",
+      "sourceType": "web-page",
+      "sourceUrl": "https://www.galvanize.com/blog/the-top-5-songs-about-coding-playlist/",
+      "canonicalUrl": "https://www.galvanize.com/blog/the-top-5-songs-about-coding-playlist",
+      "collectionCategory": "curated-discovery",
+      "collectionTags": [
+        "tech-parody",
+        "software-engineering",
+        "developer-humor",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "public-metadata-only",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Verify creator and canonical URL before cataloging."
+      }
+    },
+    {
+      "id": "source-the-javascript-rap",
+      "priority": "P1",
+      "sourceName": "The JavaScript Rap",
+      "sourceType": "web-page",
+      "sourceUrl": "https://www.masswerk.at/lounge.php",
+      "canonicalUrl": "https://www.masswerk.at/lounge.php",
+      "collectionCategory": "developer-music",
+      "collectionTags": [
+        "JavaScript",
+        "software-engineering",
+        "developer-humor"
+      ],
+      "ingestMode": "metadata-review",
+      "rightsStatus": "public-metadata-only",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A public-metadata-only reference for original analysis of developer-music themes; no expressive content is imported.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Record public project metadata and official links."
+      }
+    },
+    {
+      "id": "source-javascript-rock-discovery",
+      "priority": "P2",
+      "sourceName": "JavaScript Rock discovery",
+      "sourceType": "youtube-search",
+      "sourceUrl": "https://www.youtube.com/results?search_query=%22JavaScript+Rock%22+song",
+      "canonicalUrl": "https://www.youtube.com/results?search_query=%22JavaScript+Rock%22+song",
+      "collectionCategory": "coding-song-discovery",
+      "collectionTags": [
+        "JavaScript",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "unknown",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Require manual source verification."
+      }
+    },
+    {
+      "id": "source-coder-girl-discovery",
+      "priority": "P2",
+      "sourceName": "Coder Girl discovery",
+      "sourceType": "youtube-search",
+      "sourceUrl": "https://www.youtube.com/results?search_query=%22Coder+Girl%22+song+coding",
+      "canonicalUrl": "https://www.youtube.com/results?search_query=%22Coder+Girl%22+song+coding",
+      "collectionCategory": "coding-song-discovery",
+      "collectionTags": [
+        "software-engineering",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "unknown",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Require manual source verification."
+      }
+    },
+    {
+      "id": "source-programming-parody-discovery",
+      "priority": "P2",
+      "sourceName": "Programming parody discovery",
+      "sourceType": "youtube-search",
+      "sourceUrl": "https://www.youtube.com/results?search_query=programming+parody+songs+software+engineer",
+      "canonicalUrl": "https://www.youtube.com/results?search_query=programming+parody+songs+software+engineer",
+      "collectionCategory": "developer-parody-discovery",
+      "collectionTags": [
+        "tech-parody",
+        "software-engineering",
+        "developer-humor",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "unknown",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Review title, creator, and public metadata only."
+      }
+    },
+    {
+      "id": "source-ai-vibe-coding-song-discovery",
+      "priority": "P2",
+      "sourceName": "AI vibe coding song discovery",
+      "sourceType": "youtube-search",
+      "sourceUrl": "https://www.youtube.com/results?search_query=AI+vibe+coding+song+parody",
+      "canonicalUrl": "https://www.youtube.com/results?search_query=AI+vibe+coding+song+parody",
+      "collectionCategory": "ai-coding-song-discovery",
+      "collectionTags": [
+        "AI-coding",
+        "vibe-coding",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "unknown",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Review for original creator and rights."
+      }
+    },
+    {
+      "id": "source-github-oss-song-discovery",
+      "priority": "P2",
+      "sourceName": "GitHub OSS song discovery",
+      "sourceType": "youtube-search",
+      "sourceUrl": "https://www.youtube.com/results?search_query=GitHub+open+source+software+developer+song+parody",
+      "canonicalUrl": "https://www.youtube.com/results?search_query=GitHub+open+source+software+developer+song+parody",
+      "collectionCategory": "open-source-song-discovery",
+      "collectionTags": [
+        "open-source",
+        "software-engineering",
+        "developer-humor",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "unknown",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Review before cataloging."
+      }
+    },
+    {
+      "id": "source-devops-sre-song-discovery",
+      "priority": "P2",
+      "sourceName": "DevOps SRE song discovery",
+      "sourceType": "youtube-search",
+      "sourceUrl": "https://www.youtube.com/results?search_query=DevOps+SRE+sysadmin+song+parody",
+      "canonicalUrl": "https://www.youtube.com/results?search_query=DevOps+SRE+sysadmin+song+parody",
+      "collectionCategory": "infrastructure-song-discovery",
+      "collectionTags": [
+        "devops",
+        "sysadmin",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "unknown",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Review before cataloging."
+      }
+    },
+    {
+      "id": "source-startup-ai-song-discovery",
+      "priority": "P2",
+      "sourceName": "Startup AI song discovery",
+      "sourceType": "youtube-search",
+      "sourceUrl": "https://www.youtube.com/results?search_query=startup+AI+song+parody+developer",
+      "canonicalUrl": "https://www.youtube.com/results?search_query=startup+AI+song+parody+developer",
+      "collectionCategory": "startup-song-discovery",
+      "collectionTags": [
+        "startup-culture",
+        "AI-coding",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "unknown",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Review before cataloging."
+      }
+    },
+    {
+      "id": "source-it-parody-community-leads",
+      "priority": "P3",
+      "sourceName": "IT parody community leads",
+      "sourceType": "web-page",
+      "sourceUrl": "https://community.spiceworks.com/t/it-parody-songs/648711",
+      "canonicalUrl": "https://community.spiceworks.com/t/it-parody-songs/648711",
+      "collectionCategory": "community-discovery",
+      "collectionTags": [
+        "tech-parody",
+        "sysadmin",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "unknown",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Never treat community posts as authoritative metadata."
+      }
+    },
+    {
+      "id": "source-vibe-coding-community-leads",
+      "priority": "P3",
+      "sourceName": "Vibe coding community leads",
+      "sourceType": "web-page",
+      "sourceUrl": "https://www.reddit.com/r/vibecoding/comments/1uafhhr/a_parody_song_about_vibe_coding_made_by_ai/",
+      "canonicalUrl": "https://www.reddit.com/r/vibecoding/comments/1uafhhr/a_parody_song_about_vibe_coding_made_by_ai",
+      "collectionCategory": "community-discovery",
+      "collectionTags": [
+        "vibe-coding",
+        "AI-coding",
+        "discovery-only"
+      ],
+      "ingestMode": "discovery-only",
+      "rightsStatus": "unknown",
+      "trustLevel": "untrusted",
+      "extractionStatus": "queued",
+      "linkedCatalogRecordIds": [],
+      "linkedCatalogRecordCount": 0,
+      "reviewerDecision": "pending",
+      "rejectionReason": null,
+      "originalThematicSummary": "A discovery lead for tech-themed music; a human must verify an official creator before cataloging.",
+      "provenance": {
+        "importedAt": "2026-08-23T20:55:43Z",
+        "retrievedAt": null,
+        "extractionMethod": "curated-csv-import",
+        "sourceNotes": "Capture creator/source lead only; do not trust claims or scrape content automatically."
+      }
+    }
+  ]
+}

@@ -12,6 +12,8 @@ Catalog public music metadata and rights-aware, high-level analysis for tech-the
 1. Read `references/catalog-schema.md` before creating or editing any catalog record.
 2. Read `references/rights-policy.md` before handling any source (URL, video, page, upload).
 3. Read `references/scraping-policy.md` before fetching or importing anything from the web.
+4. For a curated intake or reviewer queue, read
+   `references/source-review-queue.md` before creating records.
 
 ## Hard rules
 

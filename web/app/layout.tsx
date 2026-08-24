@@ -29,6 +29,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 Roster
               </Link>
               <Link
+                href="/sources"
+                className="whitespace-nowrap underline-offset-4 decoration-cobalt transition-colors hover:text-cobalt hover:underline"
+              >
+                Sources
+              </Link>
+              <Link
                 href="/#sign"
                 className="whitespace-nowrap underline-offset-4 decoration-cobalt transition-colors hover:text-cobalt hover:underline"
               >

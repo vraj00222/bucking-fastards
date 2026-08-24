@@ -31,6 +31,9 @@ named artist, never reuse of existing lyrics, melodies, or recordings.
 8. Include full provenance (`referenceSources`, `generatedAt`), rights notes,
    and every `safetyTransformations` entry. Output contracts are in
    `references/output-contract.md`.
+9. For a repository or pull-request roast, read
+   `references/pr-satire-briefing.md`. It defines the evidence, privacy, and
+   section rules for the first two verses and reviewer/maintainer bridge.
 
 Scripts: `scripts/build_brief.py catalog-record.json requirements.json`
 builds a brief; `scripts/validate_brief.py brief.json` validates one. Both
@@ -51,3 +54,9 @@ mood, instruments, tempo, vocal type, comma-separated, same format as the
 preset strings in `pipeline/presets.py` (e.g. "upbeat rap-pop, playful,
 808 bass, synth lead, 95-110 bpm, rhythmic male vocals"). `lyricalConstraints`
 feed the lyricist system prompt.
+
+For GitHub pull requests, use GitHub REST metadata as the primary source of
+truth. A public GitHub login, PR author, merger, organisation/repository
+one-liner, title, file counts, review states, and unchecked tasks may inform
+the song when supplied. Do not crawl LinkedIn, social networks, or unrelated
+personal pages; do not invent a missing reviewer concern or personal detail.

@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 // Liner notes: [verse]/[chorus] tags become cobalt catalog labels; any line
-// containing a mined fact gets a gold underline + paper-yellow wash. Server-safe.
+// containing a mined fact gets a gold underline + paper-yellow wash.
 // accent stays in the contract; section furniture keeps to house cobalt/gold.
 
 function escapeRe(s: string) {
@@ -9,11 +13,24 @@ function escapeRe(s: string) {
 export default function Lyrics({
   lyrics,
   facts,
+  audioUrl,
 }: {
   lyrics: string;
   facts: string[];
+  audioUrl: string;
   accent?: string;
 }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const onPlayback = (event: Event) => {
+      const { detail } = event as CustomEvent<{ audioUrl: string; playing: boolean }>;
+      if (detail.audioUrl === audioUrl) setIsPlaying(detail.playing);
+    };
+    window.addEventListener("droptable:playback", onPlayback);
+    return () => window.removeEventListener("droptable:playback", onPlayback);
+  }, [audioUrl]);
+
   // Longest facts first so "npm install commander" wins over "commander".
   const factRe = facts.length
     ? new RegExp(
@@ -25,12 +42,17 @@ export default function Lyrics({
   return (
     <div className="max-w-2xl text-[15px] leading-7 text-ink/90">
       {lyrics.split("\n").map((line, i) => {
+        const fade = isPlaying ? "lyric-fade-in" : undefined;
+        const fadeStyle = isPlaying
+          ? { animationDelay: `${Math.min(i, 15) * 35}ms` }
+          : undefined;
         const tag = line.match(/^\s*\[(.+)\]\s*$/);
         if (tag) {
           return (
             <p
               key={i}
-              className="mono-label mt-8 mb-2 flex items-baseline gap-3 text-[11px] text-cobalt first:mt-0"
+              className={`mono-label mt-8 mb-2 flex items-baseline gap-3 text-[11px] text-cobalt first:mt-0 ${fade ?? ""}`}
+              style={fadeStyle}
             >
               {tag[1]}
               <span
@@ -43,7 +65,7 @@ export default function Lyrics({
         if (!line.trim()) return null; // spacing comes from section labels
         const parts = factRe ? line.split(factRe) : [line];
         return (
-          <p key={i}>
+          <p key={i} className={fade} style={fadeStyle}>
             {parts.map((part, j) =>
               factRe && j % 2 === 1 ? (
                 <mark

@@ -1,0 +1,11 @@
+DropTable Records — what we do
+
+- Turn any GitHub repo or PR into a satirical rap song and music video, published on a web catalog.
+- Repo/PR/profile intel: GitHub REST API (facts, diffs, reviews) via pipeline/github_target.py + local clone analysis.
+- Public persona of the author: Claude with web search (pipeline/persona_intel.py), public professional facts only.
+- Lyrics: Claude (pipeline/lyricist.py) writes grounded roast lyrics plus lyric->fact "receipts" for the video.
+- Audio: ACE-Step 1.5 on a Modal L40S GPU endpoint generates the 75s track (pipeline/run.py).
+- Video brief: pipeline/video_brief.py maps each lyric to an on-screen GitHub-style receipt card.
+- Video: HyperFrames renders Claude-authored HTML/GSAP frames (droptable-video/pipeline/mp3_to_video.py).
+- AI footage beds: Google Veo 2 on Vertex AI (CogVideoX on Modal as fallback) behind the kinetic type.
+- Website: Next.js app (web/) serves the catalog, animated lyrics, player, and the video per track.

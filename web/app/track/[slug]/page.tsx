@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Cover from "@/components/Cover";
 import Lyrics from "@/components/Lyrics";
+import NowPlayingLyrics from "@/components/NowPlayingLyrics";
 import Player from "@/components/Player";
 import { getTrack, getTracks } from "@/lib/data";
 import { presetFor } from "@/lib/presets";
@@ -41,7 +42,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
     <div className="mx-auto max-w-7xl px-5 py-10 lg:py-16">
       {/* hero: engraved plate left, credits + player right */}
       <div className="grid gap-10 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-14">
-        <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
+        <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
           <Cover
             repo={track.repo}
             style={track.style}
@@ -49,6 +50,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             artist={track.artist_name}
             size="lg"
           />
+          <NowPlayingLyrics lyrics={track.lyrics} audioUrl={track.audio_url} />
         </div>
 
         <div className="flex min-w-0 flex-col gap-5">
@@ -108,6 +110,26 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
         </div>
       </div>
 
+      {/* the music video, when the label has cut one */}
+      {track.video_url && (
+        <section className="rule-double mt-16 pt-10 lg:mt-24">
+          <h2 className="font-display display-tight text-2xl text-ink">
+            The video<span style={{ color: accent }}>;</span>
+          </h2>
+          <p className="mono-label mt-1 mb-8 text-[10px] text-ink-dim">
+            Shot on location in the diff
+          </p>
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            src={track.video_url}
+            className="mx-auto max-h-[82vh] w-auto max-w-full border border-line bg-card"
+            style={{ boxShadow: "0 2px 8px rgba(30,58,158,0.12)" }}
+          />
+        </section>
+      )}
+
       {/* liner notes; blue angel plate rests along the right margin on wide screens */}
       <section className="rule-double relative mt-16 overflow-hidden pt-10 lg:mt-24">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -127,7 +149,12 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
         <p className="mono-label mt-1 mb-8 text-[10px] text-ink-dim">
           Underlined lines were mined from the repo
         </p>
-        <Lyrics lyrics={track.lyrics} facts={track.facts_highlights} accent={accent} />
+        <Lyrics
+          lyrics={track.lyrics}
+          facts={track.facts_highlights}
+          audioUrl={track.audio_url}
+          accent={accent}
+        />
       </section>
     </div>
   );

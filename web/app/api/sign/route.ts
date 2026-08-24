@@ -1,23 +1,26 @@
 import { spawn } from "child_process";
 import { NextResponse } from "next/server";
+import { join } from "path";
 import { PRESETS } from "@/lib/presets";
 import { jobs, type Job } from "../jobs";
 
-const PYTHON = "/Users/vrajpatel/Developer/droptable/.venv/bin/python";
-const CWD = "/Users/vrajpatel/Developer/droptable";
+// The app runs from `web/`; resolve the repository instead of relying on a
+// developer-machine-specific path. PYTHON can point at any configured venv.
+const CWD = join(process.cwd(), "..");
+const PYTHON = process.env.PYTHON ?? join(CWD, ".venv", "bin", "python");
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
-  const repo = String(body.repo ?? "")
+  const target = String(body.repo ?? "")
     .trim()
     .replace(/^https?:\/\/(www\.)?github\.com\//, "")
     .replace(/\.git$/, "")
     .replace(/\/+$/, "");
   const style = String(body.style ?? "");
 
-  if (!/^[\w.-]+\/[\w.-]+$/.test(repo)) {
+  if (!/^(?:[\w.-]+\/[\w.-]+(?:\/pull\/\d+)?|[\w-]+)$/.test(target)) {
     return NextResponse.json(
-      { error: "Paste a GitHub repo URL or owner/name." },
+      { error: "Paste a GitHub profile, owner/repo, or GitHub pull-request URL." },
       { status: 400 },
     );
   }
@@ -31,7 +34,20 @@ export async function POST(req: Request) {
 
   const child = spawn(
     PYTHON,
-    ["pipeline/run.py", "--repo", repo, "--style", style, "--takes", "1", "--pick", "1", "--duration", "75"],
+    [
+      "pipeline/run.py",
+      "--repo",
+      target,
+      "--style",
+      style,
+      "--takes",
+      "1",
+      "--pick",
+      "1",
+      "--duration",
+      "75",
+      ...(process.env.GREPTILE_GENIUS === "1" ? ["--genius"] : []),
+    ],
     { cwd: CWD },
   );
 

@@ -21,6 +21,7 @@ export type Track = {
   lyrics: string; // [verse]/[chorus] tags on their own lines
   facts_highlights: string[];
   audio_url: string; // "/tracks/<slug>.mp3"
+  video_url?: string | null; // "/videos/<slug>.mp4"
   cover_url: string | null; // null -> derive via lib/art
   stars: number;
   language: string;
@@ -28,6 +29,21 @@ export type Track = {
   sources: Source[];
   timing: { intel_s: number; lyrics_s: number; audio_s: number };
   take: number;
+};
+
+export type SourceReviewRecord = {
+  id: string;
+  priority: "P0" | "P1" | "P2" | "P3";
+  sourceName: string;
+  sourceType: string;
+  sourceUrl: string;
+  collectionTags: string[];
+  rightsStatus: "public-metadata-only" | "unknown";
+  trustLevel: "untrusted";
+  extractionStatus: "queued" | "metadata-captured" | "reviewed" | "rejected";
+  linkedCatalogRecordCount: number;
+  reviewerDecision: "pending" | "approved" | "rejected";
+  rejectionReason: string | null;
 };
 
 export function getTracks(): Track[] {
@@ -41,4 +57,13 @@ export function getTracks(): Track[] {
 
 export function getTrack(slug: string): Track | undefined {
   return getTracks().find((t) => t.slug === slug);
+}
+
+export function getSourceReviewQueue(): SourceReviewRecord[] {
+  try {
+    const raw = readFileSync(join(process.cwd(), "../data/source-review-queue.json"), "utf8");
+    return (JSON.parse(raw).records ?? []) as SourceReviewRecord[];
+  } catch {
+    return [];
+  }
 }
