@@ -1,0 +1,10 @@
+.env
+.git
+out/
+web/node_modules
+web/.next
+web/tsconfig.tsbuildinfo
+.claude
+.venv
+tests/
+*.log
