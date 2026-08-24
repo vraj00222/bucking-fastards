@@ -185,3 +185,7 @@ modal deploy modal_app/music_service.py
 ```
 
 If Modal assigns a different URL, update `MODAL_ENDPOINT` in `pipeline/run.py`.
+
+## Deploy the site
+
+Cloud Run, manual, ~8 min — see [DEPLOY.md](DEPLOY.md).

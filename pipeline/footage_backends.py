@@ -37,7 +37,7 @@ from pathlib import Path
 from typing import Optional, Protocol
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-COGVIDEOX_ENDPOINT = "https://vaibhavgeek--droptable-video-generate.modal.run"
+COGVIDEOX_ENDPOINT = os.environ.get("COGVIDEOX_ENDPOINT", "")  # your own `modal deploy` URL
 COGVIDEOX_TIMEOUT_S = 1200  # 20 min per clip (Modal A100 cold start)
 
 
@@ -117,7 +117,9 @@ class VeoBackend:
     max_clip_seconds = 8.0
 
     def __init__(self, project: Optional[str] = None, location: str = "us-central1") -> None:
-        self.project = project or os.environ.get("GOOGLE_CLOUD_PROJECT") or "sharp-leaf-451416-r4"
+        self.project = project or os.environ.get("GOOGLE_CLOUD_PROJECT")
+        if not self.project:
+            raise RuntimeError("VeoBackend requires GOOGLE_CLOUD_PROJECT (your own GCP project)")
         self.location = location
         try:
             from google import genai  # noqa: F401
@@ -230,6 +232,8 @@ class CogVideoXBackend:
     max_clip_seconds = 6.0
 
     def __init__(self, endpoint: str = COGVIDEOX_ENDPOINT, timeout_s: float = COGVIDEOX_TIMEOUT_S) -> None:
+        if not endpoint:
+            raise RuntimeError("CogVideoXBackend requires COGVIDEOX_ENDPOINT (your own Modal deploy URL)")
         self.endpoint = endpoint
         self.timeout_s = timeout_s
         try:
