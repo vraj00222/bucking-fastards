@@ -3,6 +3,8 @@
 !.env.example
 .venv/
 out/
+.local-video-output/
+data/telegram_subscribers.json
 node_modules/
 .next/
 __pycache__/

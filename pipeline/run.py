@@ -20,6 +20,7 @@ import greptile_client
 import github_target
 import local_intel
 import lyricist
+import notify
 import persona_intel
 
 ROOT = Path(__file__).parent.parent
@@ -31,6 +32,12 @@ MASTER_FILTER = (
 )
 
 
+def log(msg):
+    """stdout for the web UI parser, Telegram buffer for the subscribers."""
+    print(msg, flush=True)
+    notify.log(msg)
+
+
 def gen_take(caption, lyrics, duration, seed, out_path):
     t0 = time.time()
     r = requests.post(
@@ -40,7 +47,7 @@ def gen_take(caption, lyrics, duration, seed, out_path):
     )
     r.raise_for_status()
     out_path.write_bytes(base64.b64decode(r.json()["audio_b64"]))
-    print(f"  take (seed {seed}): {out_path.name} in {int(time.time() - t0)}s", flush=True)
+    log(f"  take (seed {seed}): {out_path.name} in {int(time.time() - t0)}s")
     return out_path
 
 
@@ -76,12 +83,12 @@ def main():
     timing = {}
 
     # 1. intel (cached)
-    print("STAGE:intel", flush=True)
+    log("STAGE:intel")
     facts_path = out / "facts.json"
     t0 = time.time()
     if facts_path.exists():
         facts = json.loads(facts_path.read_text())
-        print(f"facts: cached ({facts_path})")
+        log(f"facts: cached ({facts_path})")
     else:
         facts = None
         # Greptile indexing and queries are used whenever its key is configured.
@@ -95,19 +102,19 @@ def main():
                 if all(v.startswith("(query failed") for v in facts["answers"].values()):
                     raise RuntimeError("all greptile queries failed")
             except Exception as e:
-                print(f"greptile unavailable ({e}); falling back to local intel")
+                log(f"greptile unavailable ({e}); falling back to local intel")
                 facts = None
         if facts is None:
             facts = local_intel.mine(repo)
     # Code intel can stay cached; live GitHub context (issues/PR/reviews) must
     # be refreshed for every release so lyrics do not joke about stale state.
-    print("reading public GitHub context ...", flush=True)
+    log("reading public GitHub context ...")
     repository_context = github_target.collect_repository_context(repo)
     facts["target_type"] = target["kind"]
     facts["target_label"] = target["label"]
     facts["github_context"] = repository_context
     if target["kind"] == "pull-request":
-        print(f"reading pull request #{target['number']} ...", flush=True)
+        log(f"reading pull request #{target['number']} ...")
         facts["pull_request"] = github_target.collect_pull_request(
             repo, target["number"], repository_context
         )
@@ -118,7 +125,7 @@ def main():
         pr_author = ((facts.get("pull_request") or {}).get("author") or {})
         login = pr_author.get("login") or (facts.get("profile_context") or {}).get("login") or repo.split("/")[0]
         try:
-            print(f"researching public persona of {login} ...", flush=True)
+            log(f"researching public persona of {login} ...")
             facts["persona_context"] = persona_intel.gather(
                 login,
                 name=pr_author.get("name"),
@@ -126,31 +133,33 @@ def main():
                 cache_path=out / "persona.json",
             )
         except Exception as e:
-            print(f"persona research unavailable ({e}); continuing without it")
+            log(f"persona research unavailable ({e}); continuing without it")
     facts_path.write_text(json.dumps(facts, indent=2))
     timing["intel_s"] = round(time.time() - t0, 1)
 
     # teaser for the generation theater
     fact = (facts["answers"].get("comments") or facts["answers"].get("funny_names") or "")[:200]
-    print(f"FACT:{fact}", flush=True)
+    log(f"FACT:{fact}")
+    notify.flush(f"🎧 {slug} — intel done in {timing['intel_s']}s")
 
     # 2. lyrics
-    print("STAGE:lyrics", flush=True)
+    log("STAGE:lyrics")
     t0 = time.time()
     prev = previous_track(repo)
     if prev:
-        print(f'the label remembers this artist: "{prev["song_title"]}"')
+        log(f'the label remembers this artist: "{prev["song_title"]}"')
     song = lyricist.write_song(facts, args.style, previous=prev)
     timing["lyrics_s"] = round(time.time() - t0, 1)
     (out / "lyrics.json").write_text(json.dumps(song, indent=2))
-    print(f'\n"{song["song_title"]}" by {song["artist_name"]}\ncaption: {song["caption"]}\n')
+    log(f'\n"{song["song_title"]}" by {song["artist_name"]}\ncaption: {song["caption"]}\n')
 
-    print(f'TITLE:{song["song_title"]} — {song["artist_name"]}', flush=True)
+    log(f'TITLE:{song["song_title"]} — {song["artist_name"]}')
+    notify.flush(f"🎤 {slug} — lyrics done in {timing['lyrics_s']}s")
 
     # 3. audio: N takes in parallel
-    print("STAGE:audio", flush=True)
+    log("STAGE:audio")
     t0 = time.time()
-    print(f"generating {args.takes} takes on Modal ({args.duration}s each) ...")
+    log(f"generating {args.takes} takes on Modal ({args.duration}s each) ...")
     with ThreadPoolExecutor(max_workers=args.takes) as ex:
         futs = [
             ex.submit(gen_take, song["caption"], song["lyrics"], args.duration, seed, out / f"take{seed}.mp3")
@@ -158,6 +167,7 @@ def main():
         ]
         [f.result() for f in futs]
     timing["audio_s"] = round(time.time() - t0, 1)
+    notify.flush(f"🔊 {slug} — audio done in {timing['audio_s']}s")
 
     # 4. pick winner
     if args.pick:
@@ -175,7 +185,7 @@ def main():
             check=True, capture_output=True,
         )
         shutil.copy(out / "track_master.mp3", out / "track.mp3")
-        print("mastered.")
+        log("mastered.")
 
     meta = {
         "slug": slug,
@@ -210,8 +220,12 @@ def main():
         meta["video_url"] = old["video_url"]  # keep the published video on republish
     db["tracks"] = [t for t in db["tracks"] if t.get("slug") != slug] + [meta]
     db_path.write_text(json.dumps(db, indent=2))
-    print(f"STAGE:done SLUG:{slug}", flush=True)
-    print(f"\ndone: {out}/track.mp3  |  meta: {out}/meta.json  |  published to tracks.json")
+    log(f"STAGE:done SLUG:{slug}")
+    log(f"\ndone: {out}/track.mp3  |  meta: {out}/meta.json  |  published to tracks.json")
+    notify.log(f"mp3: {notify.public_url(meta['audio_url'])}")
+    if meta.get("video_url"):
+        notify.log(f"video: {notify.public_url(meta['video_url'])}")
+    notify.flush(f'🎉 released "{meta["song_title"]}" — {meta["artist_name"]}')
 
 
 if __name__ == "__main__":

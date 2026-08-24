@@ -2,7 +2,7 @@
 
 Reads out/<slug>/{facts,lyrics,meta,persona}.json and writes
 out/<slug>/video-brief.txt — the per-lyric "receipt" map plus art direction,
-consumed by droptable-video/pipeline/mp3_to_video.py via --instructions-file.
+consumed by pipeline/mp3_to_video.py via --instructions-file.
 """
 import argparse
 import json
