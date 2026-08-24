@@ -1,10 +1,10 @@
 # Bucking Fastard: Code to Video Generation Agent
 
-**Point it at a GitHub repo or pull request. Get back a music video that roasts the code.**
+**Point it at a GitHub repo or pull request. Get back a music video that explains the code/pull request in fun manner**
 
 Bucking Fastard is an automated record label for software, releasing under the
 name **DropTable Records**. Feed it any public
-repository or PR link and it reads the actual code, writes a satirical song about
+repository or PR link and it reads the actual code, writes a song about
 what it found, generates the audio on a GPU, renders a karaoke-style music video
 where every lyric pops on screen as it is sung, and publishes the release to a
 browsable catalog.
